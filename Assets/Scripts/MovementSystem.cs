@@ -14,7 +14,10 @@ public class MovementSystem : MonoBehaviour
     [SerializeField] private float verticalRaycastDistance;
     [SerializeField] private float horizontalRaycastDistance;
     [SerializeField] private float jumpPower;
+    [SerializeField] private float wallJumpPowerForward;
+    [SerializeField] private float wallJumpPowerBackward;
     [SerializeField] private float slidingPower;
+    [SerializeField] private float slidingTime;
     [SerializeField] private float runningSpeed;
     [SerializeField] private float sprintingSpeed;
     [SerializeField] private float hangingOnWallTime;
@@ -31,8 +34,20 @@ public class MovementSystem : MonoBehaviour
     [SerializeField] private MovementData movementData;
     [SerializeField] private GroundData groundData;
     [SerializeField] private MovementContext movementContext = MovementContext.Idling;
+    public MovementContext Context
+    {
+        get => movementContext;
+        set
+        {
+            if (movementContext == value) return;
+            Debug.Log($"Switching context from {movementContext} to {value}");
+            movementContext = value;
+        }
+    }
 
-    private bool isSliding;
+    private Coroutine jumpingCoroutine;
+    private Coroutine jumpingFromWallCoroutine;
+    private Coroutine slidingCoroutine;
     private Coroutine hangingOnWallCoroutine;
     private Coroutine runningWallUpCoroutine;
 
@@ -64,17 +79,21 @@ public class MovementSystem : MonoBehaviour
         public bool groundOnRight;
         public bool groundBelow;
         public bool groundAbove;
+        public bool noGroundAboveLeft;
+        public bool noGroundAboveRight;
 
-        public GroundData(bool groundOnLeft, bool groundOnRight,  bool groundBelow, bool groundAbove)
+        public GroundData(bool groundOnLeft, bool groundOnRight,  bool groundBelow, bool groundAbove, bool noGroundAboveLeft, bool noGroundAboveRight)
         {
             this.groundOnLeft = groundOnLeft;
             this.groundOnRight = groundOnRight;
             this.groundBelow = groundBelow;
             this.groundAbove = groundAbove;
+            this.noGroundAboveLeft = noGroundAboveLeft;
+            this.noGroundAboveRight = noGroundAboveRight;
         }
     }
 
-    private enum MovementContext
+    public enum MovementContext
     {
         Idling,
         RunningLeft,
@@ -84,7 +103,8 @@ public class MovementSystem : MonoBehaviour
         SlidingRight,
         SprintingLeft,
         SprintingRight,
-        Hanging,
+        HangingLeft,
+        HangingRight,
         ClimbingUp,
         ClimbingDown,
         HangingOnWallLeft,
@@ -93,8 +113,10 @@ public class MovementSystem : MonoBehaviour
         RunningWallUpRight,
         SlidingWallDownLeft,
         SlidingWallDownRight,
-        JumpingFromWallFaceToWall,
-        JumpingFromWallBackToWall,
+        WallJumpBackwardLeft,
+        WallJumpBackwardRight,
+        WallJumpForwardLeft,
+        WallJumpForwardRight,
         Falling
     }
 
@@ -122,7 +144,6 @@ public class MovementSystem : MonoBehaviour
     {
         UpdateMovementData();
         UpdateGroundData();
-        HandleDirectInput();
         UpdateMovementContext();
         ResolveMovementContext();
     }
@@ -145,8 +166,10 @@ public class MovementSystem : MonoBehaviour
         var right = Physics2D.Raycast(_collider.bounds.center, Vector2.right, horizontalRaycastDistance, groundLayerMask);
         var below = Physics2D.Raycast(_collider.bounds.center, Vector2.down, verticalRaycastDistance, groundLayerMask);
         var above = Physics2D.Raycast(_collider.bounds.center, Vector2.up, verticalRaycastDistance, groundLayerMask);
+        var noGroundAboveLeft = !Physics2D.Raycast(new Vector2(_collider.bounds.center.x, _collider.bounds.max.y + 1), Vector2.left, horizontalRaycastDistance + 1f, groundLayerMask);
+        var noGroundAboveRight = !Physics2D.Raycast(new Vector2(_collider.bounds.center.x, _collider.bounds.max.y + 1), Vector2.right, horizontalRaycastDistance + 1f, groundLayerMask);
 
-        groundData =  new GroundData(left, right, below, above);
+        groundData =  new GroundData(left, right, below, above, noGroundAboveLeft, noGroundAboveRight);
     }
 
     private void UpdateMovementContext()
@@ -156,7 +179,7 @@ public class MovementSystem : MonoBehaviour
         var vx = _rigidBody2D.linearVelocityX;
         var vy = _rigidBody2D.linearVelocityY;
 
-        movementContext = movementContext switch
+        Context = Context switch
         {
             //Idling
             MovementContext.RunningLeft when !m.left => MovementContext.Idling,
@@ -164,31 +187,40 @@ public class MovementSystem : MonoBehaviour
             MovementContext.RunningRight when !m.right => MovementContext.Idling,
             MovementContext.SprintingRight when !m.right => MovementContext.Idling,
             MovementContext.Falling when g.groundBelow => MovementContext.Idling,
-            MovementContext.SlidingLeft when !isSliding && g.groundBelow => MovementContext.Idling,
-            MovementContext.SlidingRight when !isSliding && g.groundBelow => MovementContext.Idling,
+            MovementContext.SlidingLeft when  g.groundBelow && slidingCoroutine == null => MovementContext.Idling,
+            MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null => MovementContext.Idling,
             MovementContext.SlidingWallDownLeft when g.groundBelow => MovementContext.Idling,
             MovementContext.SlidingWallDownRight when g.groundBelow => MovementContext.Idling,
-
+            MovementContext.HangingLeft when g.groundBelow && m.down => MovementContext.Idling,
+            MovementContext.HangingRight when g.groundBelow && m.down => MovementContext.Idling,
 
             //Running Left
             MovementContext.SprintingLeft when !m.sprint => MovementContext.RunningLeft,
             MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => MovementContext.RunningLeft,
             MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => MovementContext.RunningLeft,
+            MovementContext.SlidingLeft when g.groundBelow && slidingCoroutine == null && m.left => MovementContext.RunningLeft,
+            MovementContext.HangingRight when g.groundBelow && m.left => MovementContext.RunningLeft,
 
             //Running Right
             MovementContext.SprintingRight when !m.sprint => MovementContext.RunningRight,
             MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => MovementContext.RunningRight,
             MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => MovementContext.RunningRight,
+            MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null && m.right => MovementContext.RunningRight,
+            MovementContext.HangingLeft when g.groundBelow && m.right => MovementContext.RunningLeft,
 
             //Sprinting Left
             MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft && m.sprint => MovementContext.SprintingLeft,
             MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft && m.sprint => MovementContext.SprintingLeft,
             MovementContext.RunningLeft when m.sprint => MovementContext.SprintingLeft,
+            MovementContext.SlidingLeft when g.groundBelow && slidingCoroutine == null && m.left && m.sprint => MovementContext.SprintingLeft,
+            MovementContext.HangingRight when g.groundBelow && m.left && m.sprint => MovementContext.SprintingLeft,
 
             //Sprinting Right
             MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight && m.sprint => MovementContext.SprintingRight,
             MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight && m.sprint => MovementContext.SprintingRight,
             MovementContext.RunningRight when m.sprint => MovementContext.SprintingRight,
+            MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null && m.right && m.sprint => MovementContext.SprintingRight,
+            MovementContext.HangingLeft when g.groundBelow && m.right && m.sprint => MovementContext.SprintingRight,
 
             //Jumping
             MovementContext.Idling when g.groundBelow && m.jump => MovementContext.Jumping,
@@ -199,8 +231,12 @@ public class MovementSystem : MonoBehaviour
             
             //Falling
             MovementContext.Jumping when vy <= 0 => MovementContext.Falling,
-            //MovementContext.RunningWallUpLeft when runningWallUpCoroutine == null => MovementContext.Falling,
-            //MovementContext.RunningWallUpRight when runningWallUpCoroutine == null => MovementContext.Falling,
+            MovementContext.SlidingLeft when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
+            MovementContext.SlidingRight when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
+            MovementContext.WallJumpBackwardLeft when vy <= 0 => MovementContext.Falling,
+            MovementContext.WallJumpBackwardRight when vy <= 0 => MovementContext.Falling,
+            MovementContext.WallJumpForwardLeft when vy <= 0 => MovementContext.Falling,
+            MovementContext.WallJumpForwardRight when vy <= 0 => MovementContext.Falling,
 
             //Sliding
             MovementContext.SprintingLeft when m.down => MovementContext.SlidingLeft,
@@ -210,33 +246,56 @@ public class MovementSystem : MonoBehaviour
             MovementContext.Jumping when !g.groundBelow && m.left && g.groundOnLeft && !m.sprint => MovementContext.HangingOnWallLeft,
             MovementContext.Jumping when !g.groundBelow && m.right && g.groundOnRight && !m.sprint=> MovementContext.HangingOnWallRight,
 
-            //Running wall up
+
+            //Running wall up left
             MovementContext.HangingOnWallLeft when m.sprint && g.groundOnLeft => MovementContext.RunningWallUpLeft,
-            MovementContext.HangingOnWallRight when m.sprint && g.groundOnRight => MovementContext.RunningWallUpRight,
             MovementContext.Jumping when !g.groundBelow && m.left && g.groundOnLeft && m.sprint => MovementContext.RunningWallUpLeft,
+            MovementContext.WallJumpForwardLeft when g.groundOnLeft && m.sprint && m.left => MovementContext.RunningWallUpLeft,
+
+            //Running wall up right
+            MovementContext.HangingOnWallRight when m.sprint && g.groundOnRight => MovementContext.RunningWallUpRight,
             MovementContext.Jumping when !g.groundBelow && m.right && g.groundOnRight && m.sprint => MovementContext.RunningWallUpRight,
+            MovementContext.WallJumpForwardRight when g.groundOnRight && m.sprint && m.right => MovementContext.RunningWallUpRight,
 
-            //Sliding wall down
+            //Sliding wall down left
             MovementContext.HangingOnWallLeft when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownLeft,
-            MovementContext.HangingOnWallRight when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownRight,
             MovementContext.RunningWallUpLeft when runningWallUpCoroutine == null => MovementContext.SlidingWallDownLeft,
+
+            //Sliding wall down right
+            MovementContext.HangingOnWallRight when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownRight,
             MovementContext.RunningWallUpRight when runningWallUpCoroutine == null => MovementContext.SlidingWallDownRight,
+            
+            //Jumping from wall backward left
+            MovementContext.RunningWallUpRight when m.jump && !m.left => MovementContext.WallJumpBackwardLeft,
 
-            _ => movementContext,
+            //Jumping from wall backward right
+            MovementContext.RunningWallUpLeft when m.jump && !m.right => MovementContext.WallJumpBackwardRight,
+
+            //Jumping from wall forward left
+            MovementContext.RunningWallUpRight when m.jump && m.left => MovementContext.WallJumpForwardLeft,
+
+            //Jumping from wall forward right
+            MovementContext.RunningWallUpLeft when m.jump && m.right => MovementContext.WallJumpForwardRight,
+
+
+            //Hanging left
+            MovementContext.Idling when g.groundOnLeft && g.noGroundAboveLeft && m.left => MovementContext.HangingLeft,
+            MovementContext.RunningLeft when g.groundOnLeft && g.noGroundAboveLeft && m.left => MovementContext.HangingLeft,
+            MovementContext.SprintingLeft when g.groundOnLeft && g.noGroundAboveLeft && m.left => MovementContext.HangingLeft,
+
+            //Hanging right
+            MovementContext.Idling when g.groundOnRight && g.noGroundAboveRight && m.right => MovementContext.HangingRight,
+            MovementContext.RunningRight when g.groundOnRight && g.noGroundAboveRight && m.right => MovementContext.HangingRight,
+            MovementContext.SprintingRight when g.groundOnRight && g.noGroundAboveRight && m.right => MovementContext.HangingRight,
+
+
+            _ => Context,
         };
-    }
-
-    private void HandleDirectInput()
-    {
-        var m = movementData;
-        var g = groundData;
-        if (m.jump && g.groundBelow) Jump();
-        if (m.down) Sliding();
     }
 
     private void ResolveMovementContext()
     {
-        switch (movementContext)
+        switch (Context)
         {
             case MovementContext.RunningLeft:
                 RunLeft();
@@ -249,6 +308,18 @@ public class MovementSystem : MonoBehaviour
                 break;
             case MovementContext.SprintingRight:
                 SprintRight();
+                break;
+            case MovementContext.Jumping:
+                if (jumpingCoroutine != null) return;
+                jumpingCoroutine = StartCoroutine(Jump());
+                break;
+            case MovementContext.SlidingLeft:
+                if (slidingCoroutine != null) return;
+                slidingCoroutine = StartCoroutine(SlideLeft());
+                break;
+            case MovementContext.SlidingRight:
+                if (slidingCoroutine != null) return;
+                slidingCoroutine = StartCoroutine(SlideRight());
                 break;
             case MovementContext.HangingOnWallLeft:
                 if (hangingOnWallCoroutine != null) return;
@@ -277,6 +348,22 @@ public class MovementSystem : MonoBehaviour
             case MovementContext.Falling:
                 _rigidBody2D.gravityScale = 1f;
                 break;
+            case MovementContext.WallJumpBackwardLeft:
+                if (jumpingFromWallCoroutine != null) return;
+                jumpingFromWallCoroutine = StartCoroutine(WallJumpBackward(Vector2.left));
+                break;
+            case MovementContext.WallJumpBackwardRight:
+                if (jumpingFromWallCoroutine != null) return;
+                jumpingFromWallCoroutine = StartCoroutine(WallJumpBackward(Vector2.right));
+                break;
+            case MovementContext.WallJumpForwardLeft:
+                if (jumpingFromWallCoroutine != null) return;
+                jumpingFromWallCoroutine = StartCoroutine(WallJumpForward(Vector2.left));
+                break;
+            case MovementContext.WallJumpForwardRight:
+                if (jumpingFromWallCoroutine != null) return;
+                jumpingFromWallCoroutine = StartCoroutine(WallJumpForward(Vector2.right));
+                break;
         }
     }
     private void RunLeft()
@@ -299,37 +386,50 @@ public class MovementSystem : MonoBehaviour
         _rigidBody2D.linearVelocityX = sprintingSpeed;
     }
 
-    private void Jump()
+    private IEnumerator Jump()
     {
         _rigidBody2D.AddForceAtPosition(new Vector3(0, jumpPower), transform.position, ForceMode2D.Impulse);
+        while(Context == MovementContext.Jumping || Context == MovementContext.Falling)
+        {
+            yield return null;
+        }
+        ResetCoroutine(ref jumpingCoroutine);
     }
 
-
-
-    private void Sliding()
+    private IEnumerator WallJumpBackward(Vector2 direction)
     {
-        if (movementContext == MovementContext.SprintingLeft) StartCoroutine(SlideLeft());
-        if (movementContext == MovementContext.SprintingRight) StartCoroutine(SlideRight());
+        _rigidBody2D.AddForceAtPosition(new Vector3(direction.x * wallJumpPowerBackward, wallJumpPowerBackward / 10, 0), transform.position, ForceMode2D.Impulse);
+
+        while (Context == MovementContext.WallJumpBackwardRight || Context == MovementContext.WallJumpBackwardLeft || Context == MovementContext.Falling)
+        {
+            yield return null;
+        }
+        ResetCoroutine(ref jumpingFromWallCoroutine);
+    }
+
+    private IEnumerator WallJumpForward(Vector2 direction)
+    {
+        _rigidBody2D.AddForceAtPosition(new Vector3(direction.x * wallJumpPowerForward, wallJumpPowerForward, 0), transform.position, ForceMode2D.Impulse);
+
+        while (Context == MovementContext.WallJumpForwardRight || Context == MovementContext.WallJumpForwardLeft || Context == MovementContext.Falling)
+        {
+            yield return null;
+        }
+        ResetCoroutine(ref jumpingFromWallCoroutine);
     }
 
     private IEnumerator SlideLeft()
     {
-        isSliding = true;
         _rigidBody2D.AddForceAtPosition(new Vector3(-slidingPower, 0), transform.position, ForceMode2D.Impulse);
-        //REMOVE THIS WHEN GET ANIMATIONS AND MAKE THIS ANIMATION DRIVEN
-        yield return new WaitForSeconds(1f);
-        isSliding = false;
-        //END OF REMOVE
+        yield return new WaitForSeconds(slidingTime);
+        ResetCoroutine(ref slidingCoroutine);
     }
 
     private IEnumerator SlideRight()
     {
-        isSliding = true;
         _rigidBody2D.AddForceAtPosition(new Vector3(slidingPower, 0), transform.position, ForceMode2D.Impulse);
-        //REMOVE THIS WHEN GET ANIMATIONS AND MAKE THIS ANIMATION DRIVEN
-        yield return new WaitForSeconds(1f);
-        isSliding = false;
-        //END OF REMOVE
+        yield return new WaitForSeconds(slidingTime);
+        ResetCoroutine(ref slidingCoroutine);
     }
 
     private IEnumerator HangingOnWall()
@@ -346,7 +446,7 @@ public class MovementSystem : MonoBehaviour
     private IEnumerator RunningWallUp()
     {
         var time = 0f;
-        while ((movementContext == MovementContext.RunningWallUpLeft || movementContext == MovementContext.RunningWallUpRight) && time < runningWallTime)
+        while ((Context == MovementContext.RunningWallUpLeft || Context == MovementContext.RunningWallUpRight) && time < runningWallTime)
         {
             _rigidBody2D.linearVelocityY = runningWallSpeed;
             time += Time.deltaTime;
@@ -357,7 +457,6 @@ public class MovementSystem : MonoBehaviour
 
     private void ResetCoroutine(ref Coroutine c)
     {
-        Debug.Log($"Reset Coroutine");
         StopCoroutine(c);
         c = null;
     }

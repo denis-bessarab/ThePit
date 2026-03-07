@@ -8,7 +8,12 @@ public class ClimbUpPoint : MonoBehaviour
     {
         if(collision.name == "Character")
         {
-            MoveCharacter(collision.gameObject);
+            var ms = collision.GetComponent<MovementSystem>();
+            var rb = collision.GetComponent<Rigidbody2D>();
+            ms.enabled = false;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.linearVelocity = Vector2.zero;
+            //MoveCharacter(collision.gameObject);
         }
     }
 
