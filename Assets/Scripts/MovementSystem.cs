@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class MovementSystem : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class MovementSystem : MonoBehaviour
     private Coroutine runningWallUpCoroutine;
     private Coroutine climbingUpCoroutine;
     private Coroutine hangingCoroutine;
+    private Coroutine forcedSlidingWallDownCoroutine;
 
     [Serializable]
     private struct MovementData
@@ -95,6 +97,10 @@ public class MovementSystem : MonoBehaviour
         public bool groundAboveRight0_1f;
         public bool groundAboveLeft0_2f;
         public bool groundAboveRight0_2f;
+        public Vector2 groundNormal;
+        public bool groundBelowLeft;
+        public bool groundBelowCenter;
+        public bool groundBelowRight;
 
         public GroundData(
             bool groundOnLeft, 
@@ -108,7 +114,11 @@ public class MovementSystem : MonoBehaviour
             bool groundAboveLeft0_1f, 
             bool groundAboveRight0_1f,
             bool groundAboveLeft0_2f, 
-            bool groundAboveRight0_2f
+            bool groundAboveRight0_2f,
+            Vector2 groundNormal,
+            bool groundBelowLeft,
+            bool groundBelowCenter,
+            bool groundBelowRight
             )
         {
             this.groundOnLeft = groundOnLeft;
@@ -123,6 +133,10 @@ public class MovementSystem : MonoBehaviour
             this.groundAboveRight0_1f = groundAboveRight0_1f;
             this.groundAboveLeft0_2f = groundAboveLeft0_2f;
             this.groundAboveRight0_2f = groundAboveRight0_2f;
+            this.groundNormal = groundNormal;
+            this.groundBelowLeft = groundBelowLeft;
+            this.groundBelowCenter = groundBelowCenter;
+            this.groundBelowRight = groundBelowRight;
         }
     }
 
@@ -139,7 +153,9 @@ public class MovementSystem : MonoBehaviour
         HangingLeft,
         HangingRight,
         ClimbingUpLeft,
+        ClimbingDownLeft,
         ClimbingUpRight,
+        ClimbingDownRight,
         HangingOnWallLeft,
         HangingOnWallRight,
         RunningWallUpLeft,
@@ -150,7 +166,9 @@ public class MovementSystem : MonoBehaviour
         WallJumpBackwardRight,
         WallJumpForwardLeft,
         WallJumpForwardRight,
-        Falling
+        Falling,
+        ForcedSlidingWallDownLeft,
+        ForcedSlidingWallDownRight
     }
 
     private void OnEnable()
@@ -197,13 +215,15 @@ public class MovementSystem : MonoBehaviour
     {
         var b = _collider.bounds;
 
-        var below1 = Physics2D.Raycast(new Vector2(b.min.x + 0.05f, b.center.y), Vector2.down, verticalRaycastDistance, groundLayerMask);
-        var below2 = Physics2D.Raycast(b.center, Vector2.down, verticalRaycastDistance, groundLayerMask);
-        var below3 = Physics2D.Raycast(new Vector2(b.max.x - 0.05f, b.center.y), Vector2.down, verticalRaycastDistance, groundLayerMask);
+        var belowLeft = Physics2D.Raycast(new Vector2(b.min.x + 0.05f, b.center.y), Vector2.down, verticalRaycastDistance, groundLayerMask);
+        var belowCenter = Physics2D.Raycast(b.center, Vector2.down, verticalRaycastDistance, groundLayerMask);
+        var belowRight = Physics2D.Raycast(new Vector2(b.max.x - 0.05f, b.center.y), Vector2.down, verticalRaycastDistance, groundLayerMask);
+
+        var below = belowLeft || belowCenter || belowRight;
+        var groundNormal = belowCenter.normal;
 
         var left = Physics2D.Raycast(b.center, Vector2.left, horizontalRaycastDistance, groundLayerMask);
         var right = Physics2D.Raycast(b.center, Vector2.right, horizontalRaycastDistance, groundLayerMask);
-        var below = below1 || below2 || below3;
         var above = Physics2D.Raycast(b.center, Vector2.up, verticalRaycastDistance, groundLayerMask);
         var aboveLeft = Physics2D.Raycast(new Vector2(b.center.x, b.max.y), Vector2.left, horizontalRaycastDistance, groundLayerMask);
         var aboveRight = Physics2D.Raycast(new Vector2(b.center.x, b.max.y), Vector2.right, horizontalRaycastDistance, groundLayerMask);
@@ -226,7 +246,11 @@ public class MovementSystem : MonoBehaviour
             aboveLeft0_1f,
             aboveRight0_1f,
             aboveLeft0_2f,
-            aboveRight0_2f
+            aboveRight0_2f,
+            groundNormal,
+            belowLeft,
+            belowCenter,
+            belowRight
             );
     }
 
@@ -262,7 +286,7 @@ public class MovementSystem : MonoBehaviour
             MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => MovementContext.SprintingLeft,
             MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => MovementContext.SprintingLeft,
             MovementContext.HangingRight when g.groundBelow && m.left => MovementContext.SprintingLeft,
-            MovementContext.HangingRight when g.groundBelow && m.left => MovementContext.SprintingLeft,
+            MovementContext.WallJumpForwardLeft when g.groundBelow && m.left => MovementContext.SprintingLeft,
 
             //Sprinting Right
             MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => MovementContext.SprintingRight,
@@ -272,7 +296,7 @@ public class MovementSystem : MonoBehaviour
             MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => MovementContext.SprintingRight,
             MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => MovementContext.SprintingRight,
             MovementContext.HangingLeft when g.groundBelow && m.right => MovementContext.SprintingRight,
-            MovementContext.HangingLeft when g.groundBelow && m.right => MovementContext.SprintingRight,
+            MovementContext.WallJumpForwardRight when g.groundBelow && m.right => MovementContext.SprintingRight,
 
             //Jumping
             MovementContext.Idling when g.groundBelow && m.jump => MovementContext.Jumping,
@@ -282,15 +306,18 @@ public class MovementSystem : MonoBehaviour
             MovementContext.SprintingRight when m.jump => MovementContext.Jumping,
             
             //Falling
-            MovementContext.Jumping when vy <= 0 => MovementContext.Falling,
+            MovementContext.Idling when !g.groundBelow => MovementContext.Falling,
+            MovementContext.Jumping when vy <= 0 && (vx == 0 || (!g.groundOnLeft && !g.groundOnRight)) => MovementContext.Falling,
             MovementContext.SlidingLeft when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
             MovementContext.SlidingRight when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
             MovementContext.WallJumpBackwardLeft when vy <= 0 => MovementContext.Falling,
             MovementContext.WallJumpBackwardRight when vy <= 0 => MovementContext.Falling,
-            MovementContext.WallJumpForwardLeft when vy <= 0 => MovementContext.Falling,
-            MovementContext.WallJumpForwardRight when vy <= 0 => MovementContext.Falling,
+            MovementContext.WallJumpForwardLeft when vy <= 0 && !g.groundOnLeft => MovementContext.Falling,
+            MovementContext.WallJumpForwardRight when vy <= 0 && !g.groundOnRight => MovementContext.Falling,
             MovementContext.SprintingLeft when !g.groundBelow => MovementContext.Falling,
             MovementContext.SprintingRight when !g.groundBelow => MovementContext.Falling,
+            MovementContext.SlidingWallDownLeft when !g.groundOnLeft => MovementContext.Falling,
+            MovementContext.SlidingWallDownRight when !g.groundOnRight => MovementContext.Falling,
 
             //Sliding
             MovementContext.SprintingLeft when m.down => MovementContext.SlidingLeft,
@@ -306,13 +333,15 @@ public class MovementSystem : MonoBehaviour
 
             //Sliding wall down left
             MovementContext.HangingOnWallLeft when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownLeft,
-            MovementContext.RunningWallUpLeft when runningWallUpCoroutine == null => MovementContext.SlidingWallDownLeft,
+            MovementContext.RunningWallUpLeft when runningWallUpCoroutine == null  => MovementContext.SlidingWallDownLeft,
             MovementContext.Falling when g.groundOnLeft => MovementContext.SlidingWallDownLeft,
+            MovementContext.ForcedSlidingWallDownLeft when g.groundOnLeft && forcedSlidingWallDownCoroutine == null => MovementContext.SlidingWallDownLeft,
 
             //Sliding wall down right
             MovementContext.HangingOnWallRight when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownRight,
             MovementContext.RunningWallUpRight when runningWallUpCoroutine == null => MovementContext.SlidingWallDownRight,
             MovementContext.Falling when g.groundOnRight => MovementContext.SlidingWallDownRight,
+            MovementContext.ForcedSlidingWallDownRight when g.groundOnRight && forcedSlidingWallDownCoroutine == null => MovementContext.SlidingWallDownRight,
             
             //Wall jump backward left
             MovementContext.RunningWallUpRight when m.jump && !m.left => MovementContext.WallJumpBackwardLeft,
@@ -321,11 +350,11 @@ public class MovementSystem : MonoBehaviour
             MovementContext.RunningWallUpLeft when m.jump && !m.right => MovementContext.WallJumpBackwardRight,
 
             //Wall jump forward left
-            MovementContext.RunningWallUpRight when m.jump => MovementContext.WallJumpForwardLeft,
+            MovementContext.RunningWallUpRight when m.jump && m.left => MovementContext.WallJumpForwardLeft,
             MovementContext.HangingRight when m.jump && m.left => MovementContext.WallJumpForwardLeft,
 
             //Wall jump forward right
-            MovementContext.RunningWallUpLeft when m.jump => MovementContext.WallJumpForwardRight,
+            MovementContext.RunningWallUpLeft when m.jump && m.right => MovementContext.WallJumpForwardRight,
             MovementContext.HangingLeft when m.jump && m.right => MovementContext.WallJumpForwardRight,
 
             //Hanging left
@@ -338,8 +367,7 @@ public class MovementSystem : MonoBehaviour
             MovementContext.Idling when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
             MovementContext.RunningRight when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
             MovementContext.SprintingRight when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
-            MovementContext.RunningWallUpRight when g.groundAboveRight&& !g.groundAboveRight0_1f => MovementContext.HangingRight,
-
+            MovementContext.RunningWallUpRight when g.groundAboveRight && !g.groundAboveRight0_1f => MovementContext.HangingRight,
 
             //Climbing up left
             MovementContext.HangingLeft when m.up => MovementContext.ClimbingUpLeft,
@@ -349,6 +377,12 @@ public class MovementSystem : MonoBehaviour
             MovementContext.HangingRight when m.up => MovementContext.ClimbingUpRight,
             MovementContext.HangingRight when m.jump => MovementContext.ClimbingUpRight,
 
+            //Forced sliding down left
+            MovementContext.HangingLeft when m.down => MovementContext.ForcedSlidingWallDownLeft,
+
+            //Forced sliding down right
+            MovementContext.HangingRight when m.down => MovementContext.ForcedSlidingWallDownRight,
+
             _ => Context,
         };
     }
@@ -357,12 +391,6 @@ public class MovementSystem : MonoBehaviour
     {
         switch (Context)
         {
-            case MovementContext.RunningLeft:
-                RunLeft();
-                break;
-            case MovementContext.RunningRight:
-                RunRight();
-                break;
             case MovementContext.SprintingLeft:
                 SprintLeft();
                 break;
@@ -382,17 +410,11 @@ public class MovementSystem : MonoBehaviour
                 slidingCoroutine = StartCoroutine(SlideRight());
                 break;
             case MovementContext.HangingOnWallLeft:
-                if (hangingOnWallCoroutine != null) return;
-                hangingOnWallCoroutine = StartCoroutine(HangingOnWall());
-                break;
             case MovementContext.HangingOnWallRight:
                 if (hangingOnWallCoroutine != null) return;
                 hangingOnWallCoroutine = StartCoroutine(HangingOnWall());
                 break;
             case MovementContext.RunningWallUpLeft:
-                if (runningWallUpCoroutine != null) return;
-                runningWallUpCoroutine = StartCoroutine(RunningWallUp());
-                break;
             case MovementContext.RunningWallUpRight:
                 if (runningWallUpCoroutine != null) return;
                 runningWallUpCoroutine = StartCoroutine(RunningWallUp());
@@ -424,9 +446,6 @@ public class MovementSystem : MonoBehaviour
                 jumpingFromWallCoroutine = StartCoroutine(WallJumpForward(Vector2.right));
                 break;
             case MovementContext.HangingLeft:
-                if (hangingCoroutine != null) return;
-                hangingCoroutine = StartCoroutine(Hanging());
-                break;
             case MovementContext.HangingRight:
                 if (hangingCoroutine != null) return;
                 hangingCoroutine = StartCoroutine(Hanging());
@@ -439,16 +458,13 @@ public class MovementSystem : MonoBehaviour
                 if (climbingUpCoroutine != null) return;
                 climbingUpCoroutine = StartCoroutine(ClimbingUp(Vector2.right));
                 break;
+            case MovementContext.ForcedSlidingWallDownLeft:
+            case MovementContext.ForcedSlidingWallDownRight:
+                _rigidBody2D.gravityScale = 1f;
+                if (forcedSlidingWallDownCoroutine != null) return;
+                forcedSlidingWallDownCoroutine = StartCoroutine(ForcedSlidingWallDown());
+                break;
         }
-    }
-    private void RunLeft()
-    {
-        _rigidBody2D.linearVelocityX = -runningSpeed;
-    }
-
-    private void RunRight()
-    {
-        _rigidBody2D.linearVelocityX = runningSpeed;
     }
 
     private void SprintLeft()
@@ -475,7 +491,7 @@ public class MovementSystem : MonoBehaviour
 
     private IEnumerator Fall()
     {
-        while(movementContext == MovementContext.Falling)
+        while (movementContext == MovementContext.Falling)
         {
             _rigidBody2D.gravityScale += fallDynamicGravity;
             yield return null;
@@ -539,10 +555,15 @@ public class MovementSystem : MonoBehaviour
     private IEnumerator RunningWallUp()
     {
         var time = 0f;
-        while ((Context == MovementContext.RunningWallUpLeft || Context == MovementContext.RunningWallUpRight) && time < runningWallTime)
+        while (time < runningWallTime && (Context == MovementContext.RunningWallUpLeft || Context == MovementContext.RunningWallUpRight))
         {
             _rigidBody2D.linearVelocityY = runningWallSpeed;
             time += Time.deltaTime;
+            yield return null;
+        }
+
+        while (_rigidBody2D.linearVelocityY > 0 && (Context == MovementContext.RunningWallUpLeft || Context == MovementContext.RunningWallUpRight))
+        {
             yield return null;
         }
         ResetCoroutine(ref runningWallUpCoroutine);
@@ -579,6 +600,17 @@ public class MovementSystem : MonoBehaviour
         
         if(hangingCoroutine != null) ResetCoroutine(ref hangingCoroutine);
     }
+
+    private IEnumerator ForcedSlidingWallDown()
+    {
+        float time = 0;
+        while (time <= 0.5f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+        ResetCoroutine(ref forcedSlidingWallDownCoroutine);
+    } 
 
     private void ResetCoroutine(ref Coroutine c)
     {
