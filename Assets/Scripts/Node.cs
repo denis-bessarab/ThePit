@@ -1,19 +1,31 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public Vector2 position;
-    private NodeManager nodeManager;
-   
-    void Start()
-    {
-        position = transform.position;
-        nodeManager = FindNodeManager();
-        if(nodeManager != null) nodeManager.RegisterNode(this);
-    }
+    [SerializeField] public List<Node> neighbourNodes = new();
 
-    private NodeManager FindNodeManager()
+    public void FindNeighbourNodes()
     {
-        return FindFirstObjectByType<NodeManager>();
+        Vector2 pos = transform.position;
+        List<Vector2> possiblePositions = new()
+        {
+            new Vector2(pos.x + 1, pos.y), //RIGHT
+            new Vector2(pos.x + 1, pos.y - 1), //ROGHT DOWN
+            new Vector2(pos.x, pos.y - 1), // DOWN
+            new Vector2(pos.x - 1, pos.y - 1), //LEFT DOWN
+            new Vector2(pos.x - 1, pos.y), //LEFT
+            new Vector2(pos.x - 1, pos.y + 1), //LEFT UP
+            new Vector2(pos.x, pos.y + 1), //UP
+            new Vector2(pos.x + 1, pos.y + 1), //RIGHT UP
+        };
+
+        for(int i = 0; i < possiblePositions.Count; i++)
+        {
+            if(NodeManager.nodes.TryGetValue(possiblePositions[i], out Node neighbourNode))
+            {
+                neighbourNodes.Add(neighbourNode);
+            }
+        }
     }
 }

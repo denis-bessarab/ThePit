@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.pillargamesstudio.singleton": {
+      "version": "https://github.com/denis-bessarab/PGS-Singleton.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "43104846caef6a1cc4695c6e597c7b8b3e72008b"
+    },
     "com.unity.2d.animation": {
       "version": "13.0.4",
       "depth": 0,
