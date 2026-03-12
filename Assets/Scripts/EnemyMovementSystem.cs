@@ -57,6 +57,22 @@ public class EnemyMovementSystem : MonoBehaviour
 
     private void CalculateEdges()
     {
-        Debug.Log($"Edges are calculated");
+        foreach(var node in nodes)
+        {
+            var neighbourNodes = node.Value.neighbourNodes;
+
+            for (int i = 0; i < neighbourNodes.Count; i++)
+            {
+                var target = new KeyValuePair<Vector2,Node>(node.Key, node.Value);
+                EdgeType edgeType = DefineEdgeType();
+                var edge = new Edge(target, edgeType);
+                node.Value.edges.Add(edge);
+            }
+        }
+    }
+
+    private EdgeType DefineEdgeType()
+    {
+        return EdgeType.Run;
     }
 }

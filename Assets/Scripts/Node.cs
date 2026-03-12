@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    [SerializeField] public List<Node> neighbourNodes = new();
+    public List<Node> neighbourNodes = new();
+    public List<Edge> edges = new();
 
+    private void Awake()
+    {
+        
+    }
     public void FindNeighbourNodes()
     {
         Vector2 pos = transform.position;
