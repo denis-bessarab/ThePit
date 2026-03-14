@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    public Vector2 position;
     public List<Node> neighbourNodes = new();
     public List<Edge> edges = new();
 
     private void Awake()
     {
-        
+        position = transform.position;
     }
     public void FindNeighbourNodes()
     {
