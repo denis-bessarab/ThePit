@@ -42,7 +42,6 @@ public class NodeManager : Singleton<NodeManager>
 
     private void RegisterNode(Vector2 pos, Node node)
     {
-        Debug.Log($"Registration of new node {pos}");
         nodes.Add(pos, node);
     }
 

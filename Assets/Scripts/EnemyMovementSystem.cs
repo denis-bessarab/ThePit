@@ -4,20 +4,31 @@ using UnityEngine;
 [RequireComponent(typeof(AStar))]
 public class EnemyMovementSystem : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] private float movingSpeed = 2f;
+
+    [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] private AStar aStar;
+    [SerializeField] private Enemy enemy;
+
     private Dictionary<Vector2, Node> nodes = new();
     private bool nodesCopyCreated = false;
-    private AStar aStar;
-    [SerializeField] private float movingSpeed;
-    [SerializeField] private Rigidbody2D _rigidbody2D;
-    [SerializeField] private Transform target;
-    [SerializeField] private List<Node> path;
+    private List<Node> path;
 
     private Coroutine movingCoroutine;
 
-    private void Awake()
+    public List<Node> Path
     {
-        aStar = GetComponent<AStar>();
+        get => path;
+        set
+        {
+            path = value;
+            if(movingCoroutine != null) { StopCoroutine(movingCoroutine); movingCoroutine = null; }
+            if (path == null) return;
+            movingCoroutine = StartCoroutine(FollowThePath(path));
+        }
     }
+
 
     private void Start()
     {
@@ -38,22 +49,10 @@ public class EnemyMovementSystem : MonoBehaviour
         {
             StartCoroutine(WaitForNodesCopy());
         }
-        path = CalculatePath();
-        StartCoroutine(FollowThePath(path));
-
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            CalculatePath();
-        }
     }
 
     private IEnumerator WaitForNodeManager()
     {
-        Debug.Log("Waiting for Node Manager");
         while (!NodeManager.Ready)
         {
             yield return null;
@@ -63,7 +62,6 @@ public class EnemyMovementSystem : MonoBehaviour
 
     private IEnumerator WaitForNodesCopy()
     {
-        Debug.Log("Waiting for nodes copy");
         while (!nodesCopyCreated)
         {
             yield return null;
@@ -73,7 +71,6 @@ public class EnemyMovementSystem : MonoBehaviour
 
     private Dictionary<Vector2, Node> CreateNodesCopy()
     {
-        Debug.Log("Nodes copy created");
         nodesCopyCreated = true;
         return new Dictionary<Vector2, Node>(NodeManager.nodes);
     }
@@ -99,12 +96,23 @@ public class EnemyMovementSystem : MonoBehaviour
         return EdgeType.Run;
     }
 
-    private List<Node> CalculatePath()
+    public IEnumerator<List<Node>> CalculatePath()
     {
         var startNode = FindClosestNode(transform.position);
-        var targetNode = FindClosestNode(target.position);
+        var targetNode = FindClosestNode(enemy.Target.position);
         path = aStar.FindPath(startNode, targetNode);
-        return path;
+        yield return path;
+    }
+
+    //DO TO!
+    public IEnumerator TrackTarget(Transform targetTransform)
+    {
+        while(FindClosestNode(transform.position) == null)
+        {
+            yield return null;
+        }
+
+        yield return FindClosestNode(transform.position);
     }
 
     private Node FindClosestNode(Vector2 pos)
@@ -151,5 +159,12 @@ public class EnemyMovementSystem : MonoBehaviour
         }
         _rigidbody2D.linearVelocityX = 0;
         movingCoroutine = null;
+    }
+
+    public void Stop()
+    {
+        StopCoroutine(movingCoroutine);
+        movingCoroutine = null;
+        Path = null;
     }
 }
