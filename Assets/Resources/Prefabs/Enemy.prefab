@@ -90,9 +90,11 @@ GameObject:
   - component: {fileID: 8262625116892601422}
   - component: {fileID: 934004186544361977}
   - component: {fileID: 5392943001096362222}
-  - component: {fileID: 3532427465661873536}
-  - component: {fileID: 8447068646948005523}
+  - component: {fileID: 7389226230560076752}
   - component: {fileID: 1303077833437937245}
+  - component: {fileID: 8447068646948005523}
+  - component: {fileID: 3532427465661873536}
+  - component: {fileID: 6663981742251084223}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -239,34 +241,28 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &3532427465661873536
-MonoBehaviour:
+--- !u!95 &7389226230560076752
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8532323390498939278}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ac41987a98cf58498e2695e6b99b961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AStar
---- !u!114 &8447068646948005523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532323390498939278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e931bd342c793fc47995935bbb41a092, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovementSystem
-  movingSpeed: 2
-  _rigidbody2D: {fileID: 934004186544361977}
-  aStar: {fileID: 3532427465661873536}
-  enemy: {fileID: 1303077833437937245}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 31759e763e9f3a74c94f870823a99312, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1303077833437937245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,3 +276,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   ems: {fileID: 8447068646948005523}
+  _rigidbody2D: {fileID: 934004186544361977}
+  _collider2D: {fileID: 5392943001096362222}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  animator: {fileID: 7389226230560076752}
+  weapon: {fileID: 11400000, guid: f127245fc0f7fa24889f074fa0bea7c7, type: 2}
+  target: {fileID: 0}
+  isAttacking: 0
+  distanceToTarget: 0
+  isTargetVisible: 0
+  isOnWeaponDistance: 0
+  isMoving: 0
+--- !u!114 &8447068646948005523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8532323390498939278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e931bd342c793fc47995935bbb41a092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovementSystem
+  movingSpeed: 3
+  pathRecalcTime: 0.5
+  path: []
+  _rigidbody2D: {fileID: 934004186544361977}
+  aStar: {fileID: 3532427465661873536}
+  enemy: {fileID: 1303077833437937245}
+--- !u!114 &3532427465661873536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8532323390498939278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac41987a98cf58498e2695e6b99b961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AStar
+  closedList: []
+--- !u!114 &6663981742251084223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8532323390498939278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa15d65726bdb049bafcec1b4cea3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyCombatSystem

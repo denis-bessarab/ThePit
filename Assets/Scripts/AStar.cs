@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class AStar : MonoBehaviour
 {
     private Queue<Node> openList = new();
-    private List<Node> closedList = new();
+    [SerializeField] private List<Node> closedList = new();
 
     private float DistanceToTarget(Node currentNode,Node target)
     {
@@ -13,6 +13,9 @@ public class AStar : MonoBehaviour
 
     public List<Node> FindPath(Node startNode, Node targetNode)
     {
+        closedList.Clear();
+        openList.Clear();
+
         List<Node> path = new();
 
         openList.Enqueue(startNode);
@@ -26,6 +29,12 @@ public class AStar : MonoBehaviour
             var edges = currentNode.edges;
             var nextEdge = FindEdgeWithMaxWeight(currentNode, targetNode, edges, closedList);
 
+            if(nextEdge == null)
+            {
+                Debug.Log("Target is unreachable");
+                return path;
+            }
+
             closedList.Add(currentNode);
 
             openList.Enqueue(nextEdge.targetNode.Value);
@@ -37,29 +46,36 @@ public class AStar : MonoBehaviour
 
     private Edge FindEdgeWithMaxWeight(Node currentNode, Node targetNode, List<Edge> edges, List<Node> closedList)
     {
+        //THIS FUNCTION FINDS MOST EFFICIENT EDGE
         Edge nextEdge;
+
+        //CURRENT DISTANCE TO TARGET NODE
         var currentDistance = DistanceToTarget(currentNode, targetNode);
-        int minIndex = -1;
+        int nextEdgeIndex = -1;
+
         for (int i = 0; i < edges.Count; i++)
         {
-            if (closedList.Contains(edges[i].targetNode.Value)) continue;
+            var edge = edges[i];
 
-            var distanceToTarget = DistanceToTarget(edges[i].targetNode.Value, targetNode);
+            //IF EDGE IS ALREADY VIEWED CONTINUE
+            if (closedList.Contains(edge.targetNode.Value)) continue;
+
+            //SET INITIAL EDGE INDEX
+            if (i == 0) { nextEdgeIndex = i; continue; }
+
+            //DISTANCE FROM EDGE TARGET NODE TO TARGET
+            var distanceToTarget = DistanceToTarget(edge.targetNode.Value, targetNode);
+
+            //SET NEW EDGE INDEX IF DISTANCE FROM THIS TARGET NODE IS LESS
             if (distanceToTarget < currentDistance)
             {
-                if (minIndex == -1)
-                {
-                    minIndex = i;
-                }
-                else if (DistanceToTarget(edges[minIndex].targetNode.Value, targetNode) > distanceToTarget)
-                {
-                    minIndex = i;
-                }
+                nextEdgeIndex = i;
             }
-
         }
-        nextEdge = edges[minIndex];
+
+        if (nextEdgeIndex == -1) return null;
+
+        nextEdge = edges[nextEdgeIndex];
         return nextEdge;
     }
-
 }

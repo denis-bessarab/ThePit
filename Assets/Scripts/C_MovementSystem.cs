@@ -1,15 +1,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
-public class MovementSystem : MonoBehaviour
+public class C_MovementSystem : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private InputActionAsset _inputActions;
     [SerializeField] private CapsuleCollider2D _collider;
     [SerializeField] private Rigidbody2D _rigidBody2D;
+    [SerializeField] private C_InputController inputController;
+    [SerializeField] private C_CombatSystem combatSystem;
     [Header("Parameters")]
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private float verticalRaycastDistance;
@@ -29,14 +28,6 @@ public class MovementSystem : MonoBehaviour
     [SerializeField] private float climbingUpSpeed;
     [SerializeField] private float fallDynamicGravity;
     [SerializeField] private float jumpDynamicGravity;
-
-    private InputAction m_left;
-    private InputAction m_right;
-    private InputAction m_jump;
-    private InputAction m_down;
-    private InputAction m_up;
-    private InputAction m_sprint;
-
     [SerializeField] private MovementData movementData;
     [SerializeField] private GroundData groundData;
     [SerializeField] private MovementContext movementContext = MovementContext.Idling;
@@ -46,7 +37,7 @@ public class MovementSystem : MonoBehaviour
         set
         {
             if (movementContext == value) return;
-            Debug.Log($"Switching context from {movementContext} to {value}");
+            //Debug.Log($"Switching context from {movementContext} to {value}");
             movementContext = value;
         }
     }
@@ -171,26 +162,6 @@ public class MovementSystem : MonoBehaviour
         ForcedSlidingWallDownRight
     }
 
-    private void OnEnable()
-    {
-        _inputActions.FindActionMap("Character").Enable();
-    }
-
-    private void OnDisable()
-    {
-        _inputActions.FindActionMap("Character").Disable();
-    }
-
-    private void Awake()
-    {
-        m_left = InputSystem.actions.FindAction("Left");
-        m_right = InputSystem.actions.FindAction("Right");
-        m_jump = InputSystem.actions.FindAction("Jump");
-        m_down = InputSystem.actions.FindAction("Down");
-        m_up = InputSystem.actions.FindAction("Up");
-        m_sprint = InputSystem.actions.FindAction("Sprint");
-    }
-
     private void Update()
     {
         UpdateMovementData();
@@ -201,12 +172,12 @@ public class MovementSystem : MonoBehaviour
 
     private void UpdateMovementData()
     {
-        var left = m_left.IsPressed();
-        var right = m_right.IsPressed();
-        var jump = m_jump.WasPressedThisFrame();
-        var down = m_down.WasPressedThisFrame();
-        var up = m_up.IsPressed();
-        var sprint = m_sprint.IsPressed();
+        var left = inputController.m_left.IsPressed();
+        var right = inputController.m_right.IsPressed();
+        var jump = inputController.m_jump.WasPressedThisFrame();
+        var down = inputController.m_down.WasPressedThisFrame();
+        var up = inputController.m_up.IsPressed();
+        var sprint = inputController.m_sprint.IsPressed();
 
         movementData = new MovementData(left, right, jump, down, up, sprint);
     }
@@ -260,131 +231,143 @@ public class MovementSystem : MonoBehaviour
         var g = groundData;
         var vx = _rigidBody2D.linearVelocityX;
         var vy = _rigidBody2D.linearVelocityY;
-
-        Context = Context switch
+        if(combatSystem.CombatStateParameter == C_CombatSystem.CombatState.Free)
         {
-            //Idling
-            MovementContext.RunningLeft when !m.left => MovementContext.Idling,
-            MovementContext.SprintingLeft when !m.left => MovementContext.Idling,
-            MovementContext.RunningRight when !m.right => MovementContext.Idling,
-            MovementContext.SprintingRight when !m.right => MovementContext.Idling,
-            MovementContext.Falling when g.groundBelow => MovementContext.Idling,
-            MovementContext.SlidingLeft when  g.groundBelow && slidingCoroutine == null => MovementContext.Idling,
-            MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null => MovementContext.Idling,
-            MovementContext.SlidingWallDownLeft when g.groundBelow => MovementContext.Idling,
-            MovementContext.SlidingWallDownRight when g.groundBelow => MovementContext.Idling,
-            MovementContext.HangingLeft when g.groundBelow && m.down => MovementContext.Idling,
-            MovementContext.HangingRight when g.groundBelow && m.down => MovementContext.Idling,
-            MovementContext.ClimbingUpLeft when climbingUpCoroutine == null => MovementContext.Idling,
-            MovementContext.ClimbingUpRight when climbingUpCoroutine == null => MovementContext.Idling,
+            Context = Context switch
+            {
+                //Idling
+                MovementContext.RunningLeft when !m.left => MovementContext.Idling,
+                MovementContext.SprintingLeft when !m.left => MovementContext.Idling,
+                MovementContext.RunningRight when !m.right => MovementContext.Idling,
+                MovementContext.SprintingRight when !m.right => MovementContext.Idling,
+                MovementContext.Falling when g.groundBelow => MovementContext.Idling,
+                MovementContext.SlidingLeft when g.groundBelow && slidingCoroutine == null => MovementContext.Idling,
+                MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null => MovementContext.Idling,
+                MovementContext.SlidingWallDownLeft when g.groundBelow => MovementContext.Idling,
+                MovementContext.SlidingWallDownRight when g.groundBelow => MovementContext.Idling,
+                MovementContext.HangingLeft when g.groundBelow && m.down => MovementContext.Idling,
+                MovementContext.HangingRight when g.groundBelow && m.down => MovementContext.Idling,
+                MovementContext.ClimbingUpLeft when climbingUpCoroutine == null => MovementContext.Idling,
+                MovementContext.ClimbingUpRight when climbingUpCoroutine == null => MovementContext.Idling,
 
-            //Sprinting Left
-            MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => MovementContext.SprintingLeft,
-            MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => MovementContext.SprintingLeft,
-            MovementContext.SlidingLeft when g.groundBelow && slidingCoroutine == null && m.left => MovementContext.SprintingLeft,
-            MovementContext.SlidingLeft when g.groundBelow && slidingCoroutine == null && m.left => MovementContext.SprintingLeft,
-            MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => MovementContext.SprintingLeft,
-            MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => MovementContext.SprintingLeft,
-            MovementContext.HangingRight when g.groundBelow && m.left => MovementContext.SprintingLeft,
-            MovementContext.WallJumpForwardLeft when g.groundBelow && m.left => MovementContext.SprintingLeft,
+                //Sprinting Left
+                MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => MovementContext.SprintingLeft,
+                MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => MovementContext.SprintingLeft,
+                MovementContext.SlidingLeft when g.groundBelow && slidingCoroutine == null && m.left => MovementContext.SprintingLeft,
+                MovementContext.SlidingLeft when g.groundBelow && slidingCoroutine == null && m.left => MovementContext.SprintingLeft,
+                MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => MovementContext.SprintingLeft,
+                MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => MovementContext.SprintingLeft,
+                MovementContext.HangingRight when g.groundBelow && m.left => MovementContext.SprintingLeft,
+                MovementContext.WallJumpForwardLeft when g.groundBelow && m.left => MovementContext.SprintingLeft,
 
-            //Sprinting Right
-            MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => MovementContext.SprintingRight,
-            MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => MovementContext.SprintingRight,
-            MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null && m.right => MovementContext.SprintingRight,
-            MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null && m.right => MovementContext.SprintingRight,
-            MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => MovementContext.SprintingRight,
-            MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => MovementContext.SprintingRight,
-            MovementContext.HangingLeft when g.groundBelow && m.right => MovementContext.SprintingRight,
-            MovementContext.WallJumpForwardRight when g.groundBelow && m.right => MovementContext.SprintingRight,
+                //Sprinting Right
+                MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => MovementContext.SprintingRight,
+                MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => MovementContext.SprintingRight,
+                MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null && m.right => MovementContext.SprintingRight,
+                MovementContext.SlidingRight when g.groundBelow && slidingCoroutine == null && m.right => MovementContext.SprintingRight,
+                MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => MovementContext.SprintingRight,
+                MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => MovementContext.SprintingRight,
+                MovementContext.HangingLeft when g.groundBelow && m.right => MovementContext.SprintingRight,
+                MovementContext.WallJumpForwardRight when g.groundBelow && m.right => MovementContext.SprintingRight,
 
-            //Jumping
-            MovementContext.Idling when g.groundBelow && m.jump => MovementContext.Jumping,
-            MovementContext.RunningLeft when m.jump => MovementContext.Jumping,
-            MovementContext.RunningRight when m.jump => MovementContext.Jumping,
-            MovementContext.SprintingLeft when m.jump => MovementContext.Jumping,
-            MovementContext.SprintingRight when m.jump => MovementContext.Jumping,
-            
-            //Falling
-            MovementContext.Idling when !g.groundBelow => MovementContext.Falling,
-            MovementContext.Jumping when vy <= 0 && (vx == 0 || (!g.groundOnLeft && !g.groundOnRight)) => MovementContext.Falling,
-            MovementContext.SlidingLeft when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
-            MovementContext.SlidingRight when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
-            MovementContext.WallJumpBackwardLeft when vy <= 0 => MovementContext.Falling,
-            MovementContext.WallJumpBackwardRight when vy <= 0 => MovementContext.Falling,
-            MovementContext.WallJumpForwardLeft when vy <= 0 && !g.groundOnLeft => MovementContext.Falling,
-            MovementContext.WallJumpForwardRight when vy <= 0 && !g.groundOnRight => MovementContext.Falling,
-            MovementContext.SprintingLeft when !g.groundBelow => MovementContext.Falling,
-            MovementContext.SprintingRight when !g.groundBelow => MovementContext.Falling,
-            MovementContext.SlidingWallDownLeft when !g.groundOnLeft => MovementContext.Falling,
-            MovementContext.SlidingWallDownRight when !g.groundOnRight => MovementContext.Falling,
+                //Jumping
+                MovementContext.Idling when g.groundBelow && m.jump => MovementContext.Jumping,
+                MovementContext.RunningLeft when m.jump => MovementContext.Jumping,
+                MovementContext.RunningRight when m.jump => MovementContext.Jumping,
+                MovementContext.SprintingLeft when m.jump => MovementContext.Jumping,
+                MovementContext.SprintingRight when m.jump => MovementContext.Jumping,
 
-            //Sliding
-            MovementContext.SprintingLeft when m.down => MovementContext.SlidingLeft,
-            MovementContext.SprintingRight when m.down => MovementContext.SlidingRight,
+                //Falling
+                MovementContext.Idling when !g.groundBelow => MovementContext.Falling,
+                MovementContext.Jumping when vy <= 0 && (vx == 0 || (!g.groundOnLeft && !g.groundOnRight)) => MovementContext.Falling,
+                MovementContext.SlidingLeft when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
+                MovementContext.SlidingRight when !g.groundBelow && slidingCoroutine == null => MovementContext.Falling,
+                MovementContext.WallJumpBackwardLeft when vy <= 0 => MovementContext.Falling,
+                MovementContext.WallJumpBackwardRight when vy <= 0 => MovementContext.Falling,
+                MovementContext.WallJumpForwardLeft when vy <= 0 && !g.groundOnLeft => MovementContext.Falling,
+                MovementContext.WallJumpForwardRight when vy <= 0 && !g.groundOnRight => MovementContext.Falling,
+                MovementContext.SprintingLeft when !g.groundBelow => MovementContext.Falling,
+                MovementContext.SprintingRight when !g.groundBelow => MovementContext.Falling,
+                MovementContext.SlidingWallDownLeft when !g.groundOnLeft => MovementContext.Falling,
+                MovementContext.SlidingWallDownRight when !g.groundOnRight => MovementContext.Falling,
 
-            //Running wall up left
-            MovementContext.Jumping when !g.groundBelow && m.left && g.groundOnLeft && g.groundAboveLeft1f => MovementContext.RunningWallUpLeft,
-            MovementContext.WallJumpForwardLeft when g.groundOnLeft => MovementContext.RunningWallUpLeft,
+                //Sliding
+                MovementContext.SprintingLeft when m.down => MovementContext.SlidingLeft,
+                MovementContext.SprintingRight when m.down => MovementContext.SlidingRight,
 
-            //Running wall up right
-            MovementContext.Jumping when !g.groundBelow && m.right && g.groundOnRight && g.groundAboveRight1f => MovementContext.RunningWallUpRight,
-            MovementContext.WallJumpForwardRight when g.groundOnRight => MovementContext.RunningWallUpRight,
+                //Running wall up left
+                MovementContext.Jumping when !g.groundBelow && m.left && g.groundOnLeft && g.groundAboveLeft1f => MovementContext.RunningWallUpLeft,
+                MovementContext.WallJumpForwardLeft when g.groundOnLeft => MovementContext.RunningWallUpLeft,
 
-            //Sliding wall down left
-            MovementContext.HangingOnWallLeft when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownLeft,
-            MovementContext.RunningWallUpLeft when runningWallUpCoroutine == null  => MovementContext.SlidingWallDownLeft,
-            MovementContext.Falling when g.groundOnLeft => MovementContext.SlidingWallDownLeft,
-            MovementContext.ForcedSlidingWallDownLeft when g.groundOnLeft && forcedSlidingWallDownCoroutine == null => MovementContext.SlidingWallDownLeft,
+                //Running wall up right
+                MovementContext.Jumping when !g.groundBelow && m.right && g.groundOnRight && g.groundAboveRight1f => MovementContext.RunningWallUpRight,
+                MovementContext.WallJumpForwardRight when g.groundOnRight => MovementContext.RunningWallUpRight,
 
-            //Sliding wall down right
-            MovementContext.HangingOnWallRight when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownRight,
-            MovementContext.RunningWallUpRight when runningWallUpCoroutine == null => MovementContext.SlidingWallDownRight,
-            MovementContext.Falling when g.groundOnRight => MovementContext.SlidingWallDownRight,
-            MovementContext.ForcedSlidingWallDownRight when g.groundOnRight && forcedSlidingWallDownCoroutine == null => MovementContext.SlidingWallDownRight,
-            
-            //Wall jump backward left
-            MovementContext.RunningWallUpRight when m.jump && !m.left => MovementContext.WallJumpBackwardLeft,
+                //Sliding wall down left
+                MovementContext.HangingOnWallLeft when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownLeft,
+                MovementContext.RunningWallUpLeft when runningWallUpCoroutine == null => MovementContext.SlidingWallDownLeft,
+                MovementContext.Falling when g.groundOnLeft => MovementContext.SlidingWallDownLeft,
+                MovementContext.ForcedSlidingWallDownLeft when g.groundOnLeft && forcedSlidingWallDownCoroutine == null => MovementContext.SlidingWallDownLeft,
 
-            //Wall jump backward right
-            MovementContext.RunningWallUpLeft when m.jump && !m.right => MovementContext.WallJumpBackwardRight,
+                //Sliding wall down right
+                MovementContext.HangingOnWallRight when hangingOnWallCoroutine == null => MovementContext.SlidingWallDownRight,
+                MovementContext.RunningWallUpRight when runningWallUpCoroutine == null => MovementContext.SlidingWallDownRight,
+                MovementContext.Falling when g.groundOnRight => MovementContext.SlidingWallDownRight,
+                MovementContext.ForcedSlidingWallDownRight when g.groundOnRight && forcedSlidingWallDownCoroutine == null => MovementContext.SlidingWallDownRight,
 
-            //Wall jump forward left
-            MovementContext.RunningWallUpRight when m.jump && m.left => MovementContext.WallJumpForwardLeft,
-            MovementContext.HangingRight when m.jump && m.left => MovementContext.WallJumpForwardLeft,
+                //Wall jump backward left
+                MovementContext.RunningWallUpRight when m.jump && !m.left => MovementContext.WallJumpBackwardLeft,
 
-            //Wall jump forward right
-            MovementContext.RunningWallUpLeft when m.jump && m.right => MovementContext.WallJumpForwardRight,
-            MovementContext.HangingLeft when m.jump && m.right => MovementContext.WallJumpForwardRight,
+                //Wall jump backward right
+                MovementContext.RunningWallUpLeft when m.jump && !m.right => MovementContext.WallJumpBackwardRight,
 
-            //Hanging left
-            MovementContext.Idling when g.groundOnLeft && g.groundAboveLeft && !g.groundAboveLeft0_2f && m.left => MovementContext.HangingLeft,
-            MovementContext.RunningLeft when g.groundOnLeft && !g.groundAboveLeft1f && m.left => MovementContext.HangingLeft,
-            MovementContext.SprintingLeft when g.groundOnLeft && !g.groundAboveLeft1f && m.left => MovementContext.HangingLeft,
-            MovementContext.RunningWallUpLeft when g.groundAboveLeft && !g.groundAboveLeft0_1f => MovementContext.HangingLeft,
+                //Wall jump forward left
+                MovementContext.RunningWallUpRight when m.jump && m.left => MovementContext.WallJumpForwardLeft,
+                MovementContext.HangingRight when m.jump && m.left => MovementContext.WallJumpForwardLeft,
 
-            //Hanging right
-            MovementContext.Idling when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
-            MovementContext.RunningRight when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
-            MovementContext.SprintingRight when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
-            MovementContext.RunningWallUpRight when g.groundAboveRight && !g.groundAboveRight0_1f => MovementContext.HangingRight,
+                //Wall jump forward right
+                MovementContext.RunningWallUpLeft when m.jump && m.right => MovementContext.WallJumpForwardRight,
+                MovementContext.HangingLeft when m.jump && m.right => MovementContext.WallJumpForwardRight,
 
-            //Climbing up left
-            MovementContext.HangingLeft when m.up => MovementContext.ClimbingUpLeft,
-            MovementContext.HangingLeft when m.jump => MovementContext.ClimbingUpLeft,
+                //Hanging left
+                MovementContext.Idling when g.groundOnLeft && g.groundAboveLeft && !g.groundAboveLeft0_2f && m.left => MovementContext.HangingLeft,
+                MovementContext.RunningLeft when g.groundOnLeft && !g.groundAboveLeft1f && m.left => MovementContext.HangingLeft,
+                MovementContext.SprintingLeft when g.groundOnLeft && !g.groundAboveLeft1f && m.left => MovementContext.HangingLeft,
+                MovementContext.RunningWallUpLeft when g.groundAboveLeft && !g.groundAboveLeft0_1f => MovementContext.HangingLeft,
 
-            //Climbing up right
-            MovementContext.HangingRight when m.up => MovementContext.ClimbingUpRight,
-            MovementContext.HangingRight when m.jump => MovementContext.ClimbingUpRight,
+                //Hanging right
+                MovementContext.Idling when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
+                MovementContext.RunningRight when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
+                MovementContext.SprintingRight when g.groundOnRight && !g.groundAboveRight1f && m.right => MovementContext.HangingRight,
+                MovementContext.RunningWallUpRight when g.groundAboveRight && !g.groundAboveRight0_1f => MovementContext.HangingRight,
 
-            //Forced sliding down left
-            MovementContext.HangingLeft when m.down => MovementContext.ForcedSlidingWallDownLeft,
+                //Climbing up left
+                MovementContext.HangingLeft when m.up => MovementContext.ClimbingUpLeft,
+                MovementContext.HangingLeft when m.jump => MovementContext.ClimbingUpLeft,
 
-            //Forced sliding down right
-            MovementContext.HangingRight when m.down => MovementContext.ForcedSlidingWallDownRight,
+                //Climbing up right
+                MovementContext.HangingRight when m.up => MovementContext.ClimbingUpRight,
+                MovementContext.HangingRight when m.jump => MovementContext.ClimbingUpRight,
 
-            _ => Context,
-        };
+                //Forced sliding down left
+                MovementContext.HangingLeft when m.down => MovementContext.ForcedSlidingWallDownLeft,
+
+                //Forced sliding down right
+                MovementContext.HangingRight when m.down => MovementContext.ForcedSlidingWallDownRight,
+
+                _ => Context,
+            };
+        }
+
+        if(combatSystem.CombatStateParameter == C_CombatSystem.CombatState.Clinch)
+        {
+            Context = Context switch
+            {
+                _ => MovementContext.Idling
+            };
+
+        }
+   
     }
 
     private void ResolveMovementContext()

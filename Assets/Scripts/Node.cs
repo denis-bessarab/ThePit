@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+[Serializable]
 public class Node : MonoBehaviour
 {
     public Vector2 position;

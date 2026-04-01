@@ -12,7 +12,12 @@ GameObject:
   - component: {fileID: 8267935980585555749}
   - component: {fileID: 8906154476967501417}
   - component: {fileID: 4943593970016963343}
+  - component: {fileID: 6909066073946425333}
+  - component: {fileID: 9171683485340337594}
+  - component: {fileID: 6399544431197564427}
   - component: {fileID: 3681424617775417458}
+  - component: {fileID: 1853717861399494101}
+  - component: {fileID: 3676181464997615763}
   m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
@@ -158,6 +163,119 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!95 &6909066073946425333
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba4236ca7a191f841b3d2bbf4ff0c609, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9171683485340337594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576c2e0015052494badb5520bc4862e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Character
+  characterHit: {fileID: 3676181464997615763}
+  movementSystem: {fileID: 3681424617775417458}
+  combatSystem: {fileID: 1853717861399494101}
+--- !u!114 &6399544431197564427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b610c12419eb540a637a9e625a9ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterInputController
+  _inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_left:
+    m_Name: Left
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d09b9496-0aee-40e9-b703-aba1ed73cc21
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_right:
+    m_Name: Right
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ab8685be-1080-487e-8899-7dbd6d8a20c1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_jump:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e72fdac5-19bb-4106-baa4-eeef73fd049d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_down:
+    m_Name: Down
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 80380cb7-6c5f-4685-9f48-ba4f888f165a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_up:
+    m_Name: Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f5820e29-05d1-4373-a0a3-5a8089595306
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_sprint:
+    m_Name: Sprint
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2423d8ea-aefa-473b-928b-cf959344a7ed
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  m_hit:
+    m_Name: Hit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8b324a79-63b1-4cff-a3a6-4230c3dd03bd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &3681424617775417458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,9 +288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c031cd36eb27e4398e11d4ced74517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementSystem
-  _inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _collider: {fileID: 4943593970016963343}
   _rigidBody2D: {fileID: 8906154476967501417}
+  inputController: {fileID: 6399544431197564427}
+  combatSystem: {fileID: 1853717861399494101}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -218,3 +337,35 @@ MonoBehaviour:
     groundBelowCenter: 0
     groundBelowRight: 0
   movementContext: 0
+--- !u!114 &1853717861399494101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff35dea9affbf1419acbc63c6d6ca22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatSystem
+  enemiesUpdateTime: 1
+  enemiesContainer: {fileID: 0}
+  enemies: []
+  clinchEnemy: {fileID: 0}
+  closestEnemy: {fileID: 0}
+  combatState: 0
+--- !u!114 &3676181464997615763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0328bc908328b649bebc378134cc7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterHit
+  cic: {fileID: 6399544431197564427}
+  weapon: {fileID: 11400000, guid: f127245fc0f7fa24889f074fa0bea7c7, type: 2}
