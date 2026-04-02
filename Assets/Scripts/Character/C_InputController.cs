@@ -13,6 +13,11 @@ public class C_InputController : MonoBehaviour
     public InputAction m_sprint;
     public InputAction m_hit;
 
+    private void Reset()
+    {
+        _inputActions = GetInputActionAsset();
+    }
+
     private void OnEnable()
     {
         _inputActions.FindActionMap("Character").Enable();
@@ -32,5 +37,10 @@ public class C_InputController : MonoBehaviour
         m_up = InputSystem.actions.FindAction("Up");
         m_sprint = InputSystem.actions.FindAction("Sprint");
         m_hit = InputSystem.actions.FindAction("Hit");
+    }
+
+    private InputActionAsset GetInputActionAsset()
+    {
+        return Resources.Load("InputSystem_Actions") as InputActionAsset;
     }
 }

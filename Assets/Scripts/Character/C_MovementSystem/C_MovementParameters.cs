@@ -1,0 +1,56 @@
+using UnityEngine;
+
+public class C_MovementParameters : MonoBehaviour
+{
+    [SerializeField] public LayerMask groundLayerMask;
+    [SerializeField] public float verticalRaycastDistance;
+    [SerializeField] public float horizontalRaycastDistance;
+    [SerializeField] public float jumpPower;
+    [SerializeField] public float wallJumpPowerForwardX;
+    [SerializeField] public float wallJumpPowerForwardY;
+    [SerializeField] public float wallJumpPowerBackwardX;
+    [SerializeField] public float wallJumpPowerBackwardY;
+    [SerializeField] public float slidingPower;
+    [SerializeField] public float slidingTime;
+    [SerializeField] public float runningSpeed;
+    [SerializeField] public float sprintingSpeed;
+    [SerializeField] public float hangingOnWallTime;
+    [SerializeField] public float runningWallSpeed;
+    [SerializeField] public float runningWallTime;
+    [SerializeField] public float climbingUpSpeed;
+    [SerializeField] public float fallDynamicGravity;
+    [SerializeField] public float jumpDynamicGravity;
+
+    private void Reset()
+    {
+        var parameters = GetParameters();
+        ApplyParameters(parameters);
+    }
+
+    private C_MovementParametersHolder GetParameters()
+    {
+        return Resources.Load("Parameters/C_MovementParametersHolder") as C_MovementParametersHolder;
+    }
+
+    private void ApplyParameters(C_MovementParametersHolder p)
+    {
+        groundLayerMask = p.groundLayerMask;
+        verticalRaycastDistance = p.verticalRaycastDistance;
+        horizontalRaycastDistance = p.horizontalRaycastDistance;
+        jumpPower = p.jumpPower;
+        wallJumpPowerForwardX = p.wallJumpPowerForwardX;
+        wallJumpPowerForwardY = p.wallJumpPowerForwardY;
+        wallJumpPowerBackwardX = p.wallJumpPowerBackwardX;
+        wallJumpPowerBackwardY = p.wallJumpPowerBackwardY;
+        slidingPower = p.slidingPower;
+        slidingTime = p.slidingTime;
+        runningSpeed = p.runningSpeed;
+        sprintingSpeed = p.sprintingSpeed;
+        hangingOnWallTime = p.hangingOnWallTime;
+        runningWallSpeed = p.runningWallSpeed;
+        runningWallTime = p.runningWallTime;
+        climbingUpSpeed = p.climbingUpSpeed;
+        fallDynamicGravity = p.fallDynamicGravity;
+        jumpDynamicGravity = p.jumpDynamicGravity;
+    }
+}

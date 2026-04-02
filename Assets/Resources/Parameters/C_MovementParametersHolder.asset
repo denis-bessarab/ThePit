@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5ec269c3d3bec408b5c2fecb74b53c, type: 3}
+  m_Name: C_MovementParametersHolder
+  m_EditorClassIdentifier: Assembly-CSharp::C_MovementParametersHolder
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  verticalRaycastDistance: 1.1
+  horizontalRaycastDistance: 0.51
+  jumpPower: 9
+  wallJumpPowerForwardX: 7
+  wallJumpPowerForwardY: 8.5
+  wallJumpPowerBackwardX: 5
+  wallJumpPowerBackwardY: 4
+  slidingPower: 6
+  slidingTime: 0.5
+  runningSpeed: 5
+  sprintingSpeed: 7
+  hangingOnWallTime: 1
+  runningWallSpeed: 5
+  runningWallTime: 0.7
+  climbingUpSpeed: 6
+  fallDynamicGravity: 0.005
+  jumpDynamicGravity: 0.01
