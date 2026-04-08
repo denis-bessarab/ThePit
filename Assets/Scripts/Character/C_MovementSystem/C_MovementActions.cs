@@ -12,6 +12,8 @@ public class C_MovementActions : MonoBehaviour
     public Coroutine climbingUpCoroutine;
     public Coroutine hangingCoroutine;
     public Coroutine forcedSlidingWallDownCoroutine;
+    public Coroutine stoppingCoroutine;
+    public Coroutine stepCoroutine;
 
     public void SprintLeft(C_MovementParameters p, Rigidbody2D rb)
     {
@@ -39,8 +41,15 @@ public class C_MovementActions : MonoBehaviour
     {
         while (c.MovementContext == C_MovementContext.Falling)
         {
-            rb.gravityScale += p.fallDynamicGravity;
-            yield return null;
+            if(rb.gravityScale >= p.fallingVelocityMax)
+            {
+                yield return null;
+            }
+            else
+            {
+                rb.gravityScale += p.fallDynamicGravity;
+                yield return null;
+            }
         }
         rb.gravityScale = 1;
         if (fallingCoroutine != null) ResetCoroutine(ref fallingCoroutine);
@@ -115,26 +124,37 @@ public class C_MovementActions : MonoBehaviour
         ResetCoroutine(ref runningWallUpCoroutine);
     }
 
-    public IEnumerator ClimbingUp(Vector2 dir, C_MovementParameters p, Rigidbody2D rb, CapsuleCollider2D col)
+    public IEnumerator ClimbingUp(Vector2 dir, C_MovementParameters p, Rigidbody2D rb, CapsuleCollider2D col, Character c)
     {
-        var b = col.bounds;
 
-        Debug.Log(dir);
-
-        while (Physics2D.Raycast(new Vector2(b.center.x, b.min.y), dir, 1f, p.groundLayerMask))
+        if(dir.x < 0)
         {
-            rb.linearVelocityX = 0;
-            rb.linearVelocityY = p.climbingUpSpeed;
-            yield return null;
+            while (c.groundData.groundOnLeft)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = p.climbingUpSpeed;
+                yield return null;
+            };
         }
-        ;
-        while (!Physics2D.Raycast(new Vector2(dir.x == 1 ? b.min.x : b.max.x, b.min.y), Vector2.down, 0.5f, p.groundLayerMask))
+
+        if (dir.x > 0)
+        {
+            while (c.groundData.groundOnRight)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = p.climbingUpSpeed;
+                yield return null;
+            };
+        }
+
+
+        while (!c.groundData.groundBelowLeft || !c.groundData.groundBelowCenter || !c.groundData.groundBelowRight)
         {
             rb.linearVelocityX = dir.x == 1 ? p.climbingUpSpeed : -p.climbingUpSpeed;
             rb.linearVelocityY = 0;
             yield return null;
-        }
-        ;
+        };
+
         rb.linearVelocity = Vector2.zero;
         if (climbingUpCoroutine != null) ResetCoroutine(ref climbingUpCoroutine);
     }
@@ -164,8 +184,45 @@ public class C_MovementActions : MonoBehaviour
         ResetCoroutine(ref forcedSlidingWallDownCoroutine);
     }
 
+    public IEnumerator Step(Vector2 dir, Rigidbody2D rb, Character c, C_MovementParameters p)
+    {
+        if (dir.x < 0)
+        {
+            while (c.groundData.groundOnLeft)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = p.climbingUpSpeed;
+                yield return null;
+            }
+            ;
+        }
+
+        if (dir.x > 0)
+        {
+            while (c.groundData.groundOnRight)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = p.climbingUpSpeed;
+                yield return null;
+            }
+            ;
+        }
+
+
+        while (!c.groundData.groundBelowLeft || !c.groundData.groundBelowCenter || !c.groundData.groundBelowRight)
+        {
+            rb.linearVelocityX = dir.x == 1 ? p.climbingUpSpeed : -p.climbingUpSpeed;
+            rb.linearVelocityY = 0;
+            yield return null;
+        }
+        ;
+
+        rb.linearVelocity = Vector2.zero;
+        ResetCoroutine(ref stepCoroutine);
+    }
     public void ResetCoroutine(ref Coroutine c)
     {
+        if (c == null) return;
         StopCoroutine(c);
         c = null;
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class C_MovementParameters : MonoBehaviour
 {
     [SerializeField] public LayerMask groundLayerMask;
+    [SerializeField] public PhysicsMaterial2D characterMaterial;
     [SerializeField] public float verticalRaycastDistance;
     [SerializeField] public float horizontalRaycastDistance;
     [SerializeField] public float jumpPower;
@@ -20,6 +21,7 @@ public class C_MovementParameters : MonoBehaviour
     [SerializeField] public float climbingUpSpeed;
     [SerializeField] public float fallDynamicGravity;
     [SerializeField] public float jumpDynamicGravity;
+    [SerializeField] public float fallingVelocityMax;
 
     private void Reset()
     {
@@ -35,6 +37,7 @@ public class C_MovementParameters : MonoBehaviour
     private void ApplyParameters(C_MovementParametersHolder p)
     {
         groundLayerMask = p.groundLayerMask;
+        characterMaterial = p.characterMaterial;
         verticalRaycastDistance = p.verticalRaycastDistance;
         horizontalRaycastDistance = p.horizontalRaycastDistance;
         jumpPower = p.jumpPower;
@@ -52,5 +55,6 @@ public class C_MovementParameters : MonoBehaviour
         climbingUpSpeed = p.climbingUpSpeed;
         fallDynamicGravity = p.fallDynamicGravity;
         jumpDynamicGravity = p.jumpDynamicGravity;
+        fallingVelocityMax = p.fallingVelocityMax;
     }
 }

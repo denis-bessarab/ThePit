@@ -8,8 +8,8 @@ public struct GroundData
     public bool groundOnRight;
     public bool groundBelow;
     public bool groundAbove;
-    public bool groundAboveLeft;
-    public bool groundAboveRight;
+    public bool groundTopLeft;
+    public bool groundTopRight;
     public bool groundAboveLeft1f;
     public bool groundAboveRight1f;
     public bool groundAboveLeft0_1f;
@@ -20,14 +20,16 @@ public struct GroundData
     public bool groundBelowLeft;
     public bool groundBelowCenter;
     public bool groundBelowRight;
+    public bool groundBottomLeft;
+    public bool groundBottomRight;
 
     public GroundData(
         bool groundOnLeft,
         bool groundOnRight,
         bool groundBelow,
         bool groundAbove,
-        bool groundAboveLeft,
-        bool groundAboveRight,
+        bool groundTopLeft,
+        bool groundTopRight,
         bool groundAboveLeft1f,
         bool groundAboveRight1f,
         bool groundAboveLeft0_1f,
@@ -37,15 +39,17 @@ public struct GroundData
         Vector2 groundNormal,
         bool groundBelowLeft,
         bool groundBelowCenter,
-        bool groundBelowRight
+        bool groundBelowRight,
+        bool groundBottomLeft,
+        bool groundBottomRight
         )
     {
         this.groundOnLeft = groundOnLeft;
         this.groundOnRight = groundOnRight;
         this.groundBelow = groundBelow;
         this.groundAbove = groundAbove;
-        this.groundAboveLeft = groundAboveLeft;
-        this.groundAboveRight = groundAboveRight;
+        this.groundTopLeft = groundTopLeft;
+        this.groundTopRight = groundTopRight;
         this.groundAboveLeft1f = groundAboveLeft1f;
         this.groundAboveRight1f = groundAboveRight1f;
         this.groundAboveLeft0_1f = groundAboveLeft0_1f;
@@ -56,5 +60,7 @@ public struct GroundData
         this.groundBelowLeft = groundBelowLeft;
         this.groundBelowCenter = groundBelowCenter;
         this.groundBelowRight = groundBelowRight;
+        this.groundBottomLeft = groundBottomLeft;
+        this.groundBottomRight = groundBottomRight;
     }
 }

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8910340510025148957}
   - component: {fileID: 3887260537918405829}
   - component: {fileID: 6700653360455060410}
+  - component: {fileID: 1539358663467671891}
   - component: {fileID: 8588452189522015988}
   m_Layer: 3
   m_Name: Character
@@ -278,8 +279,9 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  characterMaterial: {fileID: 6200000, guid: 7b332b9918b833e42987993ce778f1d9, type: 2}
   verticalRaycastDistance: 1.1
-  horizontalRaycastDistance: 0.51
+  horizontalRaycastDistance: 0.55
   jumpPower: 9
   wallJumpPowerForwardX: 7
   wallJumpPowerForwardY: 8.5
@@ -295,6 +297,7 @@ MonoBehaviour:
   climbingUpSpeed: 6
   fallDynamicGravity: 0.005
   jumpDynamicGravity: 0.01
+  fallingVelocityMax: 2
 --- !u!114 &4125975706692358676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +346,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef9c08a6fe19594ba64906fb6437569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::C_MovementActions
+--- !u!114 &1539358663467671891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874801c7f62a236458949139ce6ecebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::C_ComponentContoller
 --- !u!114 &8588452189522015988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,3 +379,31 @@ MonoBehaviour:
   _rigidbody: {fileID: 8906154476967501417}
   _collider: {fileID: 4943593970016963343}
   movementContext: 0
+  groundData:
+    groundOnLeft: 0
+    groundOnRight: 0
+    groundBelow: 0
+    groundAbove: 0
+    groundTopLeft: 0
+    groundTopRight: 0
+    groundAboveLeft1f: 0
+    groundAboveRight1f: 0
+    groundAboveLeft0_1f: 0
+    groundAboveRight0_1f: 0
+    groundAboveLeft0_2f: 0
+    groundAboveRight0_2f: 0
+    groundNormal: {x: 0, y: 0}
+    groundBelowLeft: 0
+    groundBelowCenter: 0
+    groundBelowRight: 0
+    groundBottomLeft: 0
+    groundBottomRight: 0
+  movementData:
+    left: 0
+    right: 0
+    jump: 0
+    down: 0
+    up: 0
+    sprint: 0
+    vx: 0
+    vy: 0

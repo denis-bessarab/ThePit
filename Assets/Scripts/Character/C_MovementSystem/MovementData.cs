@@ -9,8 +9,10 @@ public struct MovementData
     public bool down;
     public bool up;
     public bool sprint;
+    public float vx;
+    public float vy;
 
-    public MovementData(bool left, bool right, bool jump, bool down, bool up, bool sprint)
+    public MovementData(bool left, bool right, bool jump, bool down, bool up, bool sprint, float vx, float vy)
     {
         this.left = left;
         this.right = right;
@@ -18,5 +20,7 @@ public struct MovementData
         this.down = down;
         this.up = up;
         this.sprint = sprint;
+        this.vx = vx;
+        this.vy = vy;
     }
 }

@@ -19,6 +19,8 @@ public class Character : MonoBehaviour
 
     [Header("Contexts")]
     [SerializeField] private C_MovementContext movementContext;
+    [SerializeField] public GroundData groundData;
+    [SerializeField] public MovementData movementData;
 
     public C_MovementContext MovementContext
     {
@@ -46,8 +48,8 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        var movementData = movementDataCollector.UpdateMovementData(inputController);
-        var groundData = movementDataCollector.UpdateGroundData(_collider, movementParameters);
+        movementData = movementDataCollector.UpdateMovementData(inputController, _rigidbody);
+        groundData = movementDataCollector.UpdateGroundData(_collider, movementParameters);
 
         MovementContext = movementContextCreator.UpdateMovementContext(
             movementData, 

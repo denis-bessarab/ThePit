@@ -26,5 +26,7 @@ public enum C_MovementContext
     WallJumpForwardRight,
     Falling,
     ForcedSlidingWallDownLeft,
-    ForcedSlidingWallDownRight
+    ForcedSlidingWallDownRight,
+    StepRight,
+    StepLeft
 }
