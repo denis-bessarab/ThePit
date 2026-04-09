@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 3887260537918405829}
   - component: {fileID: 6700653360455060410}
   - component: {fileID: 1539358663467671891}
+  - component: {fileID: 4804010625353359542}
+  - component: {fileID: 7217758552076157743}
   - component: {fileID: 8588452189522015988}
   m_Layer: 3
   m_Name: Character
@@ -255,11 +257,11 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  m_hit:
-    m_Name: Hit
+  rope:
+    m_Name: Rope
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 66ca8ea0-a7da-4180-91a0-45d99d3377ad
+    m_Id: b9675670-4dc1-4d4b-9be6-644ff7ce6289
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -358,6 +360,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874801c7f62a236458949139ce6ecebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::C_ComponentContoller
+--- !u!114 &4804010625353359542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a3a0f5dd3ccda41935d07939a446c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::C_InputResolver
+--- !u!114 &7217758552076157743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f84bb4a210b5f409b5933d6b40d563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::C_Actions
 --- !u!114 &8588452189522015988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +402,8 @@ MonoBehaviour:
   movementContextCreator: {fileID: 8910340510025148957}
   movementContextResolver: {fileID: 3887260537918405829}
   movementActions: {fileID: 6700653360455060410}
+  inputResolver: {fileID: 4804010625353359542}
+  actions: {fileID: 7217758552076157743}
   _rigidbody: {fileID: 8906154476967501417}
   _collider: {fileID: 4943593970016963343}
   movementContext: 0

@@ -7,7 +7,7 @@ public class CharacterHit : MonoBehaviour
 
     private void Update()
     {
-        var hit = cic.m_hit.WasPressedThisFrame();
+        var hit = cic.rope.WasPressedThisFrame();
 
         if(hit)
         {

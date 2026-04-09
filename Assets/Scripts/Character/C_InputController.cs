@@ -11,7 +11,7 @@ public class C_InputController : MonoBehaviour
     public InputAction m_down;
     public InputAction m_up;
     public InputAction m_sprint;
-    public InputAction m_hit;
+    public InputAction rope;
 
     private void Reset()
     {
@@ -30,13 +30,18 @@ public class C_InputController : MonoBehaviour
 
     private void Awake()
     {
-        m_left = InputSystem.actions.FindAction("Left");
-        m_right = InputSystem.actions.FindAction("Right");
-        m_jump = InputSystem.actions.FindAction("Jump");
-        m_down = InputSystem.actions.FindAction("Down");
-        m_up = InputSystem.actions.FindAction("Up");
-        m_sprint = InputSystem.actions.FindAction("Sprint");
-        m_hit = InputSystem.actions.FindAction("Hit");
+        SetActions();
+    }
+
+    private void SetActions()
+    {
+        m_left = _inputActions.FindAction("Left");
+        m_right = _inputActions.FindAction("Right");
+        m_jump = _inputActions.FindAction("Jump");
+        m_down = _inputActions.FindAction("Down");
+        m_up = _inputActions.FindAction("Up");
+        m_sprint = _inputActions.FindAction("Sprint");
+        rope = _inputActions.FindAction("Rope");
     }
 
     private InputActionAsset GetInputActionAsset()
