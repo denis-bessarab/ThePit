@@ -2,7 +2,29 @@ using UnityEngine;
 
 public class C_MovementContextCreator : MonoBehaviour
 {
-    public C_MovementContext UpdateMovementContext(MovementData m, GroundData g, C_MovementParameters p, C_MovementActions a, Character c, Rigidbody2D rb)
+    public C_MovementContext UpdateMovementContext(
+        MovementData m, 
+        GroundData g, 
+        C_MovementParameters p, 
+        C_MovementActions a, 
+        Character c, 
+        Rigidbody2D rb,
+        Rope r
+        )
+    {
+        if (r != null) return UpdateRopeContext(m, g, p, a, c, rb, r);
+        return UpdateDefaultContext(m, g, p, a, c, rb, r);
+    }
+
+    private C_MovementContext UpdateDefaultContext(
+        MovementData m,
+        GroundData g,
+        C_MovementParameters p,
+        C_MovementActions a,
+        Character c,
+        Rigidbody2D rb,
+        Rope r
+        )
     {
         return c.MovementContext switch
         {
@@ -65,6 +87,9 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.SprintingRight when !g.groundBelow => C_MovementContext.Falling,
             C_MovementContext.SlidingWallDownLeft when !g.groundOnLeft => C_MovementContext.Falling,
             C_MovementContext.SlidingWallDownRight when !g.groundOnRight => C_MovementContext.Falling,
+            C_MovementContext.ForcedSlidingWallDownLeft when !g.groundOnLeft && a.forcedSlidingWallDownCoroutine == null => C_MovementContext.Falling,
+            C_MovementContext.ForcedSlidingWallDownRight when !g.groundOnRight && a.forcedSlidingWallDownCoroutine == null => C_MovementContext.Falling,
+            C_MovementContext.Rope when r == null => C_MovementContext.Falling,
 
             //Sliding
             C_MovementContext.SprintingLeft when m.down => C_MovementContext.SlidingLeft,
@@ -124,7 +149,7 @@ public class C_MovementContextCreator : MonoBehaviour
             //Climbing up right
             C_MovementContext.HangingRight when m.up => C_MovementContext.ClimbingUpRight,
             C_MovementContext.HangingRight when m.jump => C_MovementContext.ClimbingUpRight,
-            C_MovementContext.SprintingRight when g.groundOnRight && m.right && !g.groundAboveRight0_1f => C_MovementContext.ClimbingUpLeft,
+            C_MovementContext.SprintingRight when g.groundOnRight && m.right && !g.groundAboveRight0_1f => C_MovementContext.ClimbingUpRight,
 
             //Forced sliding down left
             C_MovementContext.HangingLeft when m.down => C_MovementContext.ForcedSlidingWallDownLeft,
@@ -139,6 +164,28 @@ public class C_MovementContextCreator : MonoBehaviour
             //Step left
             C_MovementContext.SprintingLeft when !g.groundTopLeft && g.groundBottomLeft => C_MovementContext.StepLeft,
             C_MovementContext.Idling when !g.groundTopLeft && g.groundBottomLeft && m.left => C_MovementContext.StepLeft,
+
+            _ => c.MovementContext,
+        };
+    }
+
+    private C_MovementContext UpdateRopeContext(
+        MovementData m,
+        GroundData g,
+        C_MovementParameters p,
+        C_MovementActions a,
+        Character c,
+        Rigidbody2D rb,
+        Rope r
+        )
+    {
+        return c.MovementContext switch
+        {
+            //Rope
+            C_MovementContext.SprintingLeft when r != null => C_MovementContext.Rope,
+            C_MovementContext.SprintingRight when r != null => C_MovementContext.Rope,
+            C_MovementContext.Jumping when r != null => C_MovementContext.Rope,
+            C_MovementContext.Falling when r != null => C_MovementContext.Rope,
 
             _ => c.MovementContext,
         };

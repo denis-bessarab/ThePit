@@ -17,6 +17,7 @@ public class Rope : MonoBehaviour
     [SerializeField] private GameObject ropeEnd;
     [SerializeField] private Rigidbody2D ropeEndRigidbody;
     [SerializeField] private RopeData ropeData;
+    [SerializeField] private Character character;
 
     private void Reset()
     {
@@ -36,15 +37,6 @@ public class Rope : MonoBehaviour
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.T))
-        //{
-        //    ActivateRope();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    DeactivateRope();
-        //}
-
         ropeData = dataCollector.UpdateRopeData(transform.gameObject, ropeEnd, distanceJoint2D);
         UpdateRopeCenterState(ropeData);
 
@@ -57,16 +49,20 @@ public class Rope : MonoBehaviour
         if (collision.name == "Character")
         {
             var rb = collision.GetComponent<Rigidbody2D>();
+            var c = collision.GetComponent<Character>();
 
-            ActivateRope(rb);
+            ActivateRope(rb, c);
         }
     }
 
-    private void ActivateRope(Rigidbody2D rb)
+    private void ActivateRope(Rigidbody2D rb, Character c)
     {
         FreezeRopeEnd();
         distanceJoint2D.connectedBody = rb;
         inputController.enabled = true;
+        distanceJoint2D.distance = Vector3.Distance(transform.position, c.gameObject.transform.position);
+        character = c;
+        character.rope = this;
     }
 
     public void DeactivateRope()
@@ -74,6 +70,9 @@ public class Rope : MonoBehaviour
         UnfreezeRopeEnd();
         distanceJoint2D.connectedBody = ropeEndRigidbody;
         inputController.enabled = false;
+        character.rope = null;
+        character = null;
+        distanceJoint2D.distance = parameters.maxRopeLenght;
     }
 
     private void UpdateRopeCenterState(RopeData rd)
@@ -85,10 +84,12 @@ public class Rope : MonoBehaviour
     private void FreezeRopeEnd()
     {
         ropeEnd.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        ropeEnd.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void UnfreezeRopeEnd()
     {
         ropeEnd.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        ropeEnd.GetComponent<SpriteRenderer>().enabled = true;
     }
 }

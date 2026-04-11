@@ -12,6 +12,7 @@ public class C_InputController : MonoBehaviour
     public InputAction m_up;
     public InputAction m_sprint;
     public InputAction rope;
+    public InputAction restart;
 
     private void Reset()
     {
@@ -42,6 +43,7 @@ public class C_InputController : MonoBehaviour
         m_up = _inputActions.FindAction("Up");
         m_sprint = _inputActions.FindAction("Sprint");
         rope = _inputActions.FindAction("Rope");
+        restart = _inputActions.FindAction("Restart");
     }
 
     private InputActionAsset GetInputActionAsset()

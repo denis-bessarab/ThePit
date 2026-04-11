@@ -25,6 +25,7 @@ public class Character : MonoBehaviour
     [SerializeField] private C_MovementContext movementContext;
     [SerializeField] public GroundData groundData;
     [SerializeField] public MovementData movementData;
+    [SerializeField] public Rope rope;
 
     public C_MovementContext MovementContext
     {
@@ -63,7 +64,8 @@ public class Character : MonoBehaviour
             movementParameters,
             movementActions,
             this,
-            _rigidbody
+            _rigidbody,
+            rope
             );
 
         movementContextResolver.ResolveMovementContext(
