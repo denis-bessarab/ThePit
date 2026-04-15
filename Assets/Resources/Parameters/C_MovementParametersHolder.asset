@@ -17,7 +17,7 @@ MonoBehaviour:
     m_Bits: 64
   characterMaterial: {fileID: 6200000, guid: 7b332b9918b833e42987993ce778f1d9, type: 2}
   verticalRaycastDistance: 1.1
-  horizontalRaycastDistance: 0.52
+  horizontalRaycastDistance: 0.56
   jumpPower: 9
   wallJumpPowerForwardX: 7
   wallJumpPowerForwardY: 8.5
@@ -33,4 +33,5 @@ MonoBehaviour:
   climbingUpSpeed: 6
   fallDynamicGravity: 0.005
   jumpDynamicGravity: 0.01
-  fallingVelocityMax: 2
+  fallingVelocityMax: 12
+  horizontalVelocityMax: 7

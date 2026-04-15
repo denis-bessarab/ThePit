@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(C_MovementActions))]
 [RequireComponent(typeof(C_InputResolver))]
 [RequireComponent(typeof(C_Actions))]
+[RequireComponent(typeof(C_VelocityLimiter))]
 public class Character : MonoBehaviour
 {
     [Header("Components")]
@@ -18,6 +19,7 @@ public class Character : MonoBehaviour
     [SerializeField] public C_MovementActions movementActions;
     [SerializeField] public C_InputResolver inputResolver;
     [SerializeField] public C_Actions actions;
+    [SerializeField] public C_VelocityLimiter velocityLimiter;
     [SerializeField] public Rigidbody2D _rigidbody;
     [SerializeField] public CapsuleCollider2D _collider;
 
@@ -48,6 +50,7 @@ public class Character : MonoBehaviour
         movementActions = GetComponent<C_MovementActions>();
         inputResolver = GetComponent<C_InputResolver>();
         actions = GetComponent<C_Actions>();
+        velocityLimiter = GetComponent<C_VelocityLimiter>();
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
@@ -76,6 +79,7 @@ public class Character : MonoBehaviour
             _collider
             );
 
-        inputResolver.ResolveInput(inputController, actions);
+        inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData);
+        velocityLimiter.LimitVelocity(_rigidbody, movementParameters, MovementContext);
     }
 }

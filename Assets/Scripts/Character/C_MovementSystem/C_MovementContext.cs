@@ -31,5 +31,7 @@ public enum C_MovementContext
     StepLeft,
     Rope,
     StepDownLeft,
-    StepDownRight
+    StepDownRight,
+    CliffHangLeft,
+    CliffHangRight,
 }

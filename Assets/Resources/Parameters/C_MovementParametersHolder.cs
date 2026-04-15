@@ -22,4 +22,5 @@ public class C_MovementParametersHolder : ScriptableObject
     [SerializeField] public float fallDynamicGravity;
     [SerializeField] public float jumpDynamicGravity;
     [SerializeField] public float fallingVelocityMax;
+    [SerializeField] public float horizontalVelocityMax;
 }

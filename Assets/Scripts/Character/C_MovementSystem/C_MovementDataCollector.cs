@@ -5,15 +5,13 @@ using static UnityEditor.PlayerSettings;
 
 public class C_MovementDataCollector : MonoBehaviour
 {
-    Vector3 testPos;
-    Vector3 testSize;
 
     public MovementData UpdateMovementData(C_InputController ic, Rigidbody2D rb)
     {
         var left = ic.m_left.IsPressed();
         var right = ic.m_right.IsPressed();
         var jump = ic.m_jump.WasPressedThisFrame();
-        var down = ic.m_down.WasPressedThisFrame();
+        var down = ic.m_down.IsPressed();
         var up = ic.m_up.IsPressed();
         var sprint = ic.m_sprint.IsPressed();
         var vx = rb.linearVelocityX;
@@ -60,17 +58,12 @@ public class C_MovementDataCollector : MonoBehaviour
 
         var boxCastSize = 0.8f;
 
-        var groundBeneathLeft0_2f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
-        var groundBeneathRight0_2f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
+        var groundBeneathLeft1f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
+        var groundBeneathRight1f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
         var groundBeneathLeft2f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - 1.5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
         var groundBeneathRight2f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - 1.5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
         var groundBeneathLeft3f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - 2.5f), new Vector2(boxCastSize, boxCastSize), 0f,  p.groundLayerMask);
         var groundBeneathRight3f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - 2.5f), new Vector2(boxCastSize, boxCastSize), 0f,  p.groundLayerMask);
-
-        //TEST
-        testPos = new Vector3(b.center.x - 1f, b.min.y - .5f, 0);
-        testSize = new Vector3(boxCastSize, boxCastSize, 0);
-        //END OF TEST
 
         return new GroundData(
             groundOnLeft,
@@ -91,18 +84,12 @@ public class C_MovementDataCollector : MonoBehaviour
             groundBelowRight,
             groundBottomLeft,
             groundBottomRight,
-            groundBeneathLeft0_2f,
-            groundBeneathRight0_2f,
+            groundBeneathLeft1f,
+            groundBeneathRight1f,
             groundBeneathLeft2f,
             groundBeneathRight2f,
             groundBeneathLeft3f,
             groundBeneathRight3f
             );
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = UnityEngine.Color.green;
-        Gizmos.DrawWireCube(testPos, testSize);
     }
 }

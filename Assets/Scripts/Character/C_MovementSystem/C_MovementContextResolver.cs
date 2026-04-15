@@ -4,21 +4,19 @@ public class C_MovementContextResolver : MonoBehaviour
 {
     public void ResolveMovementContext(Character c, C_MovementActions a, C_MovementParameters p, Rigidbody2D rb, CapsuleCollider2D col)
     {
+        col.sharedMaterial = null;
         switch (c.MovementContext)
         {
             case C_MovementContext.Idling:
                 col.sharedMaterial = p.characterMaterial;
                 break;
             case C_MovementContext.SprintingLeft:
-                col.sharedMaterial = null;
                 a.SprintLeft(p,rb);
                 break;
             case C_MovementContext.SprintingRight:
-                col.sharedMaterial = null;
                 a.SprintRight(p,rb);
                 break;
             case C_MovementContext.Jumping:
-                col.sharedMaterial = null;
                 if (a.jumpingCoroutine != null) return;
                 a.jumpingCoroutine = StartCoroutine(a.Jump(p, c, rb));
                 break;
@@ -47,7 +45,6 @@ public class C_MovementContextResolver : MonoBehaviour
                 rb.gravityScale = 1f;
                 break;
             case C_MovementContext.Falling:
-                col.sharedMaterial = null;
                 if (a.fallingCoroutine != null) return;
                 a.fallingCoroutine = StartCoroutine(a.Fall(p,c,rb));
                 break;
@@ -87,7 +84,7 @@ public class C_MovementContextResolver : MonoBehaviour
                 a.forcedSlidingWallDownCoroutine = StartCoroutine(a.ForcedSlidingWallDown());
                 break;
             case C_MovementContext.StepLeft:
-                if(a.stepCoroutine != null) return;
+                if (a.stepCoroutine != null) return;
                 a.stepCoroutine = StartCoroutine(a.Step(Vector2.left, rb, c, p));
                 break;
             case C_MovementContext.StepRight:
@@ -101,6 +98,22 @@ public class C_MovementContextResolver : MonoBehaviour
             case C_MovementContext.StepDownRight:
                 if (a.stepDownCoroutine != null) return;
                 a.stepDownCoroutine = StartCoroutine(a.StepDown(Vector2.right, rb, c, p));
+                break;
+            case C_MovementContext.ClimbingDownLeft:
+                if (a.climbingDownCoroutine != null) return;
+                a.climbingDownCoroutine = StartCoroutine(a.ClimbDown(Vector2.left, rb, c, p));
+                break;
+            case C_MovementContext.ClimbingDownRight:
+                if (a.climbingDownCoroutine != null) return;
+                a.climbingDownCoroutine = StartCoroutine(a.ClimbDown(Vector2.right, rb, c, p));
+                break;
+            case C_MovementContext.CliffHangLeft:
+                if (a.cliffHangCoroutine != null) return;
+                a.cliffHangCoroutine = StartCoroutine(a.CliffHang(Vector2.left, rb, c, p));
+                break;
+            case C_MovementContext.CliffHangRight:
+                if (a.cliffHangCoroutine != null) return;
+                a.cliffHangCoroutine = StartCoroutine(a.CliffHang(Vector2.right, rb, c, p));
                 break;
         }
     }

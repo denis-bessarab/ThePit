@@ -55,4 +55,9 @@ public class C_Actions : MonoBehaviour
         c.rope = null;
     }
 
+    public void AirPositionAdjustment(MovementData m, Rigidbody2D rb)
+    {
+        if(m.left) rb.AddForceAtPosition(new Vector2(-2f,0), transform.position, ForceMode2D.Force);
+        if(m.right) rb.AddForceAtPosition(new Vector2(2f,0), transform.position, ForceMode2D.Force);
+    }
 }

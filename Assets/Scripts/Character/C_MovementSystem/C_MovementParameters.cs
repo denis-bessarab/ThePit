@@ -22,6 +22,7 @@ public class C_MovementParameters : MonoBehaviour
     [SerializeField] public float fallDynamicGravity;
     [SerializeField] public float jumpDynamicGravity;
     [SerializeField] public float fallingVelocityMax;
+    [SerializeField] public float horizontalVelocityMax;
 
     private void Reset()
     {
@@ -56,5 +57,6 @@ public class C_MovementParameters : MonoBehaviour
         fallDynamicGravity = p.fallDynamicGravity;
         jumpDynamicGravity = p.jumpDynamicGravity;
         fallingVelocityMax = p.fallingVelocityMax;
+        horizontalVelocityMax = p.horizontalVelocityMax;
     }
 }

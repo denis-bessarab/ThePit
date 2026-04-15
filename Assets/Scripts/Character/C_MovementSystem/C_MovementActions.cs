@@ -15,6 +15,8 @@ public class C_MovementActions : MonoBehaviour
     public Coroutine stoppingCoroutine;
     public Coroutine stepCoroutine;
     public Coroutine stepDownCoroutine;
+    public Coroutine climbingDownCoroutine;
+    public Coroutine cliffHangCoroutine;
 
     public void SprintLeft(C_MovementParameters p, Rigidbody2D rb)
     {
@@ -42,15 +44,9 @@ public class C_MovementActions : MonoBehaviour
     {
         while (c.MovementContext == C_MovementContext.Falling)
         {
-            if(rb.gravityScale >= p.fallingVelocityMax)
-            {
-                yield return null;
-            }
-            else
-            {
-                rb.gravityScale += p.fallDynamicGravity;
-                yield return null;
-            }
+
+            rb.gravityScale += p.fallDynamicGravity;
+            yield return null;
         }
         rb.gravityScale = 1;
         if (fallingCoroutine != null) ResetCoroutine(ref fallingCoroutine);
@@ -136,6 +132,14 @@ public class C_MovementActions : MonoBehaviour
                 rb.linearVelocityY = p.climbingUpSpeed;
                 yield return null;
             };
+
+            while (!c.groundData.groundBelowRight)
+            {
+                rb.linearVelocityX = -p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+            ;
         }
 
         if (dir.x > 0)
@@ -146,15 +150,15 @@ public class C_MovementActions : MonoBehaviour
                 rb.linearVelocityY = p.climbingUpSpeed;
                 yield return null;
             };
+
+            while (!c.groundData.groundBelowLeft)
+            {
+                rb.linearVelocityX = p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+            ;
         }
-
-
-        while (!c.groundData.groundBelowLeft || !c.groundData.groundBelowCenter || !c.groundData.groundBelowRight)
-        {
-            rb.linearVelocityX = dir.x == 1 ? p.climbingUpSpeed : -p.climbingUpSpeed;
-            rb.linearVelocityY = 0;
-            yield return null;
-        };
 
         rb.linearVelocity = Vector2.zero;
         if (climbingUpCoroutine != null) ResetCoroutine(ref climbingUpCoroutine);
@@ -259,6 +263,100 @@ public class C_MovementActions : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         ResetCoroutine(ref stepDownCoroutine);
     }
+
+    public IEnumerator ClimbDown(Vector2 dir, Rigidbody2D rb, Character c, C_MovementParameters p)
+    {
+
+        if (dir.x < 0)
+        {
+            while (c.groundData.groundBelowRight)
+            {
+                rb.linearVelocityX = -p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+            ;
+        }
+
+        if (dir.x > 0)
+        {
+            while (c.groundData.groundBelowLeft)
+            {
+                rb.linearVelocityX = p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+            ;
+        }
+
+
+        while (!c.groundData.groundBelow)
+        {
+            rb.linearVelocityX = 0;
+            rb.linearVelocityY = -p.climbingUpSpeed;
+            yield return null;
+        }
+;
+
+        rb.linearVelocity = Vector2.zero;
+        ResetCoroutine(ref climbingDownCoroutine);
+    }
+
+    public IEnumerator CliffHang(Vector2 dir, Rigidbody2D rb, Character c, C_MovementParameters p)
+    {
+        if (dir.x < 0)
+        {
+            while (c.groundData.groundBelowRight)
+            {
+                rb.linearVelocityX = -p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+
+            while (!c.groundData.groundOnRight)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = -p.climbingUpSpeed;
+                yield return null;
+            }
+
+            while (!c.groundData.groundAboveRight0_1f)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = -p.climbingUpSpeed;
+                yield return null;
+            }
+        }
+
+        if (dir.x > 0)
+        {
+            while (c.groundData.groundBelowLeft)
+            {
+                rb.linearVelocityX = p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+
+            while (!c.groundData.groundOnLeft)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = -p.climbingUpSpeed;
+                yield return null;
+            }
+
+            while (!c.groundData.groundAboveLeft0_1f)
+            {
+                rb.linearVelocityX = 0;
+                rb.linearVelocityY = -p.climbingUpSpeed;
+                yield return null;
+            }
+        }
+
+        rb.linearVelocity = Vector2.zero;
+        ResetCoroutine(ref cliffHangCoroutine);
+    }
+
+
     public void ResetCoroutine(ref Coroutine c)
     {
         if (c == null) return;
