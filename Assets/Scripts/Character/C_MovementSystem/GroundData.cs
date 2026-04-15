@@ -22,6 +22,12 @@ public struct GroundData
     public bool groundBelowRight;
     public bool groundBottomLeft;
     public bool groundBottomRight;
+    public bool groundBeneathLeft0_2f;
+    public bool groundBeneathRight0_2f;
+    public bool groundBeneathLeft2f;
+    public bool groundBeneathRight2f;
+    public bool groundBeneathLeft3f;
+    public bool groundBeneathRight3f;
 
     public GroundData(
         bool groundOnLeft,
@@ -41,7 +47,14 @@ public struct GroundData
         bool groundBelowCenter,
         bool groundBelowRight,
         bool groundBottomLeft,
-        bool groundBottomRight
+        bool groundBottomRight,
+        bool groundBeneathLeft0_2f,
+        bool groundBeneathRight0_2f,
+        bool groundBeneathLeft2f,
+        bool groundBeneathRight2f,
+        bool groundBeneathLeft3f,
+        bool groundBeneathRight3f
+
         )
     {
         this.groundOnLeft = groundOnLeft;
@@ -62,5 +75,11 @@ public struct GroundData
         this.groundBelowRight = groundBelowRight;
         this.groundBottomLeft = groundBottomLeft;
         this.groundBottomRight = groundBottomRight;
+        this.groundBeneathLeft0_2f = groundBeneathLeft0_2f;
+        this.groundBeneathRight0_2f = groundBeneathRight0_2f;
+        this.groundBeneathLeft2f = groundBeneathLeft2f;
+        this.groundBeneathRight2f = groundBeneathRight2f;
+        this.groundBeneathLeft3f = groundBeneathLeft3f;
+        this.groundBeneathRight3f = groundBeneathRight3f;
     }
 }

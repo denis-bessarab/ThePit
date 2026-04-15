@@ -14,6 +14,7 @@ public class C_MovementActions : MonoBehaviour
     public Coroutine forcedSlidingWallDownCoroutine;
     public Coroutine stoppingCoroutine;
     public Coroutine stepCoroutine;
+    public Coroutine stepDownCoroutine;
 
     public void SprintLeft(C_MovementParameters p, Rigidbody2D rb)
     {
@@ -219,6 +220,44 @@ public class C_MovementActions : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
         ResetCoroutine(ref stepCoroutine);
+    }
+
+    public IEnumerator StepDown(Vector2 dir, Rigidbody2D rb, Character c, C_MovementParameters p)
+    {
+
+        if (dir.x < 0)
+        {
+            while (c.groundData.groundBelowRight)
+            {
+                rb.linearVelocityX = -p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+            ;
+        }
+
+        if (dir.x > 0)
+        {
+            while (c.groundData.groundBelowLeft)
+            {
+                rb.linearVelocityX = p.climbingUpSpeed;
+                rb.linearVelocityY = 0;
+                yield return null;
+            }
+            ;
+        }
+
+
+        while (!c.groundData.groundBelow)
+        {
+            rb.linearVelocityX = 0;
+            rb.linearVelocityY = -p.climbingUpSpeed;
+            yield return null;
+        }
+    ;
+
+        rb.linearVelocity = Vector2.zero;
+        ResetCoroutine(ref stepDownCoroutine);
     }
     public void ResetCoroutine(ref Coroutine c)
     {

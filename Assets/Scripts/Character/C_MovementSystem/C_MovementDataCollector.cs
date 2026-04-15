@@ -1,7 +1,13 @@
+using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class C_MovementDataCollector : MonoBehaviour
 {
+    Vector3 testPos;
+    Vector3 testSize;
+
     public MovementData UpdateMovementData(C_InputController ic, Rigidbody2D rb)
     {
         var left = ic.m_left.IsPressed();
@@ -20,57 +26,83 @@ public class C_MovementDataCollector : MonoBehaviour
     {
         var b = col.bounds;
 
-        var belowLeft = Physics2D.Raycast(new Vector2(b.min.x + 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
-        var belowCenter = Physics2D.Raycast(b.center, Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
-        var belowRight = Physics2D.Raycast(new Vector2(b.max.x - 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
+        var groundBelowLeft = Physics2D.Raycast(new Vector2(b.min.x + 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
+        var groundBelowCenter = Physics2D.Raycast(b.center, Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
+        var groundBelowRight = Physics2D.Raycast(new Vector2(b.max.x - 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
         
-        var below = belowLeft || belowCenter || belowRight;
+        var groundBelow = groundBelowLeft || groundBelowCenter || groundBelowRight;
 
         var left1 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y + .6f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         var left2 = Physics2D.Raycast(b.center, Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         var left3 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y - .6f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
-        var leftBottom = Physics2D.Raycast(new Vector2(b.center.x, b.min.y + 0.05f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
-        var leftTop = Physics2D.Raycast(new Vector2(b.center.x, b.max.y - 0.05f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundBottomLeft = Physics2D.Raycast(new Vector2(b.center.x, b.min.y + 0.05f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundTopLeft = Physics2D.Raycast(new Vector2(b.center.x, b.max.y - 0.05f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         
-        var groundOnLeft = left1 || left2 || left3 || leftBottom || leftTop;
+        var groundOnLeft = left1 || left2 || left3 || groundBottomLeft || groundTopLeft;
 
         var right1 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y + .6f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
         var right2 = Physics2D.Raycast(b.center, Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
         var right3 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y - .6f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
-        var rightBottom = Physics2D.Raycast(new Vector2(b.center.x, b.min.y + 0.05f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
-        var rightTop = Physics2D.Raycast(new Vector2(b.center.x, b.max.y - 0.05f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundBottomRight = Physics2D.Raycast(new Vector2(b.center.x, b.min.y + 0.05f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundTopRight = Physics2D.Raycast(new Vector2(b.center.x, b.max.y - 0.05f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
 
-        var groundOnRight = right1 || right2 || right3 || rightBottom || rightTop;
+        var groundOnRight = right1 || right2 || right3 || groundBottomRight || groundTopRight;
         
-        var groundNormal = belowCenter.normal;
+        var groundNormal = groundBelowCenter.normal;
 
-        var above = Physics2D.Raycast(b.center, Vector2.up, p.verticalRaycastDistance, p.groundLayerMask);
-        var aboveLeft1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + 1f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
-        var aboveRight1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + 1f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
-        var aboveLeft0_1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .1f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
-        var aboveRight0_1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .1f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
-        var aboveLeft0_2f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .2f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
-        var aboveRight0_2f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .2f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundAbove = Physics2D.Raycast(b.center, Vector2.up, p.verticalRaycastDistance, p.groundLayerMask);
+        var groundAboveLeft1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + 1f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundAboveRight1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + 1f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundAboveLeft0_1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .1f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundAboveRight0_1f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .1f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundAboveLeft0_2f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .2f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundAboveRight0_2f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .2f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
+
+        var boxCastSize = 0.8f;
+
+        var groundBeneathLeft0_2f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
+        var groundBeneathRight0_2f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
+        var groundBeneathLeft2f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - 1.5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
+        var groundBeneathRight2f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - 1.5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
+        var groundBeneathLeft3f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - 2.5f), new Vector2(boxCastSize, boxCastSize), 0f,  p.groundLayerMask);
+        var groundBeneathRight3f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - 2.5f), new Vector2(boxCastSize, boxCastSize), 0f,  p.groundLayerMask);
+
+        //TEST
+        testPos = new Vector3(b.center.x - 1f, b.min.y - .5f, 0);
+        testSize = new Vector3(boxCastSize, boxCastSize, 0);
+        //END OF TEST
 
         return new GroundData(
             groundOnLeft,
             groundOnRight,
-            below,
-            above,
-            leftTop,
-            rightTop,
-            aboveLeft1f,
-            aboveRight1f,
-            aboveLeft0_1f,
-            aboveRight0_1f,
-            aboveLeft0_2f,
-            aboveRight0_2f,
+            groundBelow,
+            groundAbove,
+            groundTopLeft,
+            groundTopRight,
+            groundAboveLeft1f,
+            groundAboveRight1f,
+            groundAboveLeft0_1f,
+            groundAboveRight0_1f,
+            groundAboveLeft0_2f,
+            groundAboveRight0_2f,
             groundNormal,
-            belowLeft,
-            belowCenter,
-            belowRight,
-            leftBottom,
-            rightBottom
+            groundBelowLeft,
+            groundBelowCenter,
+            groundBelowRight,
+            groundBottomLeft,
+            groundBottomRight,
+            groundBeneathLeft0_2f,
+            groundBeneathRight0_2f,
+            groundBeneathLeft2f,
+            groundBeneathRight2f,
+            groundBeneathLeft3f,
+            groundBeneathRight3f
             );
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = UnityEngine.Color.green;
+        Gizmos.DrawWireCube(testPos, testSize);
     }
 }

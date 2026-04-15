@@ -94,6 +94,14 @@ public class C_MovementContextResolver : MonoBehaviour
                 if (a.stepCoroutine != null) return;
                 a.stepCoroutine = StartCoroutine(a.Step(Vector2.right, rb, c, p));
                 break;
+            case C_MovementContext.StepDownLeft:
+                if (a.stepDownCoroutine != null) return;
+                a.stepDownCoroutine = StartCoroutine(a.StepDown(Vector2.left, rb, c, p));
+                break;
+            case C_MovementContext.StepDownRight:
+                if (a.stepDownCoroutine != null) return;
+                a.stepDownCoroutine = StartCoroutine(a.StepDown(Vector2.right, rb, c, p));
+                break;
         }
     }
 }

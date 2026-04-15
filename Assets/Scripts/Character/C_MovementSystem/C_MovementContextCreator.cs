@@ -44,6 +44,8 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.ClimbingUpRight when a.climbingUpCoroutine == null => C_MovementContext.Idling,
             C_MovementContext.StepLeft when a.stepCoroutine == null => C_MovementContext.Idling,
             C_MovementContext.StepRight when a.stepCoroutine == null => C_MovementContext.Idling,
+            C_MovementContext.StepDownLeft when a.stepDownCoroutine == null => C_MovementContext.Idling,
+            C_MovementContext.StepDownRight when a.stepDownCoroutine == null => C_MovementContext.Idling,
 
             //Sprinting Left
             C_MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => C_MovementContext.SprintingLeft,
@@ -55,6 +57,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.HangingRight when g.groundBelow && m.left => C_MovementContext.SprintingLeft,
             C_MovementContext.WallJumpForwardLeft when g.groundBelow && m.left => C_MovementContext.SprintingLeft,
             C_MovementContext.StepLeft when m.left && a.stepCoroutine == null => C_MovementContext.SprintingLeft,
+            C_MovementContext.StepDownLeft when m.left && a.stepDownCoroutine == null => C_MovementContext.SprintingLeft,
 
             //Sprinting Right
             C_MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => C_MovementContext.SprintingRight,
@@ -66,6 +69,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.HangingLeft when g.groundBelow && m.right => C_MovementContext.SprintingRight,
             C_MovementContext.WallJumpForwardRight when g.groundBelow && m.right => C_MovementContext.SprintingRight,
             C_MovementContext.StepRight when m.right && a.stepCoroutine == null => C_MovementContext.SprintingRight,
+            C_MovementContext.StepDownRight when m.right && a.stepDownCoroutine == null => C_MovementContext.SprintingRight,
 
             //Jumping
             C_MovementContext.Idling when g.groundBelow && m.jump => C_MovementContext.Jumping,
@@ -164,6 +168,14 @@ public class C_MovementContextCreator : MonoBehaviour
             //Step left
             C_MovementContext.SprintingLeft when !g.groundTopLeft && g.groundBottomLeft => C_MovementContext.StepLeft,
             C_MovementContext.Idling when !g.groundTopLeft && g.groundBottomLeft && m.left => C_MovementContext.StepLeft,
+            
+            //Step Down left
+            C_MovementContext.SprintingLeft when !g.groundBeneathLeft0_2f && g.groundBeneathLeft2f && m.left && !g.groundBottomLeft => C_MovementContext.StepDownLeft,
+            C_MovementContext.Idling when !g.groundBeneathLeft0_2f && g.groundBeneathLeft2f && m.left && !g.groundBottomLeft => C_MovementContext.StepDownLeft,
+
+            //Step Down right
+            C_MovementContext.SprintingRight when !g.groundBeneathRight0_2f && g.groundBeneathRight2f && m.right && !g.groundBottomRight => C_MovementContext.StepDownRight,
+            C_MovementContext.Idling when !g.groundBeneathRight0_2f && g.groundBeneathRight2f && m.right && !g.groundBottomRight => C_MovementContext.StepDownRight,
 
             _ => c.MovementContext,
         };
