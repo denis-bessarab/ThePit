@@ -41,7 +41,7 @@ public class Rope : MonoBehaviour
         UpdateRopeCenterState(ropeData);
 
         if (!inputController.enabled) return;
-        inputResolver.ResolveInput(inputController, actions, parameters, distanceJoint2D, this);
+        inputResolver.ResolveInput(inputController, actions, parameters, distanceJoint2D, this, character.actions);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,7 +50,7 @@ public class Rope : MonoBehaviour
         {
             var rb = collision.GetComponent<Rigidbody2D>();
             var c = collision.GetComponent<Character>();
-
+            if (c.rope != null) return;
             ActivateRope(rb, c);
         }
     }
@@ -59,9 +59,9 @@ public class Rope : MonoBehaviour
     {
         FreezeRopeEnd();
         distanceJoint2D.connectedBody = rb;
+        character = c;
         inputController.enabled = true;
         distanceJoint2D.distance = Vector3.Distance(transform.position, c.gameObject.transform.position);
-        character = c;
         character.rope = this;
     }
 

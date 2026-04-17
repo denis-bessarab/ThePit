@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(C_InputResolver))]
 [RequireComponent(typeof(C_Actions))]
 [RequireComponent(typeof(C_VelocityLimiter))]
+[RequireComponent(typeof(C_LifeCycle))]
 public class Character : MonoBehaviour
 {
     [Header("Components")]
@@ -20,6 +21,7 @@ public class Character : MonoBehaviour
     [SerializeField] public C_InputResolver inputResolver;
     [SerializeField] public C_Actions actions;
     [SerializeField] public C_VelocityLimiter velocityLimiter;
+    [SerializeField] public C_LifeCycle lifeCycle;
     [SerializeField] public Rigidbody2D _rigidbody;
     [SerializeField] public CapsuleCollider2D _collider;
 
@@ -51,6 +53,7 @@ public class Character : MonoBehaviour
         inputResolver = GetComponent<C_InputResolver>();
         actions = GetComponent<C_Actions>();
         velocityLimiter = GetComponent<C_VelocityLimiter>();
+        lifeCycle = GetComponent<C_LifeCycle>();
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();

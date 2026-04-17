@@ -7,6 +7,13 @@ public class C_InputResolver : MonoBehaviour
         if (ic.rope.IsPressed()) a.RopeLoad();
         if (ic.rope.WasReleasedThisFrame()) a.RopeRelease();
         if (ic.restart.WasPressedThisFrame()) a.Restart();
-        if (c.MovementContext == C_MovementContext.Falling || c.MovementContext == C_MovementContext.Jumping) a.AirPositionAdjustment(m, rb);
+        if (
+            c.MovementContext == C_MovementContext.Falling || 
+            c.MovementContext == C_MovementContext.Jumping ||
+            c.MovementContext == C_MovementContext.WallJumpBackwardLeft ||
+            c.MovementContext == C_MovementContext.WallJumpForwardLeft ||
+            c.MovementContext == C_MovementContext.WallJumpBackwardRight ||
+            c.MovementContext == C_MovementContext.WallJumpForwardRight
+            ) a.AirPositionAdjustment(m, rb);
     }
 }

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 4804010625353359542}
   - component: {fileID: 7217758552076157743}
   - component: {fileID: 8594449760040323608}
+  - component: {fileID: 4365202445069691319}
   - component: {fileID: 8588452189522015988}
   m_Layer: 3
   m_Name: Character
@@ -409,6 +410,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e895ef214801f145863779a029ea24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::C_VelocityLimiter
+--- !u!114 &4365202445069691319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b190c01d94b6bff438ae37c5f53a172d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::C_LifeCycle
 --- !u!114 &8588452189522015988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +443,7 @@ MonoBehaviour:
   inputResolver: {fileID: 4804010625353359542}
   actions: {fileID: 7217758552076157743}
   velocityLimiter: {fileID: 8594449760040323608}
+  lifeCycle: {fileID: 4365202445069691319}
   _rigidbody: {fileID: 8906154476967501417}
   _collider: {fileID: 4943593970016963343}
   movementContext: 0

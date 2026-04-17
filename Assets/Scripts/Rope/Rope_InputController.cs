@@ -10,6 +10,7 @@ public class Rope_InputController : MonoBehaviour
     public InputAction swingLeft;
     public InputAction swingRight;
     public InputAction jump;
+    public InputAction rope;
 
     private void Reset()
     {
@@ -37,6 +38,7 @@ public class Rope_InputController : MonoBehaviour
         swingLeft = _inputActions.FindAction("SwingLeft");
         swingRight = _inputActions.FindAction("SwingRight");
         jump = _inputActions.FindAction("Jump");
+        rope = _inputActions.FindAction("Rope");
     }
 
     private InputActionAsset GetInputActionAsset()
