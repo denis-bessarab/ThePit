@@ -18,23 +18,53 @@ public class C_MovementActions : MonoBehaviour
     public Coroutine climbingDownCoroutine;
     public Coroutine cliffHangCoroutine;
 
-    public void SprintLeft(C_MovementParameters p, Rigidbody2D rb)
+    public void SprintLeft(C_MovementParameters p, Rigidbody2D rb, Character c)
     {
-        rb.linearVelocityX = -p.sprintingSpeed;
+        if(c.movementData.vx > -p.sprintingSpeed)
+        {
+            rb.linearVelocityX -= 0.2f;
+        }
+        else
+        {
+            rb.linearVelocityX = -p.sprintingSpeed;
+        }
     }
 
-    public void SprintRight(C_MovementParameters p, Rigidbody2D rb)
+    public void SprintRight(C_MovementParameters p, Rigidbody2D rb, Character c)
     {
-        rb.linearVelocityX = p.sprintingSpeed;
+        if (c.movementData.vx < p.sprintingSpeed)
+        {
+            rb.linearVelocityX += 0.2f;
+        }
+        else
+        {
+            rb.linearVelocityX = p.sprintingSpeed;
+        }
     }
 
     public IEnumerator Jump(C_MovementParameters p, Character c, Rigidbody2D rb)
     {
-        rb.AddForceAtPosition(new Vector3(0, p.jumpPower), transform.position, ForceMode2D.Impulse);
-        while (c.MovementContext == C_MovementContext.Jumping || c.MovementContext == C_MovementContext.Falling)
+        rb.AddForceAtPosition(new Vector3(p.horizontalJumpPower * c.movementData.dir.x, p.jumpPower, 0), transform.position, ForceMode2D.Impulse);
+        int framesHold = 0;
+
+        while (c.MovementContext == C_MovementContext.Jumping)
         {
-            rb.gravityScale += p.jumpDynamicGravity;
-            yield return null;
+            if (framesHold != 20)
+            {
+                framesHold++;
+                yield return null;
+            }
+            else if (c.movementData.jumpHold && framesHold < p.jumpPowerAddTimesLimit + 20)
+            {
+                framesHold++;
+                rb.AddForceAtPosition(new Vector3(0, p.additionalJumpPower), transform.position, ForceMode2D.Impulse);
+                yield return null;
+            }
+            else
+            {
+                rb.gravityScale += p.jumpDynamicGravity;
+                yield return null;
+            }
         }
         rb.gravityScale = 1;
         ResetCoroutine(ref jumpingCoroutine);
@@ -44,7 +74,6 @@ public class C_MovementActions : MonoBehaviour
     {
         while (c.MovementContext == C_MovementContext.Falling)
         {
-
             rb.gravityScale += p.fallDynamicGravity;
             yield return null;
         }
@@ -166,15 +195,13 @@ public class C_MovementActions : MonoBehaviour
 
     public IEnumerator Hanging(C_MovementParameters p, Rigidbody2D rb, Character c)
     {
-        rb.linearVelocity = Vector2.zero;
-
         while (c.MovementContext == C_MovementContext.HangingLeft || c.MovementContext == C_MovementContext.HangingRight)
         {
+            rb.linearVelocity = Vector2.zero;
             rb.gravityScale = 0;
             yield return null;
         }
         rb.gravityScale = 1;
-
         if (hangingCoroutine != null) ResetCoroutine(ref hangingCoroutine);
     }
 

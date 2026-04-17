@@ -18,9 +18,9 @@ MonoBehaviour:
   characterMaterial: {fileID: 6200000, guid: 7b332b9918b833e42987993ce778f1d9, type: 2}
   verticalRaycastDistance: 1.1
   horizontalRaycastDistance: 0.56
-  jumpPower: 9
+  jumpPower: 6
   wallJumpPowerForwardX: 7
-  wallJumpPowerForwardY: 8.5
+  wallJumpPowerForwardY: 7
   wallJumpPowerBackwardX: 5
   wallJumpPowerBackwardY: 4
   slidingPower: 6
@@ -31,7 +31,10 @@ MonoBehaviour:
   runningWallSpeed: 5
   runningWallTime: 0.7
   climbingUpSpeed: 6
-  fallDynamicGravity: 0.005
-  jumpDynamicGravity: 0.01
+  fallDynamicGravity: 0.02
+  jumpDynamicGravity: 0.02
   fallingVelocityMax: 12
   horizontalVelocityMax: 7
+  additionalJumpPower: 1
+  jumpPowerAddTimesLimit: 1
+  airPositionAdjustmentPower: 4

@@ -1,7 +1,4 @@
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class C_MovementDataCollector : MonoBehaviour
 {
@@ -16,8 +13,10 @@ public class C_MovementDataCollector : MonoBehaviour
         var sprint = ic.m_sprint.IsPressed();
         var vx = rb.linearVelocityX;
         var vy = rb.linearVelocityY;
+        var jumpHold = ic.m_jump.IsPressed();
+        var dir = new Vector2(vx, vy).normalized;
 
-        return new MovementData(left, right, jump, down, up, sprint, vx, vy);
+        return new MovementData(left, right, jump, down, up, sprint, vx, vy, jumpHold, dir);
     }
 
     public GroundData UpdateGroundData(CapsuleCollider2D col, C_MovementParameters p)

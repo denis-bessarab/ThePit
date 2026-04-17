@@ -23,6 +23,13 @@ public class C_MovementParameters : MonoBehaviour
     [SerializeField] public float jumpDynamicGravity;
     [SerializeField] public float fallingVelocityMax;
     [SerializeField] public float horizontalVelocityMax;
+    [SerializeField] public float additionalJumpPower;
+    [SerializeField] public int jumpPowerAddTimesLimit;
+    [SerializeField] public float airPositionAdjustmentPower;
+    [SerializeField] public float horizontalJumpPower;
+
+
+
 
     private void Reset()
     {
@@ -58,5 +65,9 @@ public class C_MovementParameters : MonoBehaviour
         jumpDynamicGravity = p.jumpDynamicGravity;
         fallingVelocityMax = p.fallingVelocityMax;
         horizontalVelocityMax = p.horizontalVelocityMax;
+        additionalJumpPower = p.additionalJumpPower;
+        jumpPowerAddTimesLimit = p.jumpPowerAddTimesLimit;
+        airPositionAdjustmentPower = p.airPositionAdjustmentPower;
+        horizontalJumpPower = p.horizontalJumpPower;
     }
 }

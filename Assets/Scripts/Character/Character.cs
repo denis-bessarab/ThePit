@@ -9,9 +9,12 @@ using UnityEngine;
 [RequireComponent(typeof(C_Actions))]
 [RequireComponent(typeof(C_VelocityLimiter))]
 [RequireComponent(typeof(C_LifeCycle))]
+[RequireComponent(typeof(C_Collector))]
 public class Character : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField] public Rigidbody2D _rigidbody;
+    [SerializeField] public CapsuleCollider2D _collider;
     [SerializeField] public C_InputController inputController;
     [SerializeField] public C_MovementParameters movementParameters;
     [SerializeField] public C_MovementDataCollector movementDataCollector;
@@ -22,8 +25,7 @@ public class Character : MonoBehaviour
     [SerializeField] public C_Actions actions;
     [SerializeField] public C_VelocityLimiter velocityLimiter;
     [SerializeField] public C_LifeCycle lifeCycle;
-    [SerializeField] public Rigidbody2D _rigidbody;
-    [SerializeField] public CapsuleCollider2D _collider;
+    [SerializeField] public C_Collector collector;
 
     [Header("Contexts")]
     [SerializeField] private C_MovementContext movementContext;
@@ -44,6 +46,8 @@ public class Character : MonoBehaviour
 
     private void Reset()
     {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<CapsuleCollider2D>();
         inputController = GetComponent<C_InputController>();
         movementParameters = GetComponent<C_MovementParameters>();
         movementDataCollector = GetComponent<C_MovementDataCollector>();
@@ -54,9 +58,7 @@ public class Character : MonoBehaviour
         actions = GetComponent<C_Actions>();
         velocityLimiter = GetComponent<C_VelocityLimiter>();
         lifeCycle = GetComponent<C_LifeCycle>();
-
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _collider = GetComponent<CapsuleCollider2D>();
+        collector = GetComponent<C_Collector>();
     }
 
     private void Update()
@@ -82,7 +84,7 @@ public class Character : MonoBehaviour
             _collider
             );
 
-        inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData);
+        inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData, movementParameters);
         velocityLimiter.LimitVelocity(_rigidbody, movementParameters, MovementContext);
     }
 }

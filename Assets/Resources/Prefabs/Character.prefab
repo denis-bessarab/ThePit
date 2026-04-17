@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 7217758552076157743}
   - component: {fileID: 8594449760040323608}
   - component: {fileID: 4365202445069691319}
+  - component: {fileID: 8487874718075485429}
   - component: {fileID: 8588452189522015988}
   m_Layer: 3
   m_Name: Character
@@ -295,9 +296,9 @@ MonoBehaviour:
   characterMaterial: {fileID: 6200000, guid: 7b332b9918b833e42987993ce778f1d9, type: 2}
   verticalRaycastDistance: 1.1
   horizontalRaycastDistance: 0.56
-  jumpPower: 9
+  jumpPower: 6
   wallJumpPowerForwardX: 7
-  wallJumpPowerForwardY: 8.5
+  wallJumpPowerForwardY: 7
   wallJumpPowerBackwardX: 5
   wallJumpPowerBackwardY: 4
   slidingPower: 6
@@ -308,10 +309,13 @@ MonoBehaviour:
   runningWallSpeed: 5
   runningWallTime: 0.7
   climbingUpSpeed: 6
-  fallDynamicGravity: 0.005
-  jumpDynamicGravity: 0.01
+  fallDynamicGravity: 0.02
+  jumpDynamicGravity: 0.02
   fallingVelocityMax: 12
   horizontalVelocityMax: 7
+  additionalJumpPower: 1
+  jumpPowerAddTimesLimit: 1
+  airPositionAdjustmentPower: 4
 --- !u!114 &4125975706692358676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +426,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b190c01d94b6bff438ae37c5f53a172d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::C_LifeCycle
+--- !u!114 &8487874718075485429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe5f5abab35e784a8eaa93930c7bd93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::C_Collector
+  goodThingsCollected: 0
 --- !u!114 &8588452189522015988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576c2e0015052494badb5520bc4862e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Character
+  _rigidbody: {fileID: 8906154476967501417}
+  _collider: {fileID: 4943593970016963343}
   inputController: {fileID: 835234375033161735}
   movementParameters: {fileID: 3118098239298832258}
   movementDataCollector: {fileID: 4125975706692358676}
@@ -444,8 +463,7 @@ MonoBehaviour:
   actions: {fileID: 7217758552076157743}
   velocityLimiter: {fileID: 8594449760040323608}
   lifeCycle: {fileID: 4365202445069691319}
-  _rigidbody: {fileID: 8906154476967501417}
-  _collider: {fileID: 4943593970016963343}
+  collector: {fileID: 8487874718075485429}
   movementContext: 0
   groundData:
     groundOnLeft: 0
@@ -481,4 +499,5 @@ MonoBehaviour:
     sprint: 0
     vx: 0
     vy: 0
+    jumpHold: 0
   rope: {fileID: 0}

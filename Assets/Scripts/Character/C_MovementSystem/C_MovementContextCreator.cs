@@ -99,10 +99,6 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.ForcedSlidingWallDownRight when !g.groundOnRight && a.forcedSlidingWallDownCoroutine == null => C_MovementContext.Falling,
             C_MovementContext.Rope when r == null => C_MovementContext.Falling,
 
-            //Sliding
-            //C_MovementContext.SprintingLeft when m.down => C_MovementContext.SlidingLeft,
-            //C_MovementContext.SprintingRight when m.down => C_MovementContext.SlidingRight,
-
             //Running wall up left
             C_MovementContext.Jumping when !g.groundBelow && m.left && g.groundTopLeft && g.groundBottomLeft => C_MovementContext.RunningWallUpLeft,
             C_MovementContext.WallJumpForwardLeft when g.groundTopLeft && g.groundBottomLeft => C_MovementContext.RunningWallUpLeft,
@@ -143,6 +139,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.Falling when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f => C_MovementContext.HangingLeft,
             C_MovementContext.Jumping when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f => C_MovementContext.HangingLeft,
             C_MovementContext.CliffHangRight when a.cliffHangCoroutine == null => C_MovementContext.HangingLeft,
+            C_MovementContext.WallJumpForwardLeft when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f => C_MovementContext.HangingLeft,
 
             //Hanging right
             C_MovementContext.RunningWallUpRight when g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
@@ -150,6 +147,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.Falling when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
             C_MovementContext.Jumping when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
             C_MovementContext.CliffHangLeft when a.cliffHangCoroutine == null => C_MovementContext.HangingRight,
+            C_MovementContext.WallJumpForwardRight when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
 
             //Climbing up left
             C_MovementContext.HangingLeft when m.up => C_MovementContext.ClimbingUpLeft,
@@ -173,9 +171,11 @@ public class C_MovementContextCreator : MonoBehaviour
 
             //Forced sliding down left
             C_MovementContext.HangingLeft when m.down => C_MovementContext.ForcedSlidingWallDownLeft,
+            C_MovementContext.RunningWallUpLeft when m.down => C_MovementContext.ForcedSlidingWallDownLeft,
 
             //Forced sliding down right
             C_MovementContext.HangingRight when m.down => C_MovementContext.ForcedSlidingWallDownRight,
+            C_MovementContext.RunningWallUpRight when m.down => C_MovementContext.ForcedSlidingWallDownRight,
 
             //Step right
             C_MovementContext.SprintingRight when !g.groundTopRight && g.groundBottomRight => C_MovementContext.StepRight,

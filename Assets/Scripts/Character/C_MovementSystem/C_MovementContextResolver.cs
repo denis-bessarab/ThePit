@@ -11,10 +11,10 @@ public class C_MovementContextResolver : MonoBehaviour
                 col.sharedMaterial = p.characterMaterial;
                 break;
             case C_MovementContext.SprintingLeft:
-                a.SprintLeft(p,rb);
+                a.SprintLeft(p,rb, c);
                 break;
             case C_MovementContext.SprintingRight:
-                a.SprintRight(p,rb);
+                a.SprintRight(p,rb, c);
                 break;
             case C_MovementContext.Jumping:
                 if (a.jumpingCoroutine != null) return;
