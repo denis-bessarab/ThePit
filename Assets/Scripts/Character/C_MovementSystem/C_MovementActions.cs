@@ -18,28 +18,24 @@ public class C_MovementActions : MonoBehaviour
     public Coroutine climbingDownCoroutine;
     public Coroutine cliffHangCoroutine;
 
+    public void RunningLeft(C_MovementParameters p, Rigidbody2D rb, Character c)
+    {
+        rb.linearVelocityX = -p.runningSpeed;
+    }
+
+    public void RunningRight(C_MovementParameters p, Rigidbody2D rb, Character c)
+    {
+        rb.linearVelocityX = p.runningSpeed;
+    }
+
     public void SprintLeft(C_MovementParameters p, Rigidbody2D rb, Character c)
     {
-        if(c.movementData.vx > -p.sprintingSpeed)
-        {
-            rb.linearVelocityX -= 0.2f;
-        }
-        else
-        {
-            rb.linearVelocityX = -p.sprintingSpeed;
-        }
+        rb.linearVelocityX = -p.sprintingSpeed;
     }
 
     public void SprintRight(C_MovementParameters p, Rigidbody2D rb, Character c)
     {
-        if (c.movementData.vx < p.sprintingSpeed)
-        {
-            rb.linearVelocityX += 0.2f;
-        }
-        else
-        {
-            rb.linearVelocityX = p.sprintingSpeed;
-        }
+        rb.linearVelocityX = p.sprintingSpeed;
     }
 
     public IEnumerator Jump(C_MovementParameters p, Character c, Rigidbody2D rb)
@@ -70,14 +66,18 @@ public class C_MovementActions : MonoBehaviour
         ResetCoroutine(ref jumpingCoroutine);
     }
 
-    public IEnumerator Fall(C_MovementParameters p, Character c, Rigidbody2D rb)
+    public IEnumerator Fall(C_MovementParameters p, Character c, Rigidbody2D rb, C_LifeCycle lc)
     {
+        var fallDistance = 0f;
+        var initialFallPosY = transform.position.y;
         while (c.MovementContext == C_MovementContext.Falling)
         {
             rb.gravityScale += p.fallDynamicGravity;
+            fallDistance = Mathf.Abs(initialFallPosY - transform.position.y);
             yield return null;
         }
         rb.gravityScale = 1;
+        if (fallDistance > 12f) lc.DeathByFalling();
         if (fallingCoroutine != null) ResetCoroutine(ref fallingCoroutine);
     }
 
@@ -195,6 +195,28 @@ public class C_MovementActions : MonoBehaviour
 
     public IEnumerator Hanging(C_MovementParameters p, Rigidbody2D rb, Character c)
     {
+
+        //ADJUSTING POSITION
+        if (c.MovementContext == C_MovementContext.HangingLeft)
+        {
+            while (c.groundData.groundAboveLeft0_1f)
+            {
+                rb.linearVelocityY = 1;
+                yield return null;
+            }
+        }
+
+        if (c.MovementContext == C_MovementContext.HangingRight)
+        {
+            while (c.groundData.groundAboveRight0_1f)
+            {
+                rb.linearVelocityY = 1;
+                yield return null;
+            }
+        }
+
+        rb.linearVelocityY = 0;
+
         while (c.MovementContext == C_MovementContext.HangingLeft || c.MovementContext == C_MovementContext.HangingRight)
         {
             rb.linearVelocity = Vector2.zero;

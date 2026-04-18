@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 4365202445069691319}
   - component: {fileID: 8487874718075485429}
   - component: {fileID: 8588452189522015988}
+  - component: {fileID: 1822233983411242605}
   m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
@@ -169,7 +170,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.95, y: 2}
   m_Direction: 0
 --- !u!95 &6909066073946425333
 Animator:
@@ -308,14 +309,15 @@ MonoBehaviour:
   hangingOnWallTime: 1
   runningWallSpeed: 5
   runningWallTime: 0.7
-  climbingUpSpeed: 6
-  fallDynamicGravity: 0.02
-  jumpDynamicGravity: 0.02
+  climbingUpSpeed: 5
+  fallDynamicGravity: 0.04
+  jumpDynamicGravity: 0.04
   fallingVelocityMax: 12
-  horizontalVelocityMax: 7
-  additionalJumpPower: 1
+  horizontalVelocityMax: 12
+  additionalJumpPower: 0.5
   jumpPowerAddTimesLimit: 1
   airPositionAdjustmentPower: 4
+  horizontalJumpPower: 2
 --- !u!114 &4125975706692358676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,4 +502,17 @@ MonoBehaviour:
     vx: 0
     vy: 0
     jumpHold: 0
+    dir: {x: 0, y: 0}
   rope: {fileID: 0}
+--- !u!114 &1822233983411242605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a90b8c6161b30469b9f1070884d119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoodThingMeter

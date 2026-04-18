@@ -34,6 +34,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.RunningRight when !m.right => C_MovementContext.Idling,
             C_MovementContext.SprintingRight when !m.right => C_MovementContext.Idling,
             C_MovementContext.Falling when g.groundBelow => C_MovementContext.Idling,
+            C_MovementContext.Jumping when g.groundBelow && m.vx == 0 && m.vy == 0 => C_MovementContext.Idling,
             C_MovementContext.SlidingLeft when g.groundBelow && a.slidingCoroutine == null && m.vx == 0 => C_MovementContext.Idling,
             C_MovementContext.SlidingRight when g.groundBelow && a.slidingCoroutine == null && m.vx == 0 => C_MovementContext.Idling,
             C_MovementContext.SlidingWallDownLeft when g.groundBelow => C_MovementContext.Idling,
@@ -49,31 +50,59 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.ClimbingDownLeft when a.climbingDownCoroutine == null => C_MovementContext.Idling,
             C_MovementContext.ClimbingDownRight when a.climbingDownCoroutine == null => C_MovementContext.Idling,
 
+            //Running Left
+            C_MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => C_MovementContext.RunningLeft,
+            C_MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => C_MovementContext.RunningLeft,
+            C_MovementContext.SlidingLeft when g.groundBelow && a.slidingCoroutine == null && m.left => C_MovementContext.RunningLeft,
+            C_MovementContext.SlidingLeft when g.groundBelow && a.slidingCoroutine == null && m.left => C_MovementContext.RunningLeft,
+            C_MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => C_MovementContext.RunningLeft,
+            C_MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => C_MovementContext.RunningLeft,
+            C_MovementContext.HangingRight when g.groundBelow && m.left => C_MovementContext.RunningLeft,
+            C_MovementContext.WallJumpForwardLeft when g.groundBelow && m.left => C_MovementContext.RunningLeft,
+            C_MovementContext.StepLeft when m.left && a.stepCoroutine == null => C_MovementContext.RunningLeft,
+            C_MovementContext.StepDownLeft when m.left && a.stepDownCoroutine == null => C_MovementContext.RunningLeft,
+            C_MovementContext.ClimbingDownLeft when m.left && a.climbingDownCoroutine == null => C_MovementContext.RunningLeft,
+
+            //Running Right
+            C_MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => C_MovementContext.RunningRight,
+            C_MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => C_MovementContext.RunningRight,
+            C_MovementContext.SlidingRight when g.groundBelow && a.slidingCoroutine == null && m.right => C_MovementContext.RunningRight,
+            C_MovementContext.SlidingRight when g.groundBelow && a.slidingCoroutine == null && m.right => C_MovementContext.RunningRight,
+            C_MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => C_MovementContext.RunningRight,
+            C_MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => C_MovementContext.RunningRight,
+            C_MovementContext.HangingLeft when g.groundBelow && m.right => C_MovementContext.RunningRight,
+            C_MovementContext.WallJumpForwardRight when g.groundBelow && m.right => C_MovementContext.RunningRight,
+            C_MovementContext.StepRight when m.right && a.stepCoroutine == null => C_MovementContext.RunningRight,
+            C_MovementContext.StepDownRight when m.right && a.stepDownCoroutine == null=> C_MovementContext.RunningRight,
+            C_MovementContext.ClimbingDownRight when m.right && a.climbingDownCoroutine == null => C_MovementContext.RunningRight,
+
             //Sprinting Left
-            C_MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => C_MovementContext.SprintingLeft,
-            C_MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft => C_MovementContext.SprintingLeft,
-            C_MovementContext.SlidingLeft when g.groundBelow && a.slidingCoroutine == null && m.left => C_MovementContext.SprintingLeft,
-            C_MovementContext.SlidingLeft when g.groundBelow && a.slidingCoroutine == null && m.left => C_MovementContext.SprintingLeft,
-            C_MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => C_MovementContext.SprintingLeft,
-            C_MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft => C_MovementContext.SprintingLeft,
-            C_MovementContext.HangingRight when g.groundBelow && m.left => C_MovementContext.SprintingLeft,
-            C_MovementContext.WallJumpForwardLeft when g.groundBelow && m.left => C_MovementContext.SprintingLeft,
-            C_MovementContext.StepLeft when m.left && a.stepCoroutine == null => C_MovementContext.SprintingLeft,
-            C_MovementContext.StepDownLeft when m.left && a.stepDownCoroutine == null => C_MovementContext.SprintingLeft,
-            C_MovementContext.ClimbingDownLeft when m.left && a.climbingDownCoroutine == null => C_MovementContext.SprintingLeft,
+            C_MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.Idling when m.left && g.groundBelow && !g.groundOnLeft && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.SlidingLeft when g.groundBelow && a.slidingCoroutine == null && m.left && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.SlidingLeft when g.groundBelow && a.slidingCoroutine == null && m.left && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.Falling when g.groundBelow && m.left && !g.groundOnLeft && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.HangingRight when g.groundBelow && m.left && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.WallJumpForwardLeft when g.groundBelow && m.left && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.StepLeft when m.left && a.stepCoroutine == null && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.StepDownLeft when m.left && a.stepDownCoroutine == null && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.ClimbingDownLeft when m.left && a.climbingDownCoroutine == null && m.sprint => C_MovementContext.SprintingLeft,
+            C_MovementContext.RunningLeft when m.sprint => C_MovementContext.SprintingLeft,
 
             //Sprinting Right
-            C_MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => C_MovementContext.SprintingRight,
-            C_MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight => C_MovementContext.SprintingRight,
-            C_MovementContext.SlidingRight when g.groundBelow && a.slidingCoroutine == null && m.right => C_MovementContext.SprintingRight,
-            C_MovementContext.SlidingRight when g.groundBelow && a.slidingCoroutine == null && m.right => C_MovementContext.SprintingRight,
-            C_MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => C_MovementContext.SprintingRight,
-            C_MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight => C_MovementContext.SprintingRight,
-            C_MovementContext.HangingLeft when g.groundBelow && m.right => C_MovementContext.SprintingRight,
-            C_MovementContext.WallJumpForwardRight when g.groundBelow && m.right => C_MovementContext.SprintingRight,
-            C_MovementContext.StepRight when m.right && a.stepCoroutine == null => C_MovementContext.SprintingRight,
-            C_MovementContext.StepDownRight when m.right && a.stepDownCoroutine == null => C_MovementContext.SprintingRight,
-            C_MovementContext.ClimbingDownRight when m.right && a.climbingDownCoroutine == null => C_MovementContext.SprintingRight,
+            C_MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.Idling when m.right && g.groundBelow && !g.groundOnRight && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.SlidingRight when g.groundBelow && a.slidingCoroutine == null && m.right && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.SlidingRight when g.groundBelow && a.slidingCoroutine == null && m.right && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.Falling when g.groundBelow && m.right && !g.groundOnRight && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.HangingLeft when g.groundBelow && m.right && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.WallJumpForwardRight when g.groundBelow && m.right && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.StepRight when m.right && a.stepCoroutine == null && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.StepDownRight when m.right && a.stepDownCoroutine == null && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.ClimbingDownRight when m.right && a.climbingDownCoroutine == null && m.sprint => C_MovementContext.SprintingRight,
+            C_MovementContext.RunningRight when m.sprint => C_MovementContext.SprintingRight,
 
             //Jumping
             C_MovementContext.Idling when g.groundBelow && m.jump => C_MovementContext.Jumping,
@@ -81,6 +110,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.RunningRight when m.jump => C_MovementContext.Jumping,
             C_MovementContext.SprintingLeft when m.jump => C_MovementContext.Jumping,
             C_MovementContext.SprintingRight when m.jump => C_MovementContext.Jumping,
+            C_MovementContext.Rope when r == null && m.vy > 0 => C_MovementContext.Jumping,
 
             //Falling
             C_MovementContext.Idling when !g.groundBelow => C_MovementContext.Falling,
@@ -97,7 +127,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.SlidingWallDownRight when !g.groundOnRight => C_MovementContext.Falling,
             C_MovementContext.ForcedSlidingWallDownLeft when !g.groundOnLeft && a.forcedSlidingWallDownCoroutine == null => C_MovementContext.Falling,
             C_MovementContext.ForcedSlidingWallDownRight when !g.groundOnRight && a.forcedSlidingWallDownCoroutine == null => C_MovementContext.Falling,
-            C_MovementContext.Rope when r == null => C_MovementContext.Falling,
+            C_MovementContext.Rope when r == null && m.vy <= 0 => C_MovementContext.Falling,
 
             //Running wall up left
             C_MovementContext.Jumping when !g.groundBelow && m.left && g.groundTopLeft && g.groundBottomLeft => C_MovementContext.RunningWallUpLeft,
@@ -135,7 +165,7 @@ public class C_MovementContextCreator : MonoBehaviour
 
             //Hanging left
             C_MovementContext.RunningWallUpLeft when g.groundTopLeft && !g.groundAboveLeft0_1f => C_MovementContext.HangingLeft,
-            C_MovementContext.Falling when g.groundOnLeft && g.groundTopLeft && !g.groundAboveLeft0_1f => C_MovementContext.HangingLeft,
+            C_MovementContext.Falling when g.groundOnLeft && g.groundTopLeft && !g.groundAboveLeft1f => C_MovementContext.HangingLeft,
             C_MovementContext.Falling when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f => C_MovementContext.HangingLeft,
             C_MovementContext.Jumping when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f => C_MovementContext.HangingLeft,
             C_MovementContext.CliffHangRight when a.cliffHangCoroutine == null => C_MovementContext.HangingLeft,
@@ -143,7 +173,7 @@ public class C_MovementContextCreator : MonoBehaviour
 
             //Hanging right
             C_MovementContext.RunningWallUpRight when g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
-            C_MovementContext.Falling when g.groundOnRight && g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
+            C_MovementContext.Falling when g.groundOnRight && g.groundTopRight && !g.groundAboveRight1f => C_MovementContext.HangingRight,
             C_MovementContext.Falling when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
             C_MovementContext.Jumping when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f => C_MovementContext.HangingRight,
             C_MovementContext.CliffHangLeft when a.cliffHangCoroutine == null => C_MovementContext.HangingRight,
@@ -153,20 +183,24 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.HangingLeft when m.up => C_MovementContext.ClimbingUpLeft,
             C_MovementContext.HangingLeft when m.jump => C_MovementContext.ClimbingUpLeft,
             C_MovementContext.SprintingLeft when g.groundOnLeft && m.left && !g.groundAboveLeft0_1f => C_MovementContext.ClimbingUpLeft,
+            C_MovementContext.RunningLeft when g.groundOnLeft && m.left && !g.groundAboveLeft0_1f => C_MovementContext.ClimbingUpLeft,
             C_MovementContext.Idling when g.groundOnLeft && m.left && !g.groundAboveLeft0_1f => C_MovementContext.ClimbingUpLeft,
 
             //Climbing up right
             C_MovementContext.HangingRight when m.up => C_MovementContext.ClimbingUpRight,
             C_MovementContext.HangingRight when m.jump => C_MovementContext.ClimbingUpRight,
             C_MovementContext.SprintingRight when g.groundOnRight && m.right && !g.groundAboveRight0_1f => C_MovementContext.ClimbingUpRight,
+            C_MovementContext.RunningRight when g.groundOnRight && m.right && !g.groundAboveRight0_1f => C_MovementContext.ClimbingUpRight,
             C_MovementContext.Idling when g.groundOnRight && m.right && !g.groundAboveRight0_1f => C_MovementContext.ClimbingUpRight,
 
             //Climbing down left
             C_MovementContext.SprintingLeft when m.left && !g.groundBeneathLeft1f && !g.groundBeneathLeft2f && g.groundBeneathLeft3f && m.down=> C_MovementContext.ClimbingDownLeft,
+            C_MovementContext.RunningLeft when m.left && !g.groundBeneathLeft1f && !g.groundBeneathLeft2f && g.groundBeneathLeft3f && m.down=> C_MovementContext.ClimbingDownLeft,
             C_MovementContext.Idling when m.left && !g.groundBeneathLeft1f && !g.groundBeneathLeft2f && g.groundBeneathLeft3f && m.down => C_MovementContext.ClimbingDownLeft,
 
             //Climbing down right
             C_MovementContext.SprintingRight when m.right && !g.groundBeneathRight1f && !g.groundBeneathRight2f && g.groundBeneathRight3f && m.down => C_MovementContext.ClimbingDownRight,
+            C_MovementContext.RunningRight when m.right && !g.groundBeneathRight1f && !g.groundBeneathRight2f && g.groundBeneathRight3f && m.down => C_MovementContext.ClimbingDownRight,
             C_MovementContext.Idling when m.right && !g.groundBeneathRight1f && !g.groundBeneathRight2f && g.groundBeneathRight3f && m.down => C_MovementContext.ClimbingDownRight,
 
             //Forced sliding down left
@@ -179,26 +213,32 @@ public class C_MovementContextCreator : MonoBehaviour
 
             //Step right
             C_MovementContext.SprintingRight when !g.groundTopRight && g.groundBottomRight => C_MovementContext.StepRight,
+            C_MovementContext.RunningRight when !g.groundTopRight && g.groundBottomRight => C_MovementContext.StepRight,
             C_MovementContext.Idling when !g.groundTopRight && g.groundBottomRight && m.right => C_MovementContext.StepRight,
 
             //Step left
             C_MovementContext.SprintingLeft when !g.groundTopLeft && g.groundBottomLeft => C_MovementContext.StepLeft,
+            C_MovementContext.RunningLeft when !g.groundTopLeft && g.groundBottomLeft => C_MovementContext.StepLeft,
             C_MovementContext.Idling when !g.groundTopLeft && g.groundBottomLeft && m.left => C_MovementContext.StepLeft,
             
             //Step Down left
             C_MovementContext.SprintingLeft when !g.groundBeneathLeft1f && g.groundBeneathLeft2f && m.left && !g.groundBottomLeft && m.down => C_MovementContext.StepDownLeft,
+            C_MovementContext.RunningLeft when !g.groundBeneathLeft1f && g.groundBeneathLeft2f && m.left && !g.groundBottomLeft && m.down => C_MovementContext.StepDownLeft,
             C_MovementContext.Idling when !g.groundBeneathLeft1f && g.groundBeneathLeft2f && m.left && !g.groundBottomLeft && m.down => C_MovementContext.StepDownLeft,
 
             //Step Down right
             C_MovementContext.SprintingRight when !g.groundBeneathRight1f && g.groundBeneathRight2f && m.right && !g.groundBottomRight && m.down => C_MovementContext.StepDownRight,
+            C_MovementContext.RunningRight when !g.groundBeneathRight1f && g.groundBeneathRight2f && m.right && !g.groundBottomRight && m.down => C_MovementContext.StepDownRight,
             C_MovementContext.Idling when !g.groundBeneathRight1f && g.groundBeneathRight2f && m.right && !g.groundBottomRight && m.down => C_MovementContext.StepDownRight,
 
             //Cliff Hang left
             C_MovementContext.SprintingLeft when !g.groundBeneathLeft1f && !g.groundBeneathLeft2f && m.left && !g.groundBottomLeft && m.down => C_MovementContext.CliffHangLeft,
+            C_MovementContext.RunningLeft when !g.groundBeneathLeft1f && !g.groundBeneathLeft2f && m.left && !g.groundBottomLeft && m.down => C_MovementContext.CliffHangLeft,
             C_MovementContext.Idling when !g.groundBeneathLeft1f && !g.groundBeneathLeft2f && m.left && !g.groundBottomLeft && m.down => C_MovementContext.CliffHangLeft,
 
             //Cliff Hang right
             C_MovementContext.SprintingRight when !g.groundBeneathRight1f && !g.groundBeneathRight2f && m.right && !g.groundBottomRight && m.down => C_MovementContext.CliffHangRight,
+            C_MovementContext.RunningRight when !g.groundBeneathRight1f && !g.groundBeneathRight2f && m.right && !g.groundBottomRight && m.down => C_MovementContext.CliffHangRight,
             C_MovementContext.Idling when !g.groundBeneathRight1f && !g.groundBeneathRight2f && m.right && !g.groundBottomRight && m.down => C_MovementContext.CliffHangRight,
 
             _ => c.MovementContext,
@@ -222,6 +262,10 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.SprintingRight when r != null => C_MovementContext.Rope,
             C_MovementContext.Jumping when r != null => C_MovementContext.Rope,
             C_MovementContext.Falling when r != null => C_MovementContext.Rope,
+            C_MovementContext.WallJumpForwardLeft when r != null => C_MovementContext.Rope,
+            C_MovementContext.WallJumpForwardRight when r != null => C_MovementContext.Rope,
+            C_MovementContext.WallJumpBackwardLeft when r != null => C_MovementContext.Rope,
+            C_MovementContext.WallJumpBackwardRight when r != null => C_MovementContext.Rope,
 
             _ => c.MovementContext,
         };

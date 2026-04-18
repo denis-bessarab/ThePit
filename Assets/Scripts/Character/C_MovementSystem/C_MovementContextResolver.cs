@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class C_MovementContextResolver : MonoBehaviour
 {
-    public void ResolveMovementContext(Character c, C_MovementActions a, C_MovementParameters p, Rigidbody2D rb, CapsuleCollider2D col)
+    public void ResolveMovementContext(Character c, C_MovementActions a, C_MovementParameters p, Rigidbody2D rb, CapsuleCollider2D col, C_LifeCycle lc)
     {
         col.sharedMaterial = null;
         switch (c.MovementContext)
         {
             case C_MovementContext.Idling:
                 col.sharedMaterial = p.characterMaterial;
+                break;
+            case C_MovementContext.RunningLeft:
+                a.RunningLeft(p, rb, c);
+                break;
+            case C_MovementContext.RunningRight:
+                a.RunningRight(p, rb, c);
                 break;
             case C_MovementContext.SprintingLeft:
                 a.SprintLeft(p,rb, c);
@@ -46,7 +52,7 @@ public class C_MovementContextResolver : MonoBehaviour
                 break;
             case C_MovementContext.Falling:
                 if (a.fallingCoroutine != null) return;
-                a.fallingCoroutine = StartCoroutine(a.Fall(p,c,rb));
+                a.fallingCoroutine = StartCoroutine(a.Fall(p,c,rb,lc));
                 break;
             case C_MovementContext.WallJumpBackwardLeft:
                 if (a.jumpingFromWallCoroutine != null) return;

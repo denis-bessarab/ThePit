@@ -81,7 +81,8 @@ public class Character : MonoBehaviour
             movementActions,
             movementParameters,
             _rigidbody,
-            _collider
+            _collider,
+            lifeCycle
             );
 
         inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData, movementParameters);

@@ -12,6 +12,14 @@ public class C_LifeCycle : MonoBehaviour
         deathCoroutine = StartCoroutine(DeathCoroutine(c, rb));
     }
 
+    public void DeathByFalling()
+    {
+        if (deathCoroutine != null) return;
+        var c = GetComponent<Character>();
+        var rb = c._rigidbody;
+        deathCoroutine = StartCoroutine(DeathCoroutine(c, rb));
+    }
+
     private IEnumerator DeathCoroutine(Character c, Rigidbody2D rb)
     {
         c.enabled = false;
@@ -23,4 +31,5 @@ public class C_LifeCycle : MonoBehaviour
         c.enabled = true;
         deathCoroutine = null;
     }
+
 }

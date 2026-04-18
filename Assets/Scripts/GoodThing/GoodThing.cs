@@ -6,6 +6,8 @@ public class GoodThing : MonoBehaviour
     {
         var c = collision.GetComponent<C_Collector>();
         c.CollectGoodThing();
+        var gtm = c.gameObject.GetComponent<GoodThingMeter>();
+        gtm.RemoveGoodThing(transform.gameObject);
         Destroy(gameObject);
     }
 }

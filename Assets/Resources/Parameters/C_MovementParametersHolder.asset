@@ -30,11 +30,12 @@ MonoBehaviour:
   hangingOnWallTime: 1
   runningWallSpeed: 5
   runningWallTime: 0.7
-  climbingUpSpeed: 6
-  fallDynamicGravity: 0.02
-  jumpDynamicGravity: 0.02
+  climbingUpSpeed: 5
+  fallDynamicGravity: 0.04
+  jumpDynamicGravity: 0.04
   fallingVelocityMax: 12
-  horizontalVelocityMax: 7
-  additionalJumpPower: 1
+  horizontalVelocityMax: 12
+  additionalJumpPower: 0.5
   jumpPowerAddTimesLimit: 1
   airPositionAdjustmentPower: 4
+  horizontalJumpPower: 2
