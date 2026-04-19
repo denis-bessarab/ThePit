@@ -39,3 +39,4 @@ MonoBehaviour:
   jumpPowerAddTimesLimit: 1
   airPositionAdjustmentPower: 4
   horizontalJumpPower: 2
+  maxStamina: 100

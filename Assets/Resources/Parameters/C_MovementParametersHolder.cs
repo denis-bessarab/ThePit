@@ -27,4 +27,5 @@ public class C_MovementParametersHolder : ScriptableObject
     [SerializeField] public int jumpPowerAddTimesLimit;
     [SerializeField] public float airPositionAdjustmentPower;
     [SerializeField] public float horizontalJumpPower;
+    [SerializeField] public float maxStamina;
 }

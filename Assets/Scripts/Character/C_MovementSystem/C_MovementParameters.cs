@@ -27,6 +27,7 @@ public class C_MovementParameters : MonoBehaviour
     [SerializeField] public int jumpPowerAddTimesLimit;
     [SerializeField] public float airPositionAdjustmentPower;
     [SerializeField] public float horizontalJumpPower;
+    [SerializeField] public float maxStamina;
 
 
 
@@ -69,5 +70,6 @@ public class C_MovementParameters : MonoBehaviour
         jumpPowerAddTimesLimit = p.jumpPowerAddTimesLimit;
         airPositionAdjustmentPower = p.airPositionAdjustmentPower;
         horizontalJumpPower = p.horizontalJumpPower;
+        maxStamina = p.maxStamina;
     }
 }

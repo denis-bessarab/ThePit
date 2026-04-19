@@ -10,6 +10,8 @@ using UnityEngine;
 [RequireComponent(typeof(C_VelocityLimiter))]
 [RequireComponent(typeof(C_LifeCycle))]
 [RequireComponent(typeof(C_Collector))]
+[RequireComponent(typeof(C_UIController))]
+[RequireComponent(typeof(C_StaminaManager))]
 public class Character : MonoBehaviour
 {
     [Header("Components")]
@@ -26,6 +28,8 @@ public class Character : MonoBehaviour
     [SerializeField] public C_VelocityLimiter velocityLimiter;
     [SerializeField] public C_LifeCycle lifeCycle;
     [SerializeField] public C_Collector collector;
+    [SerializeField] public C_UIController uiController;
+    [SerializeField] public C_StaminaManager staminaManager;
 
     [Header("Contexts")]
     [SerializeField] private C_MovementContext movementContext;
@@ -59,6 +63,10 @@ public class Character : MonoBehaviour
         velocityLimiter = GetComponent<C_VelocityLimiter>();
         lifeCycle = GetComponent<C_LifeCycle>();
         collector = GetComponent<C_Collector>();
+        uiController = GetComponent<C_UIController>();
+        staminaManager = GetComponent<C_StaminaManager>();
+
+        AssignReferences();
     }
 
     private void Update()
@@ -87,5 +95,10 @@ public class Character : MonoBehaviour
 
         inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData, movementParameters);
         velocityLimiter.LimitVelocity(_rigidbody, movementParameters, MovementContext);
+    }
+
+    private void AssignReferences()
+    {
+        staminaManager.movementParameters = movementParameters;
     }
 }
