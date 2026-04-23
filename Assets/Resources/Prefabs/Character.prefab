@@ -322,6 +322,15 @@ MonoBehaviour:
   airPositionAdjustmentPower: 4
   horizontalJumpPower: 2
   maxStamina: 100
+  jumpStaminaCost: 15
+  staminaRegenerationSpeed: 20
+  sprintingStaminaCost: 5
+  wallRunningStaminaCost: 10
+  wallJumpSoftStaminaCost: 15
+  wallJumpHardStaminaCost: 20
+  staticStaminaCost: 5
+  climbingStaminaCost: 10
+  everySpentStaminaDecreace: 10
 --- !u!114 &4125975706692358676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,8 +480,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::C_StaminaManager
   stamina: 100
+  dynamicMaxStamina: 0
   staminaUI: {fileID: 160050625418525108}
   movementParameters: {fileID: 3118098239298832258}
+  staminaSpent: 0
 --- !u!114 &8588452189522015988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,9 +664,33 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5811136063995477053, guid: 044a6832441f85747996500d92cd0397, type: 3}
+      propertyPath: m_Color.b
+      value: 0.0141509175
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811136063995477053, guid: 044a6832441f85747996500d92cd0397, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7903715
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811136063995477053, guid: 044a6832441f85747996500d92cd0397, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6124270834918066542, guid: 044a6832441f85747996500d92cd0397, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206176841283987243, guid: 044a6832441f85747996500d92cd0397, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206176841283987243, guid: 044a6832441f85747996500d92cd0397, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6320754
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206176841283987243, guid: 044a6832441f85747996500d92cd0397, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6212002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

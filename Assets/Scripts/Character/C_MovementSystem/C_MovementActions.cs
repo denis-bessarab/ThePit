@@ -5,7 +5,7 @@ public class C_MovementActions : MonoBehaviour
 {
     public Coroutine jumpingCoroutine;
     public Coroutine fallingCoroutine;
-    public Coroutine jumpingFromWallCoroutine;
+    public Coroutine wallJumpCoroutine;
     public Coroutine slidingCoroutine;
     public Coroutine hangingOnWallCoroutine;
     public Coroutine runningWallUpCoroutine;
@@ -81,29 +81,29 @@ public class C_MovementActions : MonoBehaviour
         if (fallingCoroutine != null) ResetCoroutine(ref fallingCoroutine);
     }
 
-    public IEnumerator WallJumpBackward(Vector2 direction, C_MovementParameters p, Character c, Rigidbody2D rb)
+    public IEnumerator WallJumpSoft(Vector2 direction, C_MovementParameters p, Character c, Rigidbody2D rb)
     {
         rb.AddForceAtPosition(new Vector3(direction.x * p.wallJumpPowerBackwardX, p.wallJumpPowerBackwardY, 0), transform.position, ForceMode2D.Impulse);
-        while (c.MovementContext == C_MovementContext.WallJumpBackwardRight || c.MovementContext == C_MovementContext.WallJumpBackwardLeft || c.MovementContext == C_MovementContext.Falling)
+        while (c.MovementContext == C_MovementContext.WallJumpSoftRight || c.MovementContext == C_MovementContext.WallJumpSoftLeft || c.MovementContext == C_MovementContext.Falling)
         {
             rb.gravityScale += p.jumpDynamicGravity;
             yield return null;
         }
         rb.gravityScale = 1f;
-        ResetCoroutine(ref jumpingFromWallCoroutine);
+        ResetCoroutine(ref wallJumpCoroutine);
     }
 
-    public IEnumerator WallJumpForward(Vector2 direction, C_MovementParameters p, Character c, Rigidbody2D rb)
+    public IEnumerator WallJumpHard(Vector2 direction, C_MovementParameters p, Character c, Rigidbody2D rb)
     {
         rb.AddForceAtPosition(new Vector3(direction.x * p.wallJumpPowerForwardX, p.wallJumpPowerForwardY, 0), transform.position, ForceMode2D.Impulse);
 
-        while (c.MovementContext == C_MovementContext.WallJumpForwardRight || c.MovementContext == C_MovementContext.WallJumpForwardLeft || c.MovementContext == C_MovementContext.Falling)
+        while (c.MovementContext == C_MovementContext.WallJumpHardRight || c.MovementContext == C_MovementContext.WallJumpHardLeft || c.MovementContext == C_MovementContext.Falling)
         {
             rb.gravityScale += 0.01f;
             yield return null;
         }
         rb.gravityScale = 1f;
-        ResetCoroutine(ref jumpingFromWallCoroutine);
+        ResetCoroutine(ref wallJumpCoroutine);
     }
 
     public IEnumerator SlideLeft(C_MovementParameters p, Rigidbody2D rb)

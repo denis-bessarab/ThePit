@@ -81,7 +81,8 @@ public class Character : MonoBehaviour
             movementActions,
             this,
             _rigidbody,
-            rope
+            rope,
+            staminaManager
             );
 
         movementContextResolver.ResolveMovementContext(
@@ -90,7 +91,8 @@ public class Character : MonoBehaviour
             movementParameters,
             _rigidbody,
             _collider,
-            lifeCycle
+            lifeCycle,
+            staminaManager
             );
 
         inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData, movementParameters);

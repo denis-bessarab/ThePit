@@ -28,4 +28,13 @@ public class C_MovementParametersHolder : ScriptableObject
     [SerializeField] public float airPositionAdjustmentPower;
     [SerializeField] public float horizontalJumpPower;
     [SerializeField] public float maxStamina;
+    [SerializeField] public float jumpStaminaCost;
+    [SerializeField] public float staminaRegenerationSpeed;
+    [SerializeField] public float sprintingStaminaCost;
+    [SerializeField] public float wallRunningStaminaCost;
+    [SerializeField] public float wallJumpSoftStaminaCost;
+    [SerializeField] public float wallJumpHardStaminaCost;
+    [SerializeField] public float staticStaminaCost;
+    [SerializeField] public float climbingStaminaCost;
+    [SerializeField] public float everySpentStaminaDecreace;
 }

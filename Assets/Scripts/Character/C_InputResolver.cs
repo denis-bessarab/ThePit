@@ -10,10 +10,10 @@ public class C_InputResolver : MonoBehaviour
         if (
             c.MovementContext == C_MovementContext.Falling || 
             c.MovementContext == C_MovementContext.Jumping ||
-            c.MovementContext == C_MovementContext.WallJumpBackwardLeft ||
-            c.MovementContext == C_MovementContext.WallJumpForwardLeft ||
-            c.MovementContext == C_MovementContext.WallJumpBackwardRight ||
-            c.MovementContext == C_MovementContext.WallJumpForwardRight
+            c.MovementContext == C_MovementContext.WallJumpSoftLeft ||
+            c.MovementContext == C_MovementContext.WallJumpHardLeft ||
+            c.MovementContext == C_MovementContext.WallJumpSoftRight ||
+            c.MovementContext == C_MovementContext.WallJumpHardRight
             ) a.AirPositionAdjustment(m, rb, p);
     }
 }

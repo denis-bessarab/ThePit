@@ -40,3 +40,12 @@ MonoBehaviour:
   airPositionAdjustmentPower: 4
   horizontalJumpPower: 2
   maxStamina: 100
+  jumpStaminaCost: 15
+  staminaRegenerationSpeed: 20
+  sprintingStaminaCost: 5
+  wallRunningStaminaCost: 10
+  wallJumpSoftStaminaCost: 15
+  wallJumpHardStaminaCost: 20
+  staticStaminaCost: 5
+  climbingStaminaCost: 10
+  everySpentStaminaDecreace: 10

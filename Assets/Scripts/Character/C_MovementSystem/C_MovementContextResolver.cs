@@ -2,7 +2,15 @@ using UnityEngine;
 
 public class C_MovementContextResolver : MonoBehaviour
 {
-    public void ResolveMovementContext(Character c, C_MovementActions a, C_MovementParameters p, Rigidbody2D rb, CapsuleCollider2D col, C_LifeCycle lc)
+    public void ResolveMovementContext(
+        Character c, 
+        C_MovementActions a, 
+        C_MovementParameters p, 
+        Rigidbody2D rb, 
+        CapsuleCollider2D col, 
+        C_LifeCycle lc,
+        C_StaminaManager sm
+        )
     {
         col.sharedMaterial = null;
         switch (c.MovementContext)
@@ -17,13 +25,16 @@ public class C_MovementContextResolver : MonoBehaviour
                 a.RunningRight(p, rb, c);
                 break;
             case C_MovementContext.SprintingLeft:
+                sm.SpendStamina(p.sprintingStaminaCost * Time.deltaTime);
                 a.SprintLeft(p,rb, c);
                 break;
             case C_MovementContext.SprintingRight:
+                sm.SpendStamina(p.sprintingStaminaCost * Time.deltaTime);
                 a.SprintRight(p,rb, c);
                 break;
             case C_MovementContext.Jumping:
                 if (a.jumpingCoroutine != null) return;
+                sm.SpendStamina(p.jumpStaminaCost);
                 a.jumpingCoroutine = StartCoroutine(a.Jump(p, c, rb));
                 break;
             case C_MovementContext.SlidingLeft:
@@ -41,7 +52,11 @@ public class C_MovementContextResolver : MonoBehaviour
                 break;
             case C_MovementContext.RunningWallUpLeft:
             case C_MovementContext.RunningWallUpRight:
-                if (a.runningWallUpCoroutine != null) return;
+                if (a.runningWallUpCoroutine != null)
+                {
+                    sm.SpendStamina(p.wallRunningStaminaCost * Time.deltaTime);
+                    return;
+                }
                 a.runningWallUpCoroutine = StartCoroutine(a.RunningWallUp(p, rb, c));
                 break;
             case C_MovementContext.SlidingWallDownLeft:
@@ -54,33 +69,40 @@ public class C_MovementContextResolver : MonoBehaviour
                 if (a.fallingCoroutine != null) return;
                 a.fallingCoroutine = StartCoroutine(a.Fall(p,c,rb,lc));
                 break;
-            case C_MovementContext.WallJumpBackwardLeft:
-                if (a.jumpingFromWallCoroutine != null) return;
-                a.jumpingFromWallCoroutine = StartCoroutine(a.WallJumpBackward(Vector2.left,p,c,rb));
+            case C_MovementContext.WallJumpSoftLeft:
+                if (a.wallJumpCoroutine != null) return;
+                sm.SpendStamina(p.wallJumpSoftStaminaCost);
+                a.wallJumpCoroutine = StartCoroutine(a.WallJumpSoft(Vector2.left,p,c,rb));
                 break;
-            case C_MovementContext.WallJumpBackwardRight:
-                if (a.jumpingFromWallCoroutine != null) return;
-                a.jumpingFromWallCoroutine = StartCoroutine(a.WallJumpBackward(Vector2.right,p,c,rb));
+            case C_MovementContext.WallJumpSoftRight:
+                if (a.wallJumpCoroutine != null) return;
+                sm.SpendStamina(p.wallJumpSoftStaminaCost);
+                a.wallJumpCoroutine = StartCoroutine(a.WallJumpSoft(Vector2.right,p,c,rb));
                 break;
-            case C_MovementContext.WallJumpForwardLeft:
-                if (a.jumpingFromWallCoroutine != null) return;
-                a.jumpingFromWallCoroutine = StartCoroutine(a.WallJumpForward(Vector2.left, p, c, rb));
+            case C_MovementContext.WallJumpHardLeft:
+                if (a.wallJumpCoroutine != null) return;
+                sm.SpendStamina(p.wallJumpHardStaminaCost);
+                a.wallJumpCoroutine = StartCoroutine(a.WallJumpHard(Vector2.left, p, c, rb));
                 break;
-            case C_MovementContext.WallJumpForwardRight:
-                if (a.jumpingFromWallCoroutine != null) return;
-                a.jumpingFromWallCoroutine = StartCoroutine(a.WallJumpForward(Vector2.right, p, c, rb));
+            case C_MovementContext.WallJumpHardRight:
+                if (a.wallJumpCoroutine != null) return;
+                sm.SpendStamina(p.wallJumpHardStaminaCost);
+                a.wallJumpCoroutine = StartCoroutine(a.WallJumpHard(Vector2.right, p, c, rb));
                 break;
             case C_MovementContext.HangingLeft:
             case C_MovementContext.HangingRight:
+                sm.SpendStamina(p.staticStaminaCost * Time.deltaTime);
                 if (a.hangingCoroutine != null) return;
                 a.hangingCoroutine = StartCoroutine(a.Hanging(p, rb, c));
                 break;
             case C_MovementContext.ClimbingUpLeft:
                 if (a.climbingUpCoroutine != null) return;
+                sm.SpendStamina(p.climbingStaminaCost);
                 a.climbingUpCoroutine = StartCoroutine(a.ClimbingUp(Vector2.left,p,rb,col, c));
                 break;
             case C_MovementContext.ClimbingUpRight:
                 if (a.climbingUpCoroutine != null) return;
+                sm.SpendStamina(p.climbingStaminaCost);
                 a.climbingUpCoroutine = StartCoroutine(a.ClimbingUp(Vector2.right,p,rb,col, c));
                 break;
             case C_MovementContext.ForcedSlidingWallDownLeft:
@@ -114,10 +136,12 @@ public class C_MovementContextResolver : MonoBehaviour
                 a.climbingDownCoroutine = StartCoroutine(a.ClimbDown(Vector2.right, rb, c, p));
                 break;
             case C_MovementContext.CliffHangLeft:
+                sm.SpendStamina(p.staticStaminaCost * Time.deltaTime);
                 if (a.cliffHangCoroutine != null) return;
                 a.cliffHangCoroutine = StartCoroutine(a.CliffHang(Vector2.left, rb, c, p));
                 break;
             case C_MovementContext.CliffHangRight:
+                sm.SpendStamina(p.staticStaminaCost * Time.deltaTime);
                 if (a.cliffHangCoroutine != null) return;
                 a.cliffHangCoroutine = StartCoroutine(a.CliffHang(Vector2.right, rb, c, p));
                 break;

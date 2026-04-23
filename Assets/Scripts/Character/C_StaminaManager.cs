@@ -1,11 +1,16 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class C_StaminaManager : MonoBehaviour
 {
-    [SerializeField] private float stamina = 100f;
+    [SerializeField] private float stamina;
+    [SerializeField] public float dynamicMaxStamina;
     [SerializeField] public Slider staminaUI;
     [SerializeField] public C_MovementParameters movementParameters;
+    [SerializeField] public float staminaSpent;
+
+    private Coroutine staminaRegenerationCoroutine;
 
     public float Stamina
     {
@@ -27,11 +32,51 @@ public class C_StaminaManager : MonoBehaviour
     private void Setup()
     {
         staminaUI.maxValue = movementParameters.maxStamina;
-        stamina = movementParameters.maxStamina;
+        dynamicMaxStamina = movementParameters.maxStamina;
+        Stamina = dynamicMaxStamina;
     }
 
     private void UpdateUI(float value)
     {
         staminaUI.value = value;
+    }
+
+    public bool IsEnoughStamina(float stamina)
+    {
+        return Stamina >= stamina;
+    }
+
+    public void SpendStamina(float stamina)
+    {
+        Stamina -= stamina;
+        staminaSpent += stamina;
+        dynamicMaxStamina = UpdateDynamicStaminaMax(staminaSpent);
+
+        if (staminaRegenerationCoroutine != null)
+        {
+            StopCoroutine(staminaRegenerationCoroutine);
+        }
+
+        staminaRegenerationCoroutine = StartCoroutine(StaminaRegenerationCoroutine());
+    }
+
+    private IEnumerator StaminaRegenerationCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        while(Stamina < dynamicMaxStamina)
+        {
+            Stamina += movementParameters.staminaRegenerationSpeed * Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private float UpdateDynamicStaminaMax(float staminaSpent)
+    {
+        return movementParameters.maxStamina - (staminaSpent / movementParameters.everySpentStaminaDecreace);
+    }
+
+    public void ResetDynamicMaxStamina()
+    {
+        dynamicMaxStamina = movementParameters.maxStamina;
     }
 }
