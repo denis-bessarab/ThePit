@@ -8,6 +8,7 @@ public class StaminaResetThing : MonoBehaviour
         {
             var sm = collision.GetComponent<C_StaminaManager>();
             sm.ResetDynamicMaxStamina();
+            sm.TriggerStaminaRegeneration();
             Destroy(gameObject);
         }
     }

@@ -27,6 +27,7 @@ public class GoodThingMeter : MonoBehaviour
     private void FindAllGoodThings()
     {
         var container = GameObject.Find("GoodThings");
+        if(container == null) return;
 
         for (int i = 0; i < container.transform.childCount; i++)
         {

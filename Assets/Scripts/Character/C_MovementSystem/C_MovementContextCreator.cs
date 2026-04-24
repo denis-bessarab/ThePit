@@ -156,24 +156,33 @@ public class C_MovementContextCreator : MonoBehaviour
             //Wall jump soft left
             C_MovementContext.RunningWallUpRight when m.jump && !m.left && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftLeft,
             C_MovementContext.HangingRight when m.jump && !m.left && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftLeft,
+            C_MovementContext.SlidingWallDownRight when m.jump && !m.left && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftLeft,
+            C_MovementContext.ForcedSlidingWallDownRight when m.jump && !m.left && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftLeft,
 
             //Wall jump soft right
             C_MovementContext.RunningWallUpLeft when m.jump && !m.right && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftRight,
             C_MovementContext.HangingLeft when m.jump && !m.right && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftRight,
+            C_MovementContext.SlidingWallDownLeft when m.jump && !m.right && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftRight,
+            C_MovementContext.ForcedSlidingWallDownLeft when m.jump && !m.right && sm.IsEnoughStamina(p.wallJumpSoftStaminaCost) => C_MovementContext.WallJumpSoftRight,
 
             //Wall jump hard left
             C_MovementContext.RunningWallUpRight when m.jump && m.left && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardLeft,
             C_MovementContext.HangingRight when m.jump && m.left && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardLeft,
+            C_MovementContext.SlidingWallDownRight when m.jump && m.left && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardLeft,
+            C_MovementContext.ForcedSlidingWallDownRight when m.jump && m.left && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardLeft,
 
             //Wall jump hard right
             C_MovementContext.RunningWallUpLeft when m.jump && m.right && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardRight,
             C_MovementContext.HangingLeft when m.jump && m.right && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardRight,
+            C_MovementContext.SlidingWallDownLeft when m.jump && m.right && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardRight,
+            C_MovementContext.ForcedSlidingWallDownLeft when m.jump && m.right && sm.IsEnoughStamina(p.wallJumpHardStaminaCost) => C_MovementContext.WallJumpHardRight,
 
             //Hanging left
             C_MovementContext.RunningWallUpLeft when g.groundTopLeft && !g.groundAboveLeft0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingLeft,
             C_MovementContext.Falling when g.groundOnLeft && g.groundTopLeft && !g.groundAboveLeft1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingLeft,
             C_MovementContext.Falling when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingLeft,
             C_MovementContext.Jumping when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingLeft,
+            C_MovementContext.Jumping when g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingLeft,
             C_MovementContext.CliffHangRight when a.cliffHangCoroutine == null && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingLeft,
             C_MovementContext.WallJumpHardLeft when !g.groundBottomLeft && g.groundTopLeft && !g.groundAboveLeft0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingLeft,
 
@@ -182,6 +191,7 @@ public class C_MovementContextCreator : MonoBehaviour
             C_MovementContext.Falling when g.groundOnRight && g.groundTopRight && !g.groundAboveRight1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingRight,
             C_MovementContext.Falling when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingRight,
             C_MovementContext.Jumping when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingRight,
+            C_MovementContext.Jumping when g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingRight,
             C_MovementContext.CliffHangLeft when a.cliffHangCoroutine == null && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingRight,
             C_MovementContext.WallJumpHardRight when !g.groundBottomRight && g.groundTopRight && !g.groundAboveRight0_1f && sm.IsEnoughStamina(p.staticStaminaCost * Time.deltaTime) => C_MovementContext.HangingRight,
 

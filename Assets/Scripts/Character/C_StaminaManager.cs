@@ -52,12 +52,7 @@ public class C_StaminaManager : MonoBehaviour
         staminaSpent += stamina;
         dynamicMaxStamina = UpdateDynamicStaminaMax(staminaSpent);
 
-        if (staminaRegenerationCoroutine != null)
-        {
-            StopCoroutine(staminaRegenerationCoroutine);
-        }
-
-        staminaRegenerationCoroutine = StartCoroutine(StaminaRegenerationCoroutine());
+        TriggerStaminaRegeneration();
     }
 
     private IEnumerator StaminaRegenerationCoroutine()
@@ -78,5 +73,15 @@ public class C_StaminaManager : MonoBehaviour
     public void ResetDynamicMaxStamina()
     {
         dynamicMaxStamina = movementParameters.maxStamina;
+    }
+
+    public void TriggerStaminaRegeneration()
+    {
+        if (staminaRegenerationCoroutine != null)
+        {
+            StopCoroutine(staminaRegenerationCoroutine);
+        }
+
+        staminaRegenerationCoroutine = StartCoroutine(StaminaRegenerationCoroutine());
     }
 }

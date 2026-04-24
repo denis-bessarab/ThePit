@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class C_LifeCycle : MonoBehaviour
 {
+    public Vector3 resurrectionPosition = Vector3.zero;
     public Coroutine deathCoroutine;
     public void DeathByDanger()
     {
@@ -23,12 +24,12 @@ public class C_LifeCycle : MonoBehaviour
     private IEnumerator DeathCoroutine(Character c, Rigidbody2D rb)
     {
         c.enabled = false;
+        rb.bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(0.5f);
-        rb.linearVelocityX = 0;
-        rb.linearVelocityY = 0;
-        c.gameObject.transform.position = new Vector3(0, 0, 0);
+        c.gameObject.transform.position = resurrectionPosition;
         yield return new WaitForSeconds(0.5f);
         c.enabled = true;
+        rb.bodyType = RigidbodyType2D.Dynamic;
         deathCoroutine = null;
     }
 
