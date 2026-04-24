@@ -55,9 +55,10 @@ public class C_StaminaManager : MonoBehaviour
         TriggerStaminaRegeneration();
     }
 
-    private IEnumerator StaminaRegenerationCoroutine()
+    private IEnumerator StaminaRegenerationCoroutine(bool force = false)
     {
-        yield return new WaitForSeconds(1);
+        if(!force) yield return new WaitForSeconds(1);
+
         while(Stamina < dynamicMaxStamina)
         {
             Stamina += movementParameters.staminaRegenerationSpeed * Time.deltaTime;
@@ -75,13 +76,13 @@ public class C_StaminaManager : MonoBehaviour
         dynamicMaxStamina = movementParameters.maxStamina;
     }
 
-    public void TriggerStaminaRegeneration()
+    public void TriggerStaminaRegeneration(bool force = false)
     {
         if (staminaRegenerationCoroutine != null)
         {
             StopCoroutine(staminaRegenerationCoroutine);
         }
 
-        staminaRegenerationCoroutine = StartCoroutine(StaminaRegenerationCoroutine());
+        staminaRegenerationCoroutine = StartCoroutine(StaminaRegenerationCoroutine(force));
     }
 }

@@ -116,7 +116,8 @@ public class C_MovementContextCreator : MonoBehaviour
 
             //Falling
             C_MovementContext.Idling when !g.groundBelow => C_MovementContext.Falling,
-            C_MovementContext.Jumping when m.vy <= 0 && (m.vx == 0 || (!g.groundOnLeft && !g.groundOnRight)) => C_MovementContext.Falling,
+            //C_MovementContext.Jumping when m.vy <= 0 && (m.vx == 0 || (!g.groundOnLeft && !g.groundOnRight)) => C_MovementContext.Falling,
+            C_MovementContext.Jumping when m.vy <= 0 && (!(g.groundOnLeft && m.left) || !(g.groundOnRight && m.right)) => C_MovementContext.Falling,
             C_MovementContext.SlidingLeft when !g.groundBelow && a.slidingCoroutine == null => C_MovementContext.Falling,
             C_MovementContext.SlidingRight when !g.groundBelow && a.slidingCoroutine == null => C_MovementContext.Falling,
             C_MovementContext.WallJumpSoftLeft when m.vy <= 0 => C_MovementContext.Falling,
