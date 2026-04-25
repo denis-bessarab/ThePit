@@ -37,7 +37,7 @@ MonoBehaviour:
   horizontalVelocityMax: 12
   additionalJumpPower: 0.5
   jumpPowerAddTimesLimit: 1
-  airPositionAdjustmentPower: 4
+  airPositionAdjustmentPower: 2
   horizontalJumpPower: 2
   maxStamina: 100
   jumpStaminaCost: 15

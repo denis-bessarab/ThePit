@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialUI : MonoBehaviour
 {
@@ -9,5 +10,10 @@ public class TutorialUI : MonoBehaviour
         var popup = Instantiate(popupPrefab,transform);
         var popusScript = popup.GetComponent<Popup>();
         popusScript.SetText(message);
+    }
+
+    public void SkipTutorial()
+    {
+        SceneManager.LoadScene("PrototypeLVL1");
     }
 }
