@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -28,5 +29,10 @@ public class GameManager : Singleton<GameManager>
     public void PauseUnpauseGame()
     {
         pauseMenu.Settings();
+    }
+
+    public static void FinishGame()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

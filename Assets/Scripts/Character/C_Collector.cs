@@ -7,5 +7,14 @@ public class C_Collector : MonoBehaviour
     public void CollectGoodThing(int amount = 1)
     {
         goodThingsCollected++;
+        CheckGoodThingsAmount(goodThingsCollected);
+    }
+
+    private void CheckGoodThingsAmount(int amount)
+    {
+        if(amount == 3)
+        {
+            GameManager.FinishGame();
+        }
     }
 }

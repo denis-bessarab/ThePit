@@ -46,8 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   startMusicEvent:
     Guid:
-      Data1: -1605961036
-      Data2: 1244096812
-      Data3: -1853915735
-      Data4: 1591844889
+      Data1: -1308194382
+      Data2: 1145189952
+      Data3: -527879779
+      Data4: 791151788
     Path: event:/StartMusic
+  startMusicIsPlaying: 0
