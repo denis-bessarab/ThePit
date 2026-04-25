@@ -275,14 +275,20 @@ public class C_MovementContextCreator : MonoBehaviour
         return c.MovementContext switch
         {
             //Rope
-            C_MovementContext.SprintingLeft when r != null => C_MovementContext.Rope,
-            C_MovementContext.SprintingRight when r != null => C_MovementContext.Rope,
-            C_MovementContext.Jumping when r != null => C_MovementContext.Rope,
-            C_MovementContext.Falling when r != null => C_MovementContext.Rope,
-            C_MovementContext.WallJumpHardLeft when r != null => C_MovementContext.Rope,
-            C_MovementContext.WallJumpHardRight when r != null => C_MovementContext.Rope,
-            C_MovementContext.WallJumpSoftLeft when r != null => C_MovementContext.Rope,
-            C_MovementContext.WallJumpSoftRight when r != null => C_MovementContext.Rope,
+            _ when r != null => C_MovementContext.Rope,
+            //C_MovementContext.RunningRight when r != null => C_MovementContext.Rope,
+            //C_MovementContext.SprintingLeft when r != null => C_MovementContext.Rope,
+            //C_MovementContext.SprintingRight when r != null => C_MovementContext.Rope,
+            //C_MovementContext.Jumping when r != null => C_MovementContext.Rope,
+            //C_MovementContext.Falling when r != null => C_MovementContext.Rope,
+            //C_MovementContext.WallJumpHardLeft when r != null => C_MovementContext.Rope,
+            //C_MovementContext.WallJumpHardRight when r != null => C_MovementContext.Rope,
+            //C_MovementContext.WallJumpSoftLeft when r != null => C_MovementContext.Rope,
+            //C_MovementContext.WallJumpSoftRight when r != null => C_MovementContext.Rope,
+            //C_MovementContext.CliffHangLeft when r != null => C_MovementContext.Rope,
+            //C_MovementContext.CliffHangRight when r != null => C_MovementContext.Rope,
+            //C_MovementContext.HangingLeft when r != null => C_MovementContext.Rope,
+            //C_MovementContext.HangingRight when r != null => C_MovementContext.Rope,
 
             _ => c.MovementContext,
         };

@@ -68,7 +68,9 @@ public class C_StaminaManager : MonoBehaviour
 
     private float UpdateDynamicStaminaMax(float staminaSpent)
     {
-        return movementParameters.maxStamina - (staminaSpent / movementParameters.everySpentStaminaDecreace);
+        var newValue = movementParameters.maxStamina - (staminaSpent / movementParameters.everySpentStaminaDecreace);
+        if(newValue < movementParameters.staminaMin) newValue = movementParameters.staminaMin;
+        return newValue;
     }
 
     public void ResetDynamicMaxStamina()

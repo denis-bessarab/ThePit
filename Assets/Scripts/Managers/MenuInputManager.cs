@@ -9,7 +9,6 @@ public class MenuInputManager : Singleton<MenuInputManager>
     [SerializeField] public MenuInputResolver _menuInputResolver;
     [SerializeField] public GameManager gameManager;
 
-
     public InputAction pause;
 
     private Coroutine findGameManagerCoroutine;
@@ -39,7 +38,7 @@ public class MenuInputManager : Singleton<MenuInputManager>
 
     private void SetActions()
     {
-        pause = _inputActions.FindAction("Pause");
+        pause = _inputActions.FindActionMap("Menu").FindAction("Pause");
     }
 
     private InputActionAsset GetInputActionAsset()

@@ -33,12 +33,12 @@ public class Rope_InputController : MonoBehaviour
 
     private void SetActions()
     {
-        up = _inputActions.FindAction("Up");
-        down = _inputActions.FindAction("Down");
-        swingLeft = _inputActions.FindAction("SwingLeft");
-        swingRight = _inputActions.FindAction("SwingRight");
-        jump = _inputActions.FindAction("Jump");
-        rope = _inputActions.FindAction("Rope");
+        up = _inputActions.FindActionMap("Rope").FindAction("Up");
+        down = _inputActions.FindActionMap("Rope").FindAction("Down");
+        swingLeft = _inputActions.FindActionMap("Rope").FindAction("SwingLeft");
+        swingRight = _inputActions.FindActionMap("Rope").FindAction("SwingRight");
+        jump = _inputActions.FindActionMap("Rope").FindAction("Jump");
+        rope = _inputActions.FindActionMap("Rope").FindAction("Rope");
     }
 
     private InputActionAsset GetInputActionAsset()

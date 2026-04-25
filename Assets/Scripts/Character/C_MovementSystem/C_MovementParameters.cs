@@ -37,6 +37,7 @@ public class C_MovementParameters : MonoBehaviour
     [SerializeField] public float staticStaminaCost;
     [SerializeField] public float climbingStaminaCost;
     [SerializeField] public float everySpentStaminaDecreace;
+    [SerializeField] public float staminaMin;
 
 
     private void Reset()
@@ -87,5 +88,6 @@ public class C_MovementParameters : MonoBehaviour
         staticStaminaCost = p.staticStaminaCost;
         climbingStaminaCost = p.climbingStaminaCost;
         everySpentStaminaDecreace = p.everySpentStaminaDecreace;
+        staminaMin = p.staminaMin;
     }
 }

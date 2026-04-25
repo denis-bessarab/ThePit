@@ -19,8 +19,8 @@ MonoBehaviour:
   verticalRaycastDistance: 1.1
   horizontalRaycastDistance: 0.56
   jumpPower: 6
-  wallJumpPowerForwardX: 7
-  wallJumpPowerForwardY: 7
+  wallJumpPowerForwardX: 8
+  wallJumpPowerForwardY: 8
   wallJumpPowerBackwardX: 5
   wallJumpPowerBackwardY: 4
   slidingPower: 6
@@ -31,8 +31,8 @@ MonoBehaviour:
   runningWallSpeed: 5
   runningWallTime: 0.7
   climbingUpSpeed: 5
-  fallDynamicGravity: 0.04
-  jumpDynamicGravity: 0.04
+  fallDynamicGravity: 10
+  jumpDynamicGravity: 6
   fallingVelocityMax: 12
   horizontalVelocityMax: 12
   additionalJumpPower: 0.5
@@ -49,3 +49,4 @@ MonoBehaviour:
   staticStaminaCost: 5
   climbingStaminaCost: 10
   everySpentStaminaDecreace: 10
+  staminaMin: 30

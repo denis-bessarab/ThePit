@@ -36,14 +36,14 @@ public class C_InputController : MonoBehaviour
 
     private void SetActions()
     {
-        m_left = _inputActions.FindAction("Left");
-        m_right = _inputActions.FindAction("Right");
-        m_jump = _inputActions.FindAction("Jump");
-        m_down = _inputActions.FindAction("Down");
-        m_up = _inputActions.FindAction("Up");
-        m_sprint = _inputActions.FindAction("Sprint");
-        rope = _inputActions.FindAction("Rope");
-        restart = _inputActions.FindAction("Restart");
+        m_left = _inputActions.FindActionMap("Character").FindAction("Left");
+        m_right = _inputActions.FindActionMap("Character").FindAction("Right");
+        m_jump = _inputActions.FindActionMap("Character").FindAction("Jump");
+        m_down = _inputActions.FindActionMap("Character").FindAction("Down");
+        m_up = _inputActions.FindActionMap("Character").FindAction("Up");
+        m_sprint = _inputActions.FindActionMap("Character").FindAction("Sprint");
+        rope = _inputActions.FindActionMap("Character").FindAction("Rope");
+        restart = _inputActions.FindActionMap("Character").FindAction("Restart");
     }
 
     private InputActionAsset GetInputActionAsset()

@@ -12,7 +12,7 @@ public class C_Collector : MonoBehaviour
 
     private void CheckGoodThingsAmount(int amount)
     {
-        if(amount == 3)
+        if(amount == 4)
         {
             GameManager.FinishGame();
         }

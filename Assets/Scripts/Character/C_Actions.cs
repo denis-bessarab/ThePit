@@ -4,14 +4,9 @@ using UnityEngine;
 public class C_Actions : MonoBehaviour
 {
     [SerializeField] private float ropePower;
-    [SerializeField] public Vector3 startPosition;
     
     public Coroutine ropeLoadCoroutine;
 
-    private void Awake()
-    {
-        startPosition = transform.position;
-    }
     public void RopeLoad()
     {
         ropeLoadCoroutine ??= StartCoroutine(RopeLoadCoroutine());
@@ -49,7 +44,11 @@ public class C_Actions : MonoBehaviour
 
     public void Restart()
     {
+        var startPosition = GetComponent<C_LifeCycle>().resurrectionPosition;
         transform.position = startPosition;
+        var ic = GetComponent<C_InputController>();
+        ic.enabled = false;
+        ic.enabled = true;
         var c = GetComponent<Character>();
         c.MovementContext = C_MovementContext.Idling;
         c.rope = null;

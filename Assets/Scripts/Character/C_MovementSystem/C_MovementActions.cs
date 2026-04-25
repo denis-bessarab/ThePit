@@ -58,7 +58,7 @@ public class C_MovementActions : MonoBehaviour
             }
             else
             {
-                rb.gravityScale += p.jumpDynamicGravity;
+                rb.gravityScale += p.jumpDynamicGravity * Time.deltaTime;
                 yield return null;
             }
         }
@@ -72,7 +72,7 @@ public class C_MovementActions : MonoBehaviour
         var initialFallPosY = transform.position.y;
         while (c.MovementContext == C_MovementContext.Falling)
         {
-            rb.gravityScale += p.fallDynamicGravity;
+            rb.gravityScale += p.fallDynamicGravity * Time.deltaTime;
             fallDistance = Mathf.Abs(initialFallPosY - transform.position.y);
             yield return null;
         }
@@ -86,7 +86,7 @@ public class C_MovementActions : MonoBehaviour
         rb.AddForceAtPosition(new Vector3(direction.x * p.wallJumpPowerBackwardX, p.wallJumpPowerBackwardY, 0), transform.position, ForceMode2D.Impulse);
         while (c.MovementContext == C_MovementContext.WallJumpSoftRight || c.MovementContext == C_MovementContext.WallJumpSoftLeft || c.MovementContext == C_MovementContext.Falling)
         {
-            rb.gravityScale += p.jumpDynamicGravity;
+            rb.gravityScale += p.jumpDynamicGravity * Time.deltaTime;
             yield return null;
         }
         rb.gravityScale = 1f;
@@ -99,7 +99,7 @@ public class C_MovementActions : MonoBehaviour
 
         while (c.MovementContext == C_MovementContext.WallJumpHardRight || c.MovementContext == C_MovementContext.WallJumpHardLeft || c.MovementContext == C_MovementContext.Falling)
         {
-            rb.gravityScale += 0.01f;
+            rb.gravityScale += p.fallDynamicGravity * Time.deltaTime;
             yield return null;
         }
         rb.gravityScale = 1f;

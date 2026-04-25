@@ -33,7 +33,11 @@ public class C_MovementContextResolver : MonoBehaviour
                 a.SprintRight(p,rb, c);
                 break;
             case C_MovementContext.Jumping:
-                if (a.jumpingCoroutine != null) return;
+                if (a.jumpingCoroutine != null)
+                {
+                    Debug.Log("Coroutine is running");
+                    return;
+                }
                 sm.SpendStamina(p.jumpStaminaCost);
                 a.jumpingCoroutine = StartCoroutine(a.Jump(p, c, rb));
                 break;

@@ -7,6 +7,8 @@ public class GoodThing : MonoBehaviour
         if(collision.name == "Character")
         {
             var c = collision.GetComponent<C_Collector>();
+            var lc = collision.GetComponent<C_LifeCycle>();
+            lc.resurrectionPosition = transform.position;
             c.CollectGoodThing();
             var gtm = c.gameObject.GetComponent<GoodThingMeter>();
             gtm.RemoveGoodThing(transform.gameObject);

@@ -37,4 +37,5 @@ public class C_MovementParametersHolder : ScriptableObject
     [SerializeField] public float staticStaminaCost;
     [SerializeField] public float climbingStaminaCost;
     [SerializeField] public float everySpentStaminaDecreace;
+    [SerializeField] public float staminaMin;
 }

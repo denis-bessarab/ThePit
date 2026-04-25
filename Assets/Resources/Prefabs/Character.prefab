@@ -214,7 +214,7 @@ MonoBehaviour:
     m_Name: Left
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 4081343d-5a2e-4067-8b78-b2f2f461f1a0
+    m_Id: eeb7c833-f1c2-481f-ac67-09226857e551
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -223,7 +223,7 @@ MonoBehaviour:
     m_Name: Right
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: c334e9e5-5f0c-4c2d-a076-1c20789a6345
+    m_Id: ddab1888-f8b1-4d48-950b-942603cc9d3c
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -232,7 +232,7 @@ MonoBehaviour:
     m_Name: Jump
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 1096653f-b3dd-466b-a3ab-e8e8a92e9831
+    m_Id: c05f7fec-9922-4fa8-a1dc-91e81ca396e6
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -241,7 +241,7 @@ MonoBehaviour:
     m_Name: Down
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 42923d1b-33a6-4703-b734-1ba521412823
+    m_Id: 8427b362-09a4-49e0-853c-9910ee8912d5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -250,7 +250,7 @@ MonoBehaviour:
     m_Name: Up
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 13f58a85-6149-4812-b9b2-0f41815f46a7
+    m_Id: afd73087-4852-4074-9a2b-4cc79439a4f9
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -259,7 +259,7 @@ MonoBehaviour:
     m_Name: Sprint
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ff7bccb2-b1ac-45b4-9e6e-37350e3263c8
+    m_Id: db82dcdc-85a9-4c23-a46e-8ef69843345e
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -268,7 +268,7 @@ MonoBehaviour:
     m_Name: Rope
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: b9675670-4dc1-4d4b-9be6-644ff7ce6289
+    m_Id: b8b7e9e4-25a2-4e5e-aa49-cde7dc9e2f55
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Name: Restart
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: cc1a758e-0b13-4f36-adfd-96a1a1fedff7
+    m_Id: eed91ae7-c75f-40f3-91ef-c71abdfbfa6f
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -301,8 +301,8 @@ MonoBehaviour:
   verticalRaycastDistance: 1.1
   horizontalRaycastDistance: 0.56
   jumpPower: 6
-  wallJumpPowerForwardX: 7
-  wallJumpPowerForwardY: 7
+  wallJumpPowerForwardX: 8
+  wallJumpPowerForwardY: 8
   wallJumpPowerBackwardX: 5
   wallJumpPowerBackwardY: 4
   slidingPower: 6
@@ -313,8 +313,8 @@ MonoBehaviour:
   runningWallSpeed: 5
   runningWallTime: 0.7
   climbingUpSpeed: 5
-  fallDynamicGravity: 0.04
-  jumpDynamicGravity: 0.04
+  fallDynamicGravity: 10
+  jumpDynamicGravity: 6
   fallingVelocityMax: 12
   horizontalVelocityMax: 12
   additionalJumpPower: 0.5
@@ -331,6 +331,7 @@ MonoBehaviour:
   staticStaminaCost: 5
   climbingStaminaCost: 10
   everySpentStaminaDecreace: 10
+  staminaMin: 30
 --- !u!114 &4125975706692358676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::C_Actions
   ropePower: 0
-  startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &8594449760040323608
 MonoBehaviour:
   m_ObjectHideFlags: 0
