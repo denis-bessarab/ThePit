@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd96a2399c473c84ead5770e9e7257d7, type: 3}
+  m_Name: Fist
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  weaponName: Fist
+  distanceOfUse: 1.5
+  action: {fileID: 11400000, guid: 9767a50ea96c4054eab006912b545b90, type: 2}
+  animationClip: {fileID: 7400000, guid: 9dfc227f265fc4240b03de5c1647b0d7, type: 2}

@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "com.pillargamesstudio.singleton":"https://github.com/denis-bessarab/PGS-Singleton.git",
+    "com.pillargamesstudio.prototypemenu":"https://github.com/denis-bessarab/PGS-PrototypeMenu.git",
+    "com.pillargamesstudio.defaultscenes":"https://github.com/denis-bessarab/PGS-DefaultScenes2D.git",
     "com.unity.2d.animation": "13.0.4",
     "com.unity.2d.aseprite": "3.0.1",
     "com.unity.2d.pixel-perfect": "5.1.1",

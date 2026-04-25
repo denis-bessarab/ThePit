@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "com.pillargamesstudio.defaultscenes": {
+      "version": "https://github.com/denis-bessarab/PGS-DefaultScenes2D.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "765bc06f57f40a2b263a9c76b31bca2206c02b18"
+    },
+    "com.pillargamesstudio.prototypemenu": {
+      "version": "https://github.com/denis-bessarab/PGS-PrototypeMenu.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e61201ff1e5dbf4d2ff1b15cfbbd1a99123e4fa1"
+    },
+    "com.pillargamesstudio.singleton": {
+      "version": "https://github.com/denis-bessarab/PGS-Singleton.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "7ba859469774c2ccf42dcb2f54d3796e0280a8af"
+    },
     "com.unity.2d.animation": {
       "version": "13.0.4",
       "depth": 0,
