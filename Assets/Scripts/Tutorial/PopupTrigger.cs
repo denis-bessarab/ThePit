@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PopupTrigger : MonoBehaviour
 {
-    [SerializeField] private TutorialUI tutorialUI; 
+    [SerializeField] private TutorialUI tutorialUI;
+    [TextArea(3,10)]
     [SerializeField] private string message;
 
     private void Awake()
