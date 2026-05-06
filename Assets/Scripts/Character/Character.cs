@@ -48,6 +48,10 @@ public class Character : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        CharactersManager.activeCharacter = this;
+    }
     private void Reset()
     {
         _rigidbody = GetComponent<Rigidbody2D>();

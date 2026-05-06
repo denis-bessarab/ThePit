@@ -1,0 +1,2015 @@
+fileFormatVersion: 2
+guid: ebeb31fc2dfdcdb4cb0179f933a41bb5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8579265910635374063
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_0
+  - first:
+      213: 1386166304929560924
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_1
+  - first:
+      213: -9074657511453571811
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_2
+  - first:
+      213: 5868889723721948910
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_3
+  - first:
+      213: 3457071493934961654
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_4
+  - first:
+      213: -4702428072469229178
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_5
+  - first:
+      213: -1018772152483410022
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_6
+  - first:
+      213: -298486200803234976
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_7
+  - first:
+      213: -2193357473976734817
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_8
+  - first:
+      213: 788954538017348889
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_9
+  - first:
+      213: 146789777184573462
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_10
+  - first:
+      213: -5723651883114395631
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_11
+  - first:
+      213: -794298224027165754
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_12
+  - first:
+      213: 9015983700756375159
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_13
+  - first:
+      213: 490538231571512530
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_14
+  - first:
+      213: 442534891943079357
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_15
+  - first:
+      213: 8363152647825761243
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_16
+  - first:
+      213: -7576498124941742796
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_17
+  - first:
+      213: -229097503675744425
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_18
+  - first:
+      213: -4804994811620856151
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_19
+  - first:
+      213: -3042503414620643674
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_20
+  - first:
+      213: 7445773405462449450
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_21
+  - first:
+      213: 2805977679746135380
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_22
+  - first:
+      213: 2566564189308963701
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_23
+  - first:
+      213: -4730440495760845592
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_24
+  - first:
+      213: 6316098620798871009
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_25
+  - first:
+      213: -8183708514280750917
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_26
+  - first:
+      213: -1008935511431931063
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_27
+  - first:
+      213: -6965635203867283114
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_28
+  - first:
+      213: -4864191421036776594
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_29
+  - first:
+      213: -1329484918451022134
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_30
+  - first:
+      213: -4725224985647252294
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_31
+  - first:
+      213: -2097356970034977691
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_32
+  - first:
+      213: 6910755801508525195
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_33
+  - first:
+      213: 570842610658522501
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_34
+  - first:
+      213: 5936042439562268299
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_35
+  - first:
+      213: 6962117439538744112
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_36
+  - first:
+      213: 5605804166653602832
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_37
+  - first:
+      213: -5458761225008590879
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_38
+  - first:
+      213: -4737020438406915892
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_39
+  - first:
+      213: 7081788591950760330
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_40
+  - first:
+      213: 3621602217445680859
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_41
+  - first:
+      213: 5687839376409331943
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_42
+  - first:
+      213: -2761381897760503304
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_43
+  - first:
+      213: -5228564395902278194
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_44
+  - first:
+      213: 3051152179774100458
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_45
+  - first:
+      213: -1276703772391609777
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_46
+  - first:
+      213: -2173390900987617151
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_47
+  - first:
+      213: -7386785574405158486
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_48
+  - first:
+      213: -4253870220714334468
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_49
+  - first:
+      213: 3143461152537489527
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_50
+  - first:
+      213: -723479062609836401
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_51
+  - first:
+      213: 4066507596842140869
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_52
+  - first:
+      213: -1057547581030136052
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_53
+  - first:
+      213: -5716310135204609630
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_54
+  - first:
+      213: -5174372152754771849
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_55
+  - first:
+      213: -6960081504866741386
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_56
+  - first:
+      213: -3045678751396732703
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_57
+  - first:
+      213: -4068273761378693465
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_58
+  - first:
+      213: 2857330121485128040
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_59
+  - first:
+      213: -6166552638464877150
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_60
+  - first:
+      213: -5816502228923099751
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_61
+  - first:
+      213: 1603902967751321215
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_62
+  - first:
+      213: 9087873810286521408
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_63
+  - first:
+      213: 5750668653744084140
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_64
+  - first:
+      213: 4067214977114829595
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_65
+  - first:
+      213: -3257674880257420819
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_66
+  - first:
+      213: 2110888418848280848
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_67
+  - first:
+      213: 2745986475895169842
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_68
+  - first:
+      213: 2581625687096973569
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_69
+  - first:
+      213: -8598932615844209001
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_70
+  - first:
+      213: -8204755642686727995
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_71
+  - first:
+      213: 8187269223407871452
+    second: pngtree-campfire-color-png-illustration-png-image_14612446_72
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 2246
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11ad5f2fb1350f880800000000000000
+      internalID: -8579265910635374063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_1
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 2366
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5931fcf8e6ac3310800000000000000
+      internalID: 1386166304929560924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_2
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 2390
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d15ca7ba217501280800000000000000
+      internalID: -9074657511453571811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_3
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 2246
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee1368eb1c727150800000000000000
+      internalID: 5868889723721948910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_4
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 2366
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f35f17153cf9ff20800000000000000
+      internalID: 3457071493934961654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_5
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 2390
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68195a6259e9dbeb0800000000000000
+      internalID: -4702428072469229178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_6
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 2246
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f8a2000289cd1f0800000000000000
+      internalID: -1018772152483410022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_7
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 2366
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06b64ceb1609bdbf0800000000000000
+      internalID: -298486200803234976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_8
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 2390
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9b2b229ff0af81e0800000000000000
+      internalID: -2193357473976734817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_9
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 2246
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91dd476e8fde2fa00800000000000000
+      internalID: 788954538017348889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_10
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 2366
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 618cebd4680890200800000000000000
+      internalID: 146789777184573462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_11
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 2390
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11888f000f08190b0800000000000000
+      internalID: -5723651883114395631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_12
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 2397
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cb132f39f51af4f0800000000000000
+      internalID: -794298224027165754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_13
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 2308
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 776ab4838653f1d70800000000000000
+      internalID: 9015983700756375159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_14
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 2346
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dc71913cedbec600800000000000000
+      internalID: 490538231571512530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_15
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 2308
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbdabfab323342600800000000000000
+      internalID: 442534891943079357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_16
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 2346
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd3a508f503ef0470800000000000000
+      internalID: 8363152647825761243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_17
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 2308
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43d2f6de81fdad690800000000000000
+      internalID: -7576498124941742796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_18
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 2346
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75f7a72c80512dcf0800000000000000
+      internalID: -229097503675744425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_19
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 2308
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ae6eb14daa315db0800000000000000
+      internalID: -4804994811620856151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_20
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 2346
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ae9f97a34bd6c5d0800000000000000
+      internalID: -3042503414620643674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_21
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 111
+        width: 2081
+        height: 2167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2dc3ae7673b45760800000000000000
+      internalID: 7445773405462449450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_22
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 2247
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45571f045d5d0f620800000000000000
+      internalID: 2805977679746135380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_23
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 2278
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57bcffc28844e9320800000000000000
+      internalID: 2566564189308963701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_24
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 2247
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e45d0b9e691a5eb0800000000000000
+      internalID: -4730440495760845592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_25
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 2278
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e52d034b3a47a750800000000000000
+      internalID: 6316098620798871009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_26
+      rect:
+        serializedVersion: 2
+        x: 1550
+        y: 2247
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb0c4f42770ad6e80800000000000000
+      internalID: -8183708514280750917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_27
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 2278
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94b92d77f7a8ff1f0800000000000000
+      internalID: -1008935511431931063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_28
+      rect:
+        serializedVersion: 2
+        x: 2151
+        y: 2247
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 651f88600b7155f90800000000000000
+      internalID: -6965635203867283114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_29
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 2278
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e63b9959cabee7cb0800000000000000
+      internalID: -4864191421036776594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_30
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 1999
+        width: 42
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac6dc75b288bc8de0800000000000000
+      internalID: -1329484918451022134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_31
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 2028
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abcf1be29e0ac6eb0800000000000000
+      internalID: -4725224985647252294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_32
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1914
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56420e1b2f0b4e2e0800000000000000
+      internalID: -2097356970034977691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_33
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1967
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b84b26669cfe7ef50800000000000000
+      internalID: 6910755801508525195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_34
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1969
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58535f6745a0ce700800000000000000
+      internalID: 570842610658522501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_35
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1645
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8e80c5f52f016250800000000000000
+      internalID: 5936042439562268299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_36
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1764
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b4244ace86e9060800000000000000
+      internalID: 6962117439538744112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_37
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 1789
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01ceac15031dbcd40800000000000000
+      internalID: 5605804166653602832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_38
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1796
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1efcfad66959e34b0800000000000000
+      internalID: -5458761225008590879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_39
+      rect:
+        serializedVersion: 2
+        x: 2206
+        y: 1707
+        width: 53
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc89df25209b24eb0800000000000000
+      internalID: -4737020438406915892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_40
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1745
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8983a51431974260800000000000000
+      internalID: 7081788591950760330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_41
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1366
+        width: 72
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd6ed985704824230800000000000000
+      internalID: 3621602217445680859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_42
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 1427
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e88b5207c34fee40800000000000000
+      internalID: 5687839376409331943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_43
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1313
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f98ace5bc99da9d0800000000000000
+      internalID: -2761381897760503304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_44
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1368
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec56df052686077b0800000000000000
+      internalID: -5228564395902278194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_45
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1044
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae31817edbed75a20800000000000000
+      internalID: 3051152179774100458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_46
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1164
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4a623beeac384ee0800000000000000
+      internalID: -1276703772391609777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_47
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 1188
+        width: 35
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 180219c9d7096d1e0800000000000000
+      internalID: -2173390900987617151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_48
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1195
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa9c99d28addc7990800000000000000
+      internalID: -7386785574405158486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_49
+      rect:
+        serializedVersion: 2
+        x: 2207
+        y: 1106
+        width: 52
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf6a5bd729737f4c0800000000000000
+      internalID: -4253870220714334468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_50
+      rect:
+        serializedVersion: 2
+        x: 2249
+        y: 1144
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 770bc327341df9b20800000000000000
+      internalID: 3143461152537489527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_51
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 797
+        width: 42
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8645be20afa5f5f0800000000000000
+      internalID: -723479062609836401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_52
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 826
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c404323d132f6830800000000000000
+      internalID: 4066507596842140869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_53
+      rect:
+        serializedVersion: 2
+        x: 2016
+        y: 640
+        width: 283
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0700a30416d251f0800000000000000
+      internalID: -1057547581030136052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_54
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 712
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a10a25e7369ba0b0800000000000000
+      internalID: -5716310135204609630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_55
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 765
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 778e06b21ffe038b0800000000000000
+      internalID: -5174372152754771849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_56
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 767
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 673d6a65fb2d86f90800000000000000
+      internalID: -6960081504866741386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_57
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 443
+        width: 248
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e0ea03ff439bb5d0800000000000000
+      internalID: -3045678751396732703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_58
+      rect:
+        serializedVersion: 2
+        x: 1886
+        y: 346
+        width: 437
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ae0bf391969a87c0800000000000000
+      internalID: -4068273761378693465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_59
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 594
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86115215b9647a720800000000000000
+      internalID: 2857330121485128040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_60
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 164
+        width: 72
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ad9d8f0c010c6aa0800000000000000
+      internalID: -6166552638464877150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_61
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 225
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99555c93a02a74fa0800000000000000
+      internalID: -5816502228923099751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_62
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 111
+        width: 255
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7623075045324610800000000000000
+      internalID: 1603902967751321215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_63
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 166
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04c24b1b41d9e1e70800000000000000
+      internalID: 9087873810286521408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_64
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca4d3671caa7ecf40800000000000000
+      internalID: 5750668653744084140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_65
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b13f3100976a17830800000000000000
+      internalID: 4067214977114829595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_66
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de11b80d4f96ac2d0800000000000000
+      internalID: -3257674880257420819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_67
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01110fd35d16b4d10800000000000000
+      internalID: 2110888418848280848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_68
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23322c5a624bb1620800000000000000
+      internalID: 2745986475895169842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_69
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 109507662e6c3d320800000000000000
+      internalID: 2581625687096973569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_70
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79ed51158547aa880800000000000000
+      internalID: -8598932615844209001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_71
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c896c0b63ad22e80800000000000000
+      internalID: -8204755642686727995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-campfire-color-png-illustration-png-image_14612446_72
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 0
+        width: 90
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd5e6bd0bf50f9170800000000000000
+      internalID: 8187269223407871452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pngtree-campfire-color-png-illustration-png-image_14612446_0: -8579265910635374063
+      pngtree-campfire-color-png-illustration-png-image_14612446_1: 1386166304929560924
+      pngtree-campfire-color-png-illustration-png-image_14612446_10: 146789777184573462
+      pngtree-campfire-color-png-illustration-png-image_14612446_11: -5723651883114395631
+      pngtree-campfire-color-png-illustration-png-image_14612446_12: -794298224027165754
+      pngtree-campfire-color-png-illustration-png-image_14612446_13: 9015983700756375159
+      pngtree-campfire-color-png-illustration-png-image_14612446_14: 490538231571512530
+      pngtree-campfire-color-png-illustration-png-image_14612446_15: 442534891943079357
+      pngtree-campfire-color-png-illustration-png-image_14612446_16: 8363152647825761243
+      pngtree-campfire-color-png-illustration-png-image_14612446_17: -7576498124941742796
+      pngtree-campfire-color-png-illustration-png-image_14612446_18: -229097503675744425
+      pngtree-campfire-color-png-illustration-png-image_14612446_19: -4804994811620856151
+      pngtree-campfire-color-png-illustration-png-image_14612446_2: -9074657511453571811
+      pngtree-campfire-color-png-illustration-png-image_14612446_20: -3042503414620643674
+      pngtree-campfire-color-png-illustration-png-image_14612446_21: 7445773405462449450
+      pngtree-campfire-color-png-illustration-png-image_14612446_22: 2805977679746135380
+      pngtree-campfire-color-png-illustration-png-image_14612446_23: 2566564189308963701
+      pngtree-campfire-color-png-illustration-png-image_14612446_24: -4730440495760845592
+      pngtree-campfire-color-png-illustration-png-image_14612446_25: 6316098620798871009
+      pngtree-campfire-color-png-illustration-png-image_14612446_26: -8183708514280750917
+      pngtree-campfire-color-png-illustration-png-image_14612446_27: -1008935511431931063
+      pngtree-campfire-color-png-illustration-png-image_14612446_28: -6965635203867283114
+      pngtree-campfire-color-png-illustration-png-image_14612446_29: -4864191421036776594
+      pngtree-campfire-color-png-illustration-png-image_14612446_3: 5868889723721948910
+      pngtree-campfire-color-png-illustration-png-image_14612446_30: -1329484918451022134
+      pngtree-campfire-color-png-illustration-png-image_14612446_31: -4725224985647252294
+      pngtree-campfire-color-png-illustration-png-image_14612446_32: -2097356970034977691
+      pngtree-campfire-color-png-illustration-png-image_14612446_33: 6910755801508525195
+      pngtree-campfire-color-png-illustration-png-image_14612446_34: 570842610658522501
+      pngtree-campfire-color-png-illustration-png-image_14612446_35: 5936042439562268299
+      pngtree-campfire-color-png-illustration-png-image_14612446_36: 6962117439538744112
+      pngtree-campfire-color-png-illustration-png-image_14612446_37: 5605804166653602832
+      pngtree-campfire-color-png-illustration-png-image_14612446_38: -5458761225008590879
+      pngtree-campfire-color-png-illustration-png-image_14612446_39: -4737020438406915892
+      pngtree-campfire-color-png-illustration-png-image_14612446_4: 3457071493934961654
+      pngtree-campfire-color-png-illustration-png-image_14612446_40: 7081788591950760330
+      pngtree-campfire-color-png-illustration-png-image_14612446_41: 3621602217445680859
+      pngtree-campfire-color-png-illustration-png-image_14612446_42: 5687839376409331943
+      pngtree-campfire-color-png-illustration-png-image_14612446_43: -2761381897760503304
+      pngtree-campfire-color-png-illustration-png-image_14612446_44: -5228564395902278194
+      pngtree-campfire-color-png-illustration-png-image_14612446_45: 3051152179774100458
+      pngtree-campfire-color-png-illustration-png-image_14612446_46: -1276703772391609777
+      pngtree-campfire-color-png-illustration-png-image_14612446_47: -2173390900987617151
+      pngtree-campfire-color-png-illustration-png-image_14612446_48: -7386785574405158486
+      pngtree-campfire-color-png-illustration-png-image_14612446_49: -4253870220714334468
+      pngtree-campfire-color-png-illustration-png-image_14612446_5: -4702428072469229178
+      pngtree-campfire-color-png-illustration-png-image_14612446_50: 3143461152537489527
+      pngtree-campfire-color-png-illustration-png-image_14612446_51: -723479062609836401
+      pngtree-campfire-color-png-illustration-png-image_14612446_52: 4066507596842140869
+      pngtree-campfire-color-png-illustration-png-image_14612446_53: -1057547581030136052
+      pngtree-campfire-color-png-illustration-png-image_14612446_54: -5716310135204609630
+      pngtree-campfire-color-png-illustration-png-image_14612446_55: -5174372152754771849
+      pngtree-campfire-color-png-illustration-png-image_14612446_56: -6960081504866741386
+      pngtree-campfire-color-png-illustration-png-image_14612446_57: -3045678751396732703
+      pngtree-campfire-color-png-illustration-png-image_14612446_58: -4068273761378693465
+      pngtree-campfire-color-png-illustration-png-image_14612446_59: 2857330121485128040
+      pngtree-campfire-color-png-illustration-png-image_14612446_6: -1018772152483410022
+      pngtree-campfire-color-png-illustration-png-image_14612446_60: -6166552638464877150
+      pngtree-campfire-color-png-illustration-png-image_14612446_61: -5816502228923099751
+      pngtree-campfire-color-png-illustration-png-image_14612446_62: 1603902967751321215
+      pngtree-campfire-color-png-illustration-png-image_14612446_63: 9087873810286521408
+      pngtree-campfire-color-png-illustration-png-image_14612446_64: 5750668653744084140
+      pngtree-campfire-color-png-illustration-png-image_14612446_65: 4067214977114829595
+      pngtree-campfire-color-png-illustration-png-image_14612446_66: -3257674880257420819
+      pngtree-campfire-color-png-illustration-png-image_14612446_67: 2110888418848280848
+      pngtree-campfire-color-png-illustration-png-image_14612446_68: 2745986475895169842
+      pngtree-campfire-color-png-illustration-png-image_14612446_69: 2581625687096973569
+      pngtree-campfire-color-png-illustration-png-image_14612446_7: -298486200803234976
+      pngtree-campfire-color-png-illustration-png-image_14612446_70: -8598932615844209001
+      pngtree-campfire-color-png-illustration-png-image_14612446_71: -8204755642686727995
+      pngtree-campfire-color-png-illustration-png-image_14612446_72: 8187269223407871452
+      pngtree-campfire-color-png-illustration-png-image_14612446_8: -2193357473976734817
+      pngtree-campfire-color-png-illustration-png-image_14612446_9: 788954538017348889
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

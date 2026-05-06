@@ -16,10 +16,10 @@ public class AudioManager : Singleton<AudioManager>
     }
     public void PlayMusic()
     {
-        if (musicStarted) return;
-        var instance = RuntimeManager.CreateInstance(startMusicEvent);
-        instance.start();
-        musicStarted = true;
+        //if (musicStarted) return;
+        //var instance = RuntimeManager.CreateInstance(startMusicEvent);
+        //instance.start();
+        //musicStarted = true;
     }
 
     public static void ChangeMasterVolume(float volume)
