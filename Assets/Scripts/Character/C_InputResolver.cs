@@ -2,11 +2,21 @@ using UnityEngine;
 
 public class C_InputResolver : MonoBehaviour
 {
-    public void ResolveInput(C_InputController ic, C_Actions a, Character c, Rigidbody2D rb, MovementData m, C_MovementParameters p)
+    public void ResolveInput(
+        C_InputController ic,
+        C_Actions a,
+        Character c,
+        Rigidbody2D rb,
+        MovementData m,
+        C_MovementParameters p,
+        C_LifeCycle lc,
+        CustomInventory i
+        )
     {
         if (ic.rope.IsPressed()) a.RopeLoad();
         if (ic.rope.WasReleasedThisFrame()) a.RopeRelease();
-        if (ic.restart.WasPressedThisFrame()) a.Restart();
+        if (ic.restart.WasPressedThisFrame()) a.Restart(lc, ic, c);
+        if (ic.inventory.WasPressedThisFrame()) a.OpenCloseInventory(i);
         if (
             c.MovementContext == C_MovementContext.Falling || 
             c.MovementContext == C_MovementContext.Jumping ||

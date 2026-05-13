@@ -13,6 +13,7 @@ public class C_InputController : MonoBehaviour
     public InputAction m_sprint;
     public InputAction rope;
     public InputAction restart;
+    public InputAction inventory;
 
     private void Reset()
     {
@@ -44,6 +45,7 @@ public class C_InputController : MonoBehaviour
         m_sprint = _inputActions.FindActionMap("Character").FindAction("Sprint");
         rope = _inputActions.FindActionMap("Character").FindAction("Rope");
         restart = _inputActions.FindActionMap("Character").FindAction("Restart");
+        inventory = _inputActions.FindActionMap("Character").FindAction("Inventory");
     }
 
     private InputActionAsset GetInputActionAsset()

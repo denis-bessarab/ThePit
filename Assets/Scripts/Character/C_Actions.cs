@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class C_Actions : MonoBehaviour
 {
+    [Header("Parameters")]
     [SerializeField] private float ropePower;
     
     public Coroutine ropeLoadCoroutine;
@@ -38,18 +39,16 @@ public class C_Actions : MonoBehaviour
         var ropeBall = Instantiate(Resources.Load("Prefabs/Rope/RopeBall") as GameObject);
         ropeBall.transform.position = transform.position;
         var rb = ropeBall.GetComponent<Rigidbody2D>();
-        var force = dir * 10 * ropePower;
+        var force = 10 * ropePower * dir;
         rb.AddForceAtPosition(force, ropeBall.transform.position, ForceMode2D.Impulse);
     }
 
-    public void Restart()
+    public void Restart(C_LifeCycle lc, C_InputController ic, Character c)
     {
-        var startPosition = GetComponent<C_LifeCycle>().resurrectionPosition;
+        var startPosition = lc.resurrectionPosition;
         transform.position = startPosition;
-        var ic = GetComponent<C_InputController>();
         ic.enabled = false;
         ic.enabled = true;
-        var c = GetComponent<Character>();
         c.MovementContext = C_MovementContext.Idling;
         c.rope = null;
     }
@@ -58,5 +57,11 @@ public class C_Actions : MonoBehaviour
     {
         if(m.left && m.vx > 0) rb.AddForceAtPosition(new Vector2(-p.airPositionAdjustmentPower,0), transform.position, ForceMode2D.Force);
         if(m.right && m.vx < 0) rb.AddForceAtPosition(new Vector2(p.airPositionAdjustmentPower, 0), transform.position, ForceMode2D.Force);
+    }
+
+    public void OpenCloseInventory(CustomInventory i)
+    {
+        if(i.IsInventoryOpen) i.CloseInventory();
+        else i.OpenInventory();
     }
 }

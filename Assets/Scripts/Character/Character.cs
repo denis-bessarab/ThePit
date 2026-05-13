@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
     [SerializeField] public C_UIController uiController;
     [SerializeField] public C_StaminaManager staminaManager;
     [SerializeField] public C_CharacterDataController dataController;
+    [SerializeField] public CustomInventory inventory;
 
     [Header("Contexts")]
     [SerializeField] private C_MovementContext movementContext;
@@ -69,6 +70,7 @@ public class Character : MonoBehaviour
         uiController = GetComponent<C_UIController>();
         staminaManager = GetComponent<C_StaminaManager>();
         dataController = GetComponent<C_CharacterDataController>();
+        inventory = transform.GetChild(1).GetComponent<CustomInventory>();
 
         AssignReferences();
     }
@@ -99,7 +101,7 @@ public class Character : MonoBehaviour
             staminaManager
             );
 
-        inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData, movementParameters);
+        inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData, movementParameters,lifeCycle, inventory);
         velocityLimiter.LimitVelocity(_rigidbody, movementParameters, MovementContext);
     }
 

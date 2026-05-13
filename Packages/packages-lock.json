@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "765bc06f57f40a2b263a9c76b31bca2206c02b18"
     },
+    "com.pillargamesstudio.prototypeinventory": {
+      "version": "https://github.com/denis-bessarab/PGS-PrototypeInventory.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b35f3317f10534a3a5c5af4af6ef000711dbbec5"
+    },
     "com.pillargamesstudio.prototypemenu": {
       "version": "https://github.com/denis-bessarab/PGS-PrototypeMenu.git",
       "depth": 0,
