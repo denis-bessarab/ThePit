@@ -10,6 +10,8 @@ public static class C_Utility
 
     public static Vector3 GetMousePosition()
     {
+        if (Camera.main == null) return Vector3.zero;
+
         var mousePosX = Mouse.current.position.x.ReadValue();
         var mousePosY = Mouse.current.position.y.ReadValue();
         var mouseScreenPos = new Vector3 (mousePosX, mousePosY, 0);

@@ -8,9 +8,9 @@ public class ClickableObjectsManager :Singleton<ClickableObjectsManager>
         var mousePos = C_Utility.GetMousePosition();
 
         var rc = Physics2D.Raycast(mousePos, Vector2.zero, LayerMask.NameToLayer("Character"));
-        if (rc && Mouse.current.leftButton.wasPressedThisFrame && rc.collider.name == "CharacterOption")
+        if (rc && Mouse.current.leftButton.wasPressedThisFrame && rc.collider.name == "RosterCharacter")
         {
-            rc.collider.gameObject.GetComponent<CharacterOption>().OnClick();
+            rc.collider.gameObject.GetComponent<RosterCharacter>().OnClick();
         }
     }
 }

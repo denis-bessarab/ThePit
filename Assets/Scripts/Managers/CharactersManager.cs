@@ -1,79 +1,158 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class CharactersManager : Singleton<CharactersManager>
 {
-    [SerializeField] private int charactersAmount;
-    private bool isOptionsGenerated;
-    public static List<CharacterOptionData> characterOptionsData = new();
-    public static List<GameObject> characterOptionsGameObjects = new();
-    public static CharacterOptionData activeCharacterData;
-    public static Character activeCharacter;
+    [SerializeField] public int charactersAmount;
+    [SerializeField] private Vector3 instantiatePosition;
+    [SerializeField] public List<CharacterData> charactersData;
+    [SerializeField] private Character character;
+    [SerializeField] private List<C_MovementParametersHolder> movementParametersPresets;
+    [SerializeField] private List<C_Appearance> appearancePresets;
+    [SerializeField] public CharacterData activeCharacter;
+
+    [Header("Operational Flags")]
+    [SerializeField] public bool areMovementPresetsLoaded;
+    [SerializeField] public bool areApperancePresetsLoaded;
+    [SerializeField] public bool areCharactersGenerated;
+    [SerializeField] public bool isDataReady;
+
 
     private void Start()
     {
-        GenerateCharacterOptions();
-        SpawnCharacterOptionsGameObjects();
-        StartCoroutine(GetActiveCharacter());
+        movementParametersPresets = LoadParametersPresets();
+        appearancePresets = LoadAppearancePresets();
+        GenerateCharacters();
+        InstantiateCharacter();
     }
-    private void GenerateCharacterOptions()
+
+    public void InstantiateCharacter()
     {
-        if (isOptionsGenerated) return;
+        if (character != null) return;
+
+        var op = SceneManager.LoadSceneAsync("CharacterScene", LoadSceneMode.Additive);
+        op.completed += AfterInstantiateSetup;
+        op.completed += _ => SetCharacterPosition(instantiatePosition);
+        op.completed += _ => AssignCharactersData();
+        op.completed += _ => isDataReady = true;
+    }
+
+    private void AssignCharactersData(int index = 0)
+    {
+        if(activeCharacter.id != 0)
+        {
+            character.dataController.CharacterData = activeCharacter;
+        }
+        else
+        {
+            character.dataController.CharacterData = charactersData[index];
+            activeCharacter = charactersData[index];
+        }
+    }
+
+    private void AssignCharactersData(CharacterData cd)
+    {
+        character.dataController.CharacterData = cd;
+        activeCharacter = cd;
+    }
+
+    private void GenerateCharacters()
+    {
+        if (areCharactersGenerated) return;
+
         for (int i = 0; i < charactersAmount; i++)
         {
-            var characterOptionData = new CharacterOptionData(GenerateSpriteColor(), new Vector3(i - 4 + 0.5f * i, 0, 0));
-            characterOptionsData.Add(characterOptionData);
+            var appearance = ChooseApperancePreset();
+            var movementParameters = ChooseMovementParametersPreset();
+
+            var newCharactersData = new CharacterData(i + 1, $"Character-{i + 1}", appearance, movementParameters);
+            charactersData.Add(newCharactersData);
         }
-        isOptionsGenerated = true;
+
+        areCharactersGenerated = true;
     }
 
-    public void SpawnCharacterOptionsGameObjects()
+    private C_Appearance ChooseApperancePreset()
     {
+        return appearancePresets[Random.Range(0,appearancePresets.Count)];
+    }
 
-        for (int i = 0; i < characterOptionsData.Count; i++)
+    private C_MovementParametersHolder ChooseMovementParametersPreset()
+    {
+        return movementParametersPresets[Random.Range(0, movementParametersPresets.Count)];
+    }
+
+    public void ChangeCharacter(CharacterData cd)
+    {
+        activeCharacter = cd;
+        AssignCharactersData(cd);
+        FindAndUpdateRoster();
+    }
+
+    private void SetCharacterPosition(Vector3 pos)
+    {
+        if (character == null) return;
+        character.gameObject.transform.position = pos;
+    }
+
+    private List<C_MovementParametersHolder> LoadParametersPresets()
+    {
+        if (areMovementPresetsLoaded) return movementParametersPresets;
+        var presets = Resources.LoadAll<C_MovementParametersHolder>("Parameters/C_MovementParametersPresets");
+        areMovementPresetsLoaded = true;
+        return presets.ToList();
+    }
+
+    private List<C_Appearance> LoadAppearancePresets()
+    {
+        if (areApperancePresetsLoaded) return appearancePresets;
+        var presets = Resources.LoadAll<C_Appearance>("Appearances/AppearancePresets");
+        areApperancePresetsLoaded = true;
+        return presets.ToList();
+    }
+
+    private void AfterInstantiateSetup(AsyncOperation op)
+    {
+        var character = GameObject.Find("Character");
+        var c = character.GetComponent<Character>();
+        this.character = c;
+    }
+
+    private void FindAndUpdateRoster()
+    {
+        var roster = GameObject.Find("Roster");
+        if(roster == null) return;
+        var r = roster.GetComponent<Roster>();
+        r.UpdateRoster();
+    }
+
+    public void GetCommandWhenSceneChanges(string sceneName)
+    {
+        //Debug.Log($"I see that change to {sceneName}");
+
+        switch(sceneName)
         {
-            var go = Instantiate(Resources.Load("Prefabs/CharacterOption") as GameObject);
-            go.GetComponent<SpriteRenderer>().color = characterOptionsData[i].color;
-            go.transform.position = characterOptionsData[i].position;
-            characterOptionsGameObjects.Clear();
-            characterOptionsGameObjects.Add(go);
-            go.name = "CharacterOption";
+            case "Dungeon":
+                ResolveDungeonChange();
+                break;
+            case "Home":
+                ResolveHomeChange();
+                break;
         }
     }
 
-    public static void SwitchCharacter(CharacterOption co)
+    private void ResolveDungeonChange()
     {
-        var newCharacterSR = co.GetComponent<SpriteRenderer>();
-        var activeCharacterSR = activeCharacter.GetComponent<SpriteRenderer>();
-
-        var activeCharacterColor = activeCharacterSR.color;
-        var newCharacterColor = newCharacterSR.color;
-
-        newCharacterSR.color = activeCharacterColor;
-        activeCharacterSR.color = newCharacterColor;
+        character = null;
+        InstantiateCharacter();
     }
 
-    private Color32 GenerateSpriteColor()
+    private void ResolveHomeChange()
     {
-        return new Color32(
-            (byte)Random.Range(0, 255),
-            (byte)Random.Range(0, 255),
-            (byte)Random.Range(0, 255),
-            (byte)255f);
-    }
-
-    private IEnumerator GetActiveCharacter()
-    {
-        GameObject go = null;
-        while(go == null)
-        {
-            go = GameObject.Find("Character");
-            yield return null;
-        }
-
-        CharacterOptionData data = new CharacterOptionData(go.GetComponent<SpriteRenderer>().color, transform.position);
-        activeCharacterData = data;
-        activeCharacter = go.GetComponent<Character>();
+        character = null;
+        InstantiateCharacter();
     }
 }

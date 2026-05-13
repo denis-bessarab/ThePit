@@ -12,11 +12,13 @@ using UnityEngine;
 [RequireComponent(typeof(C_Collector))]
 [RequireComponent(typeof(C_UIController))]
 [RequireComponent(typeof(C_StaminaManager))]
+[RequireComponent(typeof(C_CharacterDataController))]
 public class Character : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] public Rigidbody2D _rigidbody;
     [SerializeField] public CapsuleCollider2D _collider;
+    [SerializeField] public SpriteRenderer _spriteRenderer;
     [SerializeField] public C_InputController inputController;
     [SerializeField] public C_MovementParameters movementParameters;
     [SerializeField] public C_MovementDataCollector movementDataCollector;
@@ -30,6 +32,7 @@ public class Character : MonoBehaviour
     [SerializeField] public C_Collector collector;
     [SerializeField] public C_UIController uiController;
     [SerializeField] public C_StaminaManager staminaManager;
+    [SerializeField] public C_CharacterDataController dataController;
 
     [Header("Contexts")]
     [SerializeField] private C_MovementContext movementContext;
@@ -43,19 +46,15 @@ public class Character : MonoBehaviour
         set
         {
             if (movementContext == value) return;
-            Debug.Log($"Switching context from {movementContext} to {value}");
+            //Debug.Log($"Switching context from {movementContext} to {value}");
             movementContext = value;
         }
-    }
-
-    private void Awake()
-    {
-        CharactersManager.activeCharacter = this;
     }
     private void Reset()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         inputController = GetComponent<C_InputController>();
         movementParameters = GetComponent<C_MovementParameters>();
         movementDataCollector = GetComponent<C_MovementDataCollector>();
@@ -69,6 +68,7 @@ public class Character : MonoBehaviour
         collector = GetComponent<C_Collector>();
         uiController = GetComponent<C_UIController>();
         staminaManager = GetComponent<C_StaminaManager>();
+        dataController = GetComponent<C_CharacterDataController>();
 
         AssignReferences();
     }
@@ -106,5 +106,7 @@ public class Character : MonoBehaviour
     private void AssignReferences()
     {
         staminaManager.movementParameters = movementParameters;
+        dataController.movementParameters = movementParameters;
+        dataController.spriteRenderer = _spriteRenderer;
     }
 }

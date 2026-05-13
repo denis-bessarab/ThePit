@@ -8,7 +8,7 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private static Bus masterBus;
     [SerializeField] private bool musicStarted;
     [Range(0,1)]
-    [SerializeField] public static float masterVolume = 1;
+    [SerializeField] public float masterVolume = 1;
     private void Start()
     {
         masterBus = RuntimeManager.GetBus("bus:/");
@@ -22,7 +22,7 @@ public class AudioManager : Singleton<AudioManager>
         //musicStarted = true;
     }
 
-    public static void ChangeMasterVolume(float volume)
+    public void ChangeMasterVolume(float volume)
     {
         masterVolume = volume;
         masterBus.setVolume(volume);

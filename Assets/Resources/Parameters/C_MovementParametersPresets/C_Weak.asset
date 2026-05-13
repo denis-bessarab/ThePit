@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5ec269c3d3bec408b5c2fecb74b53c, type: 3}
+  m_Name: C_Weak
+  m_EditorClassIdentifier: Assembly-CSharp::C_MovementParametersHolder
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  characterMaterial: {fileID: 6200000, guid: 7b332b9918b833e42987993ce778f1d9, type: 2}
+  verticalRaycastDistance: 1.1
+  horizontalRaycastDistance: 0.56
+  jumpPower: 5
+  wallJumpPowerForwardX: 7
+  wallJumpPowerForwardY: 7
+  wallJumpPowerBackwardX: 4
+  wallJumpPowerBackwardY: 3
+  slidingPower: 6
+  slidingTime: 0.5
+  runningSpeed: 5
+  sprintingSpeed: 7
+  hangingOnWallTime: 0.9
+  runningWallSpeed: 4.5
+  runningWallTime: 0.7
+  climbingUpSpeed: 5
+  fallDynamicGravity: 10
+  jumpDynamicGravity: 6
+  fallingVelocityMax: 12
+  horizontalVelocityMax: 12
+  additionalJumpPower: 0.5
+  jumpPowerAddTimesLimit: 1
+  airPositionAdjustmentPower: 2
+  horizontalJumpPower: 1.5
+  maxStamina: 90
+  jumpStaminaCost: 15
+  staminaRegenerationSpeed: 20
+  sprintingStaminaCost: 5
+  wallRunningStaminaCost: 10
+  wallJumpSoftStaminaCost: 15
+  wallJumpHardStaminaCost: 20
+  staticStaminaCost: 5
+  climbingStaminaCost: 10
+  everySpentStaminaDecreace: 10
+  staminaMin: 30

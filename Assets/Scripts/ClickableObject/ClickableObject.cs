@@ -1,10 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ClickableObject : MonoBehaviour, IOnClick
+public abstract class ClickableObject : MonoBehaviour, IOnClick
 {
-    public virtual void OnClick()
-    {
-
-    }
+    public abstract void OnClick();
 }

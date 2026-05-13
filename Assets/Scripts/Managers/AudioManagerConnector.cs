@@ -11,15 +11,17 @@ public class AudioManagerConnector : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if(AudioManager.masterVolume != slider.value)
+        if (AudioManager.Instance == null) return;
+
+        if(AudioManager.Instance.masterVolume != slider.value)
         {
-            slider.value = AudioManager.masterVolume;
+            slider.value = AudioManager.Instance.masterVolume;
         }
     }
 
     public void ChangeMasterValue(float value)
     {
-        AudioManager.ChangeMasterVolume(value);
+        AudioManager.Instance.ChangeMasterVolume(value);
     }
 
     public void ExitGame()

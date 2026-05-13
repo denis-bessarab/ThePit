@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] public static PGS_PrototypePauseMenu pauseMenu;
+    [SerializeField] public GameState gameState = GameState.Home;
     private Coroutine findPauseMenuCorotine;
 
     private void Start()

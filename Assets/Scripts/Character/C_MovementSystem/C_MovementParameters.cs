@@ -51,7 +51,7 @@ public class C_MovementParameters : MonoBehaviour
         return Resources.Load("Parameters/C_MovementParametersHolder") as C_MovementParametersHolder;
     }
 
-    private void ApplyParameters(C_MovementParametersHolder p)
+    public void ApplyParameters(C_MovementParametersHolder p)
     {
         groundLayerMask = p.groundLayerMask;
         characterMaterial = p.characterMaterial;
