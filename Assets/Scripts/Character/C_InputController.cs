@@ -11,7 +11,8 @@ public class C_InputController : MonoBehaviour
     public InputAction m_down;
     public InputAction m_up;
     public InputAction m_sprint;
-    public InputAction rope;
+    public InputAction lmbAction;
+    public InputAction rmbAction;
     public InputAction restart;
     public InputAction inventory;
 
@@ -43,7 +44,8 @@ public class C_InputController : MonoBehaviour
         m_down = _inputActions.FindActionMap("Character").FindAction("Down");
         m_up = _inputActions.FindActionMap("Character").FindAction("Up");
         m_sprint = _inputActions.FindActionMap("Character").FindAction("Sprint");
-        rope = _inputActions.FindActionMap("Character").FindAction("Rope");
+        lmbAction = _inputActions.FindActionMap("Character").FindAction("LMBAction");
+        rmbAction = _inputActions.FindActionMap("Character").FindAction("RMBAction");
         restart = _inputActions.FindActionMap("Character").FindAction("Restart");
         inventory = _inputActions.FindActionMap("Character").FindAction("Inventory");
     }

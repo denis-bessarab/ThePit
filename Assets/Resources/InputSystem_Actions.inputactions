@@ -61,9 +61,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Rope",
+                    "name": "LMBAction",
                     "type": "Button",
                     "id": "f8b974e7-9aef-45bf-817c-dfd60d7e5797",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RMBAction",
+                    "type": "Button",
+                    "id": "4e912a48-7cda-49a9-8573-431a8ec8f1d5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -162,7 +171,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rope",
+                    "action": "LMBAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -185,6 +194,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14e50b09-d307-4c76-962a-4332ea559a0b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RMBAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

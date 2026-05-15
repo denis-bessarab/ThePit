@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ComponentBasedScenes/CameraScene.unity
     guid: bd37aac47c1651248a267a6bf53cdc52
   - enabled: 1
-    path: Assets/Scenes/Prototype2/Home.unity
+    path: Assets/Scenes/Prototype2/Shelter.unity
     guid: 2c509d711c3bf4c42bb2960bae14c632
   - enabled: 1
     path: Assets/Scenes/Prototype2/Dungeon.unity

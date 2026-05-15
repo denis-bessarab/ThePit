@@ -59,7 +59,7 @@ public class C_Actions : MonoBehaviour
         if(m.right && m.vx < 0) rb.AddForceAtPosition(new Vector2(p.airPositionAdjustmentPower, 0), transform.position, ForceMode2D.Force);
     }
 
-    public void OpenCloseInventory(CustomInventory i)
+    public void OpenCloseInventory(PGS_Inventory i)
     {
         if(i.IsInventoryOpen) i.CloseInventory();
         else i.OpenInventory();

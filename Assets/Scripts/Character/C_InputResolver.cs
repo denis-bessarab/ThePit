@@ -10,11 +10,16 @@ public class C_InputResolver : MonoBehaviour
         MovementData m,
         C_MovementParameters p,
         C_LifeCycle lc,
-        CustomInventory i
+        PGS_Inventory i,
+        C_UsableItemsController uic
         )
     {
-        if (ic.rope.IsPressed()) a.RopeLoad();
-        if (ic.rope.WasReleasedThisFrame()) a.RopeRelease();
+        if (ic.lmbAction.WasPressedThisFrame()) uic.LMBAction();
+        if (ic.rmbAction.WasPressedThisFrame()) uic.RMBAction();
+        if (ic.lmbAction.IsPressed()) uic.LMBHoldAction();
+        if (ic.rmbAction.IsPressed()) uic.RMBHoldAction();
+        if (ic.lmbAction.WasReleasedThisFrame()) uic.LMBReleaseAction();
+        if (ic.rmbAction.WasReleasedThisFrame()) uic.RMBReleaseAction();
         if (ic.restart.WasPressedThisFrame()) a.Restart(lc, ic, c);
         if (ic.inventory.WasPressedThisFrame()) a.OpenCloseInventory(i);
         if (

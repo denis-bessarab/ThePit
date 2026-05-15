@@ -13,6 +13,7 @@ using UnityEngine;
 [RequireComponent(typeof(C_UIController))]
 [RequireComponent(typeof(C_StaminaManager))]
 [RequireComponent(typeof(C_CharacterDataController))]
+[RequireComponent(typeof(C_UsableItemsController))]
 public class Character : MonoBehaviour
 {
     [Header("Components")]
@@ -33,7 +34,8 @@ public class Character : MonoBehaviour
     [SerializeField] public C_UIController uiController;
     [SerializeField] public C_StaminaManager staminaManager;
     [SerializeField] public C_CharacterDataController dataController;
-    [SerializeField] public CustomInventory inventory;
+    [SerializeField] public PGS_Inventory inventory;
+    [SerializeField] public C_UsableItemsController usableItemsController;
 
     [Header("Contexts")]
     [SerializeField] private C_MovementContext movementContext;
@@ -70,7 +72,8 @@ public class Character : MonoBehaviour
         uiController = GetComponent<C_UIController>();
         staminaManager = GetComponent<C_StaminaManager>();
         dataController = GetComponent<C_CharacterDataController>();
-        inventory = transform.GetChild(1).GetComponent<CustomInventory>();
+        inventory = transform.GetChild(1).GetComponent<PGS_Inventory>();
+        usableItemsController = GetComponent<C_UsableItemsController>();
 
         AssignReferences();
     }
@@ -101,8 +104,24 @@ public class Character : MonoBehaviour
             staminaManager
             );
 
-        inputResolver.ResolveInput(inputController, actions, this, _rigidbody, movementData, movementParameters,lifeCycle, inventory);
-        velocityLimiter.LimitVelocity(_rigidbody, movementParameters, MovementContext);
+        inputResolver.ResolveInput(
+            inputController, 
+            actions, 
+            this, 
+            _rigidbody, 
+            movementData, 
+            movementParameters,
+            lifeCycle, 
+            inventory, 
+            usableItemsController
+            );
+        
+        
+        velocityLimiter.LimitVelocity(
+            _rigidbody, 
+            movementParameters, 
+            MovementContext
+            );
     }
 
     private void AssignReferences()
