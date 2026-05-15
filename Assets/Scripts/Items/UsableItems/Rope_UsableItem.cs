@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public class RopeItem : UsableItem
+public class Rope_UsableItem : UsableItem
 {
     [Header("Parameters")]
     [SerializeField] private float ropePower = 1;
