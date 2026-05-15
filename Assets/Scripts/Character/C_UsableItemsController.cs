@@ -11,7 +11,6 @@ public class C_UsableItemsController : MonoBehaviour
         set
         {
             currentUsableItem = value;
-            if(itemSceneReference)
         }
     }
 
