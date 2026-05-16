@@ -3,7 +3,6 @@ using UnityEngine;
 public class C_UsableItemsController : MonoBehaviour
 {
     [SerializeField] private UsableItem currentUsableItem;
-    [SerializeField] private GameObject itemSceneReference;
 
     public UsableItem CurrentUsableItem
     {

@@ -15,6 +15,12 @@ public class C_InputController : MonoBehaviour
     public InputAction rmbAction;
     public InputAction restart;
     public InputAction inventory;
+    public InputAction qab_1;
+    public InputAction qab_2;
+    public InputAction qab_3;
+    public InputAction qab_4;
+    public InputAction qab_5;
+    public InputAction qab_6;
 
     private void Reset()
     {
@@ -48,6 +54,12 @@ public class C_InputController : MonoBehaviour
         rmbAction = _inputActions.FindActionMap("Character").FindAction("RMBAction");
         restart = _inputActions.FindActionMap("Character").FindAction("Restart");
         inventory = _inputActions.FindActionMap("Character").FindAction("Inventory");
+        qab_1 = _inputActions.FindActionMap("Character").FindAction("QAB-1");
+        qab_2 = _inputActions.FindActionMap("Character").FindAction("QAB-2");
+        qab_3 = _inputActions.FindActionMap("Character").FindAction("QAB-3");
+        qab_4 = _inputActions.FindActionMap("Character").FindAction("QAB-4");
+        qab_5 = _inputActions.FindActionMap("Character").FindAction("QAB-5");
+        qab_6 = _inputActions.FindActionMap("Character").FindAction("QAB-6");
     }
 
     private InputActionAsset GetInputActionAsset()

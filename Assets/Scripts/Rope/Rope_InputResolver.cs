@@ -9,7 +9,7 @@ public class Rope_InputResolver : MonoBehaviour
         if (ic.swingLeft.WasPressedThisFrame()) a.SwingLeft(p, d);
         if (ic.swingRight.WasPressedThisFrame()) a.SwingRight(p, d);
         if (ic.jump.WasPressedThisFrame()) a.Jump(r);
-        if (ic.rope.IsPressed()) ca.RopeLoad();
-        if (ic.rope.WasReleasedThisFrame()) ca.RopeRelease();
+        //if (ic.rope.IsPressed()) ca.RopeLoad();
+        //if (ic.rope.WasReleasedThisFrame()) ca.RopeRelease();
     }
 }

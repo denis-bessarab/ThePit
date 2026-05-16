@@ -13,7 +13,6 @@ using UnityEngine;
 [RequireComponent(typeof(C_UIController))]
 [RequireComponent(typeof(C_StaminaManager))]
 [RequireComponent(typeof(C_CharacterDataController))]
-[RequireComponent(typeof(C_UsableItemsController))]
 public class Character : MonoBehaviour
 {
     [Header("Components")]
@@ -35,7 +34,7 @@ public class Character : MonoBehaviour
     [SerializeField] public C_StaminaManager staminaManager;
     [SerializeField] public C_CharacterDataController dataController;
     [SerializeField] public PGS_Inventory inventory;
-    [SerializeField] public C_UsableItemsController usableItemsController;
+    [SerializeField] public QuickAccessBar quickAccessBar;
 
     [Header("Contexts")]
     [SerializeField] private C_MovementContext movementContext;
@@ -73,7 +72,7 @@ public class Character : MonoBehaviour
         staminaManager = GetComponent<C_StaminaManager>();
         dataController = GetComponent<C_CharacterDataController>();
         inventory = transform.GetChild(1).GetComponent<PGS_Inventory>();
-        usableItemsController = GetComponent<C_UsableItemsController>();
+        quickAccessBar = transform.GetChild(2).GetComponent<QuickAccessBar>();
 
         AssignReferences();
     }
@@ -113,7 +112,7 @@ public class Character : MonoBehaviour
             movementParameters,
             lifeCycle, 
             inventory, 
-            usableItemsController
+            quickAccessBar
             );
         
         
