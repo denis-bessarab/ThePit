@@ -2,10 +2,16 @@ using System.Collections;
 using UnityEngine;
 public class Rope_UsableItem : UsableItem
 {
+    [Header("Components")]
+    [SerializeField] private Character character;
     [Header("Parameters")]
     [SerializeField] private float ropePower = 1;
     public Coroutine ropeLoadCoroutine;
 
+    private void Start()
+    {
+        character = FindCharacter();
+    }
     public override void LMBHoldAction()
     {
         ropeLoadCoroutine ??= StartCoroutine(RopeLoadCoroutine());
@@ -31,13 +37,19 @@ public class Rope_UsableItem : UsableItem
             if (ropePower < 1.5) return;
         }
 
-        var mousePos = C_Utility.GetMousePosition();
-        var dir = C_Utility.GetDirectionToPointer(transform.position, mousePos);
-
         var ropeBall = Instantiate(Resources.Load("Prefabs/Rope/RopeBall") as GameObject);
-        ropeBall.transform.position = transform.position;
+        ropeBall.transform.position = character.transform.position;
+
+        var mousePos = C_Utility.GetMouseWorldPosition();
+        var dir = C_Utility.GetDirectionToPointer(ropeBall.transform.position, mousePos);
+
         var rb = ropeBall.GetComponent<Rigidbody2D>();
         var force = 10 * ropePower * dir;
         rb.AddForceAtPosition(force, ropeBall.transform.position, ForceMode2D.Impulse);
+    }
+
+    private Character FindCharacter()
+    {
+        return FindAnyObjectByType<Character>();
     }
 }

@@ -8,7 +8,7 @@ public static class C_Utility
         return (pointerPos - pos).normalized;
     }
 
-    public static Vector3 GetMousePosition()
+    public static Vector3 GetMouseWorldPosition()
     {
         if (Camera.main == null) return Vector3.zero;
 
@@ -18,5 +18,15 @@ public static class C_Utility
         var mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
         mouseWorldPos = new Vector3 (mouseWorldPos.x, mouseWorldPos.y, 0);
         return mouseWorldPos;
+    }
+
+    public static Vector3 GetMouseScreenPosition()
+    {
+        if (Camera.main == null) return Vector3.zero;
+
+        var mousePosX = Mouse.current.position.x.ReadValue();
+        var mousePosY = Mouse.current.position.y.ReadValue();
+        var mouseScreenPos = new Vector3(mousePosX, mousePosY, 0);
+        return mouseScreenPos;
     }
 }

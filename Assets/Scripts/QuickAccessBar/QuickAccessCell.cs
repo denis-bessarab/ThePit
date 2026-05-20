@@ -1,13 +1,17 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class QuickAccessCell : MonoBehaviour
+public class QuickAccessCell : MonoBehaviour, IPointerClickHandler
 {
     [Header("Parameters")]
     [SerializeField] private PGS_InventoryCell cellReference;
     [SerializeField] private Color32 defaultColor;
     [SerializeField] private Color32 activeColor;
+    [SerializeField] private Action<QuickAccessCell> onClickCallback;
+    [SerializeField] private Sprite defaultSprite;
 
     [Header("Components")]
     [SerializeField] public QuickAccessBar quickAccessBar;
@@ -21,7 +25,15 @@ public class QuickAccessCell : MonoBehaviour
         set
         {
             cellReference = value;
-            SyncWithInventoryCell();
+
+            if(cellReference == null)
+            {
+                SetImage(defaultSprite);
+            }
+            else
+            {
+                SyncWithInventoryCell();
+            }
         }
     }
 
@@ -59,7 +71,17 @@ public class QuickAccessCell : MonoBehaviour
 
     public void SyncWithInventoryCell()
     {
-        SetImage(cellReference.Item.inventoryIcon);
-        SetQuantity(cellReference.Quantity);
+        SetImage(CellReference.Item.inventoryIcon);
+        SetQuantity(CellReference.Quantity);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        onClickCallback?.Invoke(this);
+    }
+
+    public void SetClickCallback(Action<QuickAccessCell> callback)
+    {
+        onClickCallback = callback;
     }
 }

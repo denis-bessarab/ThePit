@@ -82,7 +82,13 @@ public class QuickAccessBar : C_UsableItemsController
         var item = cell.CellReference.Item as CustomItem;
         if (item == null) return;
 
+        if (item.usableItemPrefab == null) return;
         usableItemPrefabReference = Instantiate(item.usableItemPrefab);
         CurrentUsableItem = usableItemPrefabReference.GetComponent<UsableItem>();
+    }
+
+    public List<QuickAccessCell> GetQuickAccessBarCells()
+    {
+        return quickAccessCells;
     }
 }
