@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class QuickAccessBar : C_UsableItemsController
     [SerializeField] private GameObject QABCellsContainer;
     [SerializeField] private List<QuickAccessCell> quickAccessCells;
     [SerializeField] private QuickAccessCell activeCell;
+    [SerializeField] public DynamicItemHolder dynamicItemHolder;
     public QuickAccessCell ActiveCell
     {
         get => activeCell;
@@ -30,6 +32,7 @@ public class QuickAccessBar : C_UsableItemsController
     private void Start()
     {
         SetActiveCell(0);
+        StartCoroutine(FindDynamicItemHolder());
     }
 
     private void SetupQAB()
@@ -74,21 +77,27 @@ public class QuickAccessBar : C_UsableItemsController
         var cell = quickAccessCells[index];
         ActiveCell = cell;
 
-        if (cell.CellReference == null) return;
+        if (cell.Item == null) return;
 
         CurrentUsableItem = null;
         Destroy(usableItemPrefabReference);
 
-        var item = cell.CellReference.Item as CustomItem;
-        if (item == null) return;
-
-        if (item.usableItemPrefab == null) return;
-        usableItemPrefabReference = Instantiate(item.usableItemPrefab);
+        if (cell.Item.usableItemPrefab == null) return;
+        usableItemPrefabReference = Instantiate(cell.Item.usableItemPrefab);
         CurrentUsableItem = usableItemPrefabReference.GetComponent<UsableItem>();
     }
 
     public List<QuickAccessCell> GetQuickAccessBarCells()
     {
         return quickAccessCells;
+    }
+
+    private IEnumerator FindDynamicItemHolder()
+    {
+        while (dynamicItemHolder == null)
+        {
+            dynamicItemHolder = FindAnyObjectByType<DynamicItemHolder>();
+            yield return null;
+        }
     }
 }

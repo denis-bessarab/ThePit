@@ -7,33 +7,47 @@ using UnityEngine.UI;
 public class QuickAccessCell : MonoBehaviour, IPointerClickHandler
 {
     [Header("Parameters")]
-    [SerializeField] private PGS_InventoryCell cellReference;
+    //[SerializeField] private PGS_InventoryCell cellReference;
     [SerializeField] private Color32 defaultColor;
     [SerializeField] private Color32 activeColor;
     [SerializeField] private Action<QuickAccessCell> onClickCallback;
     [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private CustomItem item;
+    [SerializeField] private int quantity;
 
     [Header("Components")]
     [SerializeField] public QuickAccessBar quickAccessBar;
     [SerializeField] private Image itemImage;
     [SerializeField] private Image backgroundImage;
-    [SerializeField] private TextMeshProUGUI quantity;
+    [SerializeField] private TextMeshProUGUI quantityText;
 
-    public PGS_InventoryCell CellReference
+    public CustomItem Item
     {
-        get => cellReference;
+        get => item;
         set
         {
-            cellReference = value;
+            item = value;
 
-            if(cellReference == null)
+            if(item == null)
             {
                 SetImage(defaultSprite);
+                Quantity = 0;
             }
             else
             {
-                SyncWithInventoryCell();
+                SetImage(item.inventoryIcon);
+                Quantity = quickAccessBar.dynamicItemHolder.RequestItemAmountInInventory(item);
             }
+        }
+    }
+
+    public int Quantity
+    {
+        get => quantity;
+        set
+        {
+            quantity = value;
+            UpdateQuantityUI(quantity);
         }
     }
 
@@ -56,7 +70,7 @@ public class QuickAccessCell : MonoBehaviour, IPointerClickHandler
     {
         backgroundImage = GetComponent<Image>();
         itemImage = transform.GetChild(0).GetComponent<Image>();
-        quantity = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        quantityText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
     private void SetImage(Sprite sprite)
@@ -64,15 +78,10 @@ public class QuickAccessCell : MonoBehaviour, IPointerClickHandler
         itemImage.sprite = sprite;
     }
 
-    private void SetQuantity(int quantity)
+    private void UpdateQuantityUI(int quantity)
     {
-        this.quantity.text = quantity.ToString();
-    }
-
-    public void SyncWithInventoryCell()
-    {
-        SetImage(CellReference.Item.inventoryIcon);
-        SetQuantity(CellReference.Quantity);
+        if(quantity == 0) quantityText.text = string.Empty;
+        else quantityText.text = quantity.ToString();
     }
 
     public void OnPointerClick(PointerEventData eventData)
