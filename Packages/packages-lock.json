@@ -12,7 +12,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "d2624c59a607517055ec81be7515f650e2b66860"
+      "hash": "9f8095fd7466794f3c768b325e05a74781d3be4e"
     },
     "com.pillargamesstudio.prototypemenu": {
       "version": "https://github.com/denis-bessarab/PGS-PrototypeMenu.git",

@@ -10,11 +10,10 @@ public class CustomInventory : PGS_Inventory
     {
         StartCoroutine(FindDynamicItemHolder());
     }
-    public override Tuple<bool, int> AddItemToInventory(PGS_Item item, int quantity)
+
+    protected override void SendAddItemRaport(AddResult result)
     {
-        var result = base.AddItemToInventory(item, quantity);
-        dynamicItemHolder.ItemAddedToInventoryEvent(item, quantity, result);
-        return result;
+        base.SendAddItemRaport(result);
     }
 
     private IEnumerator FindDynamicItemHolder()
