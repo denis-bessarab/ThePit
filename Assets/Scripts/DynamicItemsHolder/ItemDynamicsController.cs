@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class DynamicItemHolder : MonoBehaviour
+public class ItemDynamicsController : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject imageGameObject;
@@ -349,8 +348,28 @@ public class DynamicItemHolder : MonoBehaviour
         return inventory.SummarizeItemQuantityInAllCells(item);
     }
 
-    public void ItemAddedToInventoryEvent(PGS_Item item, int quantity, Tuple<bool, int> result)
+    public void SyncItemsAmountBetweenQABAndInventoryAfterInventoryChanges(PGS_Inventory.AddResult addResult, PGS_Inventory.RemoveResult removeResult)
     {
-        Debug.Log($"Got informed that in inventory was added {item.itemName} with {result.Item1} result and in rest of {result.Item2} in amount of {quantity}");
+        //Debug.Log($"Item {result.item.itemName} was added to inventory with result {result.result} in amount of {result.added} with rest {result.rest}");
+        var item = addResult.item? addResult.item : removeResult.item;
+        var qabCellsWithItem = GetQABCellWithItem(item);
+
+        for (int i = 0; i < qabCellsWithItem.Count; i++)
+        {
+            quickAccessBarCells[i].Quantity = RequestItemAmountInInventory(item);
+        }
+    }
+
+
+    private List<QuickAccessCell> GetQABCellWithItem(PGS_Item item)
+    {
+        List<QuickAccessCell> qabCellWithThisItem = new();
+
+        for (int i = 0; i < quickAccessBarCells.Count; i++)
+        {
+            if (quickAccessBarCells[i].Item == item) qabCellWithThisItem.Add(quickAccessBarCells[i]);
+        }
+
+        return qabCellWithThisItem;
     }
 }

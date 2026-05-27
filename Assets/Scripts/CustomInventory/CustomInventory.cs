@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class CustomInventory : PGS_Inventory
 {
-    [SerializeField] private DynamicItemHolder dynamicItemHolder;
+    [SerializeField] private ItemDynamicsController itemDynamicsController;
 
     private void Start()
     {
         StartCoroutine(FindDynamicItemHolder());
     }
 
-    protected override void SendAddItemRaport(AddResult result)
+    protected override void SendAddItemReport(AddResult result)
     {
-        base.SendAddItemRaport(result);
+        if (itemDynamicsController == null) return;
+        itemDynamicsController.SyncItemsAmountBetweenQABAndInventoryAfterInventoryChanges(result, default);
+    }
+
+    protected override void SendRemoveItemReport(RemoveResult result)
+    {
+        if (itemDynamicsController == null) return;
+        itemDynamicsController.SyncItemsAmountBetweenQABAndInventoryAfterInventoryChanges(default, result);
     }
 
     private IEnumerator FindDynamicItemHolder()
     {
-        while (dynamicItemHolder == null)
+        while (itemDynamicsController == null)
         {
-            dynamicItemHolder = FindAnyObjectByType<DynamicItemHolder>();
+            itemDynamicsController = FindAnyObjectByType<ItemDynamicsController>();
             yield return null;
         }
     }

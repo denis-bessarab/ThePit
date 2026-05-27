@@ -31,12 +31,16 @@ public class QuickAccessCell : MonoBehaviour, IPointerClickHandler
             if(item == null)
             {
                 SetImage(defaultSprite);
-                Quantity = 0;
             }
             else
             {
                 SetImage(item.inventoryIcon);
-                Quantity = quickAccessBar.dynamicItemHolder.RequestItemAmountInInventory(item);
+                Quantity = quickAccessBar.itemDynamicsController.RequestItemAmountInInventory(item);
+            }
+
+            if(quickAccessBar.ActiveCell == this)
+            {
+                quickAccessBar.SyncActiveCell();
             }
         }
     }
@@ -46,7 +50,18 @@ public class QuickAccessCell : MonoBehaviour, IPointerClickHandler
         get => quantity;
         set
         {
-            quantity = value;
+            if (quantity == value) return;
+
+            if (value <= 0)
+            {
+                quantity = 0;
+                Item = null;
+            }
+            else
+            {
+                quantity = value;
+            }
+
             UpdateQuantityUI(quantity);
         }
     }

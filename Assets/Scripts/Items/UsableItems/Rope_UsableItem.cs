@@ -2,15 +2,18 @@ using System.Collections;
 using UnityEngine;
 public class Rope_UsableItem : UsableItem
 {
-    [Header("Components")]
-    [SerializeField] private Character character;
     [Header("Parameters")]
-    [SerializeField] private float ropePower = 1;
+    [SerializeField] private float minRopePower = 0f;
+    [SerializeField] private float currentRopePower = 0f;
+    [SerializeField] private float maxRopePower = 3f;
+    [SerializeField] private float breakPointPercent = 0.3f;
+    [SerializeField] private float ropeForce = 10f;
     public Coroutine ropeLoadCoroutine;
 
-    private void Start()
+    protected override void Start()
     {
-        character = FindCharacter();
+        base.Start();
+        usableItemUI.SetupUsableItemUI(minRopePower, maxRopePower, true, 0.3f);
     }
     public override void LMBHoldAction()
     {
@@ -19,22 +22,29 @@ public class Rope_UsableItem : UsableItem
 
     private IEnumerator RopeLoadCoroutine()
     {
-        ropePower = 1;
+        usableItemUI.ShowUI();
+        currentRopePower = minRopePower;
 
-        while (ropePower < 3)
+        while (currentRopePower < maxRopePower)
         {
-            ropePower += Time.deltaTime;
+            currentRopePower += Time.deltaTime;
+            usableItemUI.UpdateValue(currentRopePower);
             yield return null;
         }
     }
 
     public override void LMBReleaseAction()
     {
+        usableItemUI.UpdateValue(minRopePower);
+        usableItemUI.HideUI();
+
+        if (character == null) return;
+
         if (ropeLoadCoroutine != null)
         {
             StopCoroutine(ropeLoadCoroutine);
             ropeLoadCoroutine = null;
-            if (ropePower < 1.5) return;
+            if (currentRopePower < maxRopePower * breakPointPercent) return;
         }
 
         var ropeBall = Instantiate(Resources.Load("Prefabs/Rope/RopeBall") as GameObject);
@@ -44,12 +54,14 @@ public class Rope_UsableItem : UsableItem
         var dir = C_Utility.GetDirectionToPointer(ropeBall.transform.position, mousePos);
 
         var rb = ropeBall.GetComponent<Rigidbody2D>();
-        var force = 10 * ropePower * dir;
+        var force = ropeForce * currentRopePower * dir;
         rb.AddForceAtPosition(force, ropeBall.transform.position, ForceMode2D.Impulse);
+
+        RemoveItemFromInventory(1);
     }
 
-    private Character FindCharacter()
+    protected override void RemoveItemFromInventory(int quantity)
     {
-        return FindAnyObjectByType<Character>();
+        inventory.RemoveItemFromInventory(itemReference, quantity);
     }
 }

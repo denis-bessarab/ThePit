@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class QuickAccessBar : C_UsableItemsController
     [SerializeField] private GameObject QABCellsContainer;
     [SerializeField] private List<QuickAccessCell> quickAccessCells;
     [SerializeField] private QuickAccessCell activeCell;
-    [SerializeField] public DynamicItemHolder dynamicItemHolder;
+    [SerializeField] public ItemDynamicsController itemDynamicsController;
     public QuickAccessCell ActiveCell
     {
         get => activeCell;
@@ -21,6 +22,9 @@ public class QuickAccessBar : C_UsableItemsController
             if(activeCell != null) activeCell.DeactivateCell();
             activeCell = value;
             activeCell.ActivateCell();
+            DestroyUsableItemPrefabRef(usableItemPrefabReference);
+            if (activeCell.Item == null) return;
+            InstantiateUsableItemPrefabRef(activeCell.Item.usableItemPrefab);
         }
     }
 
@@ -76,15 +80,21 @@ public class QuickAccessBar : C_UsableItemsController
     {
         var cell = quickAccessCells[index];
         ActiveCell = cell;
+    }
 
-        if (cell.Item == null) return;
-
-        CurrentUsableItem = null;
-        Destroy(usableItemPrefabReference);
-
-        if (cell.Item.usableItemPrefab == null) return;
-        usableItemPrefabReference = Instantiate(cell.Item.usableItemPrefab);
+    private void InstantiateUsableItemPrefabRef(GameObject prefab)
+    {
+        if (prefab == null) return;
+        usableItemPrefabReference = Instantiate(prefab);
         CurrentUsableItem = usableItemPrefabReference.GetComponent<UsableItem>();
+    }
+
+    private void DestroyUsableItemPrefabRef(GameObject prefab)
+    {
+        if (prefab == null) return;
+        Destroy(prefab);
+        usableItemPrefabReference = null;
+        CurrentUsableItem = null;
     }
 
     public List<QuickAccessCell> GetQuickAccessBarCells()
@@ -94,10 +104,15 @@ public class QuickAccessBar : C_UsableItemsController
 
     private IEnumerator FindDynamicItemHolder()
     {
-        while (dynamicItemHolder == null)
+        while (itemDynamicsController == null)
         {
-            dynamicItemHolder = FindAnyObjectByType<DynamicItemHolder>();
+            itemDynamicsController = FindAnyObjectByType<ItemDynamicsController>();
             yield return null;
         }
+    }
+
+    public void SyncActiveCell()
+    {
+        ActiveCell = ActiveCell;
     }
 }
