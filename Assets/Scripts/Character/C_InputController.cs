@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class C_InputController : MonoBehaviour
 {
     [SerializeField] public InputActionAsset _inputActions;
+    [SerializeField] public string activeActionMap;
 
     public InputAction m_left;
     public InputAction m_right;
@@ -39,27 +40,28 @@ public class C_InputController : MonoBehaviour
 
     private void Awake()
     {
-        SetActions();
+        SetActions("Character");
     }
 
-    private void SetActions()
+    public void SetActions(string actionMap)
     {
-        m_left = _inputActions.FindActionMap("Character").FindAction("Left");
-        m_right = _inputActions.FindActionMap("Character").FindAction("Right");
-        m_jump = _inputActions.FindActionMap("Character").FindAction("Jump");
-        m_down = _inputActions.FindActionMap("Character").FindAction("Down");
-        m_up = _inputActions.FindActionMap("Character").FindAction("Up");
-        m_sprint = _inputActions.FindActionMap("Character").FindAction("Sprint");
-        lmbAction = _inputActions.FindActionMap("Character").FindAction("LMBAction");
-        rmbAction = _inputActions.FindActionMap("Character").FindAction("RMBAction");
-        restart = _inputActions.FindActionMap("Character").FindAction("Restart");
-        inventory = _inputActions.FindActionMap("Character").FindAction("Inventory");
-        qab_1 = _inputActions.FindActionMap("Character").FindAction("QAB-1");
-        qab_2 = _inputActions.FindActionMap("Character").FindAction("QAB-2");
-        qab_3 = _inputActions.FindActionMap("Character").FindAction("QAB-3");
-        qab_4 = _inputActions.FindActionMap("Character").FindAction("QAB-4");
-        qab_5 = _inputActions.FindActionMap("Character").FindAction("QAB-5");
-        qab_6 = _inputActions.FindActionMap("Character").FindAction("QAB-6");
+        m_left = _inputActions.FindActionMap(actionMap).FindAction("Left");
+        m_right = _inputActions.FindActionMap(actionMap).FindAction("Right");
+        m_jump = _inputActions.FindActionMap(actionMap).FindAction("Jump");
+        m_down = _inputActions.FindActionMap(actionMap).FindAction("Down");
+        m_up = _inputActions.FindActionMap(actionMap).FindAction("Up");
+        m_sprint = _inputActions.FindActionMap(actionMap).FindAction("Sprint");
+        lmbAction = _inputActions.FindActionMap(actionMap).FindAction("LMBAction");
+        rmbAction = _inputActions.FindActionMap(actionMap).FindAction("RMBAction");
+        restart = _inputActions.FindActionMap(actionMap).FindAction("Restart");
+        inventory = _inputActions.FindActionMap(actionMap).FindAction("Inventory");
+        qab_1 = _inputActions.FindActionMap(actionMap).FindAction("QAB-1");
+        qab_2 = _inputActions.FindActionMap(actionMap).FindAction("QAB-2");
+        qab_3 = _inputActions.FindActionMap(actionMap).FindAction("QAB-3");
+        qab_4 = _inputActions.FindActionMap(actionMap).FindAction("QAB-4");
+        qab_5 = _inputActions.FindActionMap(actionMap).FindAction("QAB-5");
+        qab_6 = _inputActions.FindActionMap(actionMap).FindAction("QAB-6");
+        activeActionMap = actionMap;
     }
 
     private InputActionAsset GetInputActionAsset()

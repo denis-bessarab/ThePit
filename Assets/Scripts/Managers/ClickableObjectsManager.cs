@@ -1,16 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ClickableObjectsManager :Singleton<ClickableObjectsManager>
+public class ClickableObjectsManager : Singleton<ClickableObjectsManager>
 {
     void Update()
     {
         var mousePos = C_Utility.GetMouseWorldPosition();
 
-        var rc = Physics2D.Raycast(mousePos, Vector2.zero, LayerMask.NameToLayer("Character"));
-        if (rc && Mouse.current.leftButton.wasPressedThisFrame && rc.collider.name == "RosterCharacter")
+        var rc = Physics2D.Raycast(mousePos, Vector2.zero);
+
+        if (rc && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            rc.collider.gameObject.GetComponent<RosterCharacter>().OnClick();
+            if(rc.collider.TryGetComponent<ClickableObject>(out var clickable))
+            {
+                clickable.OnClick();
+            }
         }
     }
 }

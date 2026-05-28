@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3925031574030185173}
   - component: {fileID: 1193196925671849299}
   - component: {fileID: -4371498519770067489}
+  - component: {fileID: 6676170574610195637}
   m_Layer: 3
   m_Name: RosterCharacter
   m_TagString: Untagged
@@ -148,3 +149,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.95, y: 2}
   m_Direction: 0
+--- !u!114 &6676170574610195637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558631466625259080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a162a9f0c486347bd8972d733c6835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ActionMapSwitcher
+  actionMap: CharacterMouseOff
+  actionMapReturn: Character
+  isActive: 0

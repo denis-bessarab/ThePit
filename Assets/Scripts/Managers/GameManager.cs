@@ -17,14 +17,14 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            var ia = Resources.Load("InputSystem_Actions") as InputActionAsset;
-            for(int i = 0; i < ia.actionMaps.Count; i++)
-            {
-                Debug.Log($"{ia.actionMaps[i].name} {ia.actionMaps[i].enabled}");
-            }
-        }
+        //if(Input.GetKeyDown(KeyCode.T))
+        //{
+        //    var ia = Resources.Load("InputSystem_Actions") as InputActionAsset;
+        //    for(int i = 0; i < ia.actionMaps.Count; i++)
+        //    {
+        //        Debug.Log($"{ia.actionMaps[i].name} {ia.actionMaps[i].enabled}");
+        //    }
+        //}
     }
 
     public static IEnumerator FindPauseMenu()
