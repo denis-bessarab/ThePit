@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8906154476967501417}
   - component: {fileID: 4943593970016963343}
   - component: {fileID: 6909066073946425333}
+  - component: {fileID: 4740062667846450954}
   - component: {fileID: 835234375033161735}
   - component: {fileID: 3118098239298832258}
   - component: {fileID: 4125975706692358676}
@@ -203,6 +204,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4740062667846450954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820740465858160818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a642a185f5ea2be44a1f41d062c4287a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Test
 --- !u!114 &835234375033161735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5218,6 +5231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ActionMapSwitcherUI
   actionMap: CharacterMouseOff
+  actionMapReturn: 
 --- !u!1001 &6742016110928509287
 PrefabInstance:
   m_ObjectHideFlags: 0
