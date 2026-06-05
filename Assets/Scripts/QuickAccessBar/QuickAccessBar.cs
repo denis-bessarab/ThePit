@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuickAccessBar : C_UsableItemsController
 {
-    [Header("Parameters")]
+    [Header("Resources")]
     [SerializeField] private GameObject usableItemPrefabReference;
 
     [Header("Components")]
@@ -14,6 +14,8 @@ public class QuickAccessBar : C_UsableItemsController
     [SerializeField] private List<QuickAccessCell> quickAccessCells;
     [SerializeField] private QuickAccessCell activeCell;
     [SerializeField] public ItemDynamicsController itemDynamicsController;
+    [SerializeField] public InputManager inputManager;
+
     public QuickAccessCell ActiveCell
     {
         get => activeCell;
@@ -33,10 +35,19 @@ public class QuickAccessBar : C_UsableItemsController
         SetupQAB();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         SetActiveCell(0);
         StartCoroutine(FindDynamicItemHolder());
+        StartCoroutine(FindInputManager(SubscribeToInputManager));
+    }
+    private void OnDisable()
+    {
+        UnsubscribeFromInputManager();
+    }
+    private void OnDestroy()
+    {
+        UnsubscribeFromInputManager();
     }
 
     private void SetupQAB()
@@ -111,8 +122,43 @@ public class QuickAccessBar : C_UsableItemsController
         }
     }
 
+    private IEnumerator FindInputManager(Action callback)
+    {
+        while (inputManager == null)
+        {
+            inputManager = InputManager.Instance;
+            yield return null;
+        }
+
+        callback?.Invoke();
+    }
+
     public void SyncActiveCell()
     {
         ActiveCell = ActiveCell;
+    }
+
+    private void SubscribeToInputManager()
+    {
+        var im = inputManager;
+
+        im.onQab1.Insert(0, SetActiveCell);
+        im.onQab2.Insert(0, SetActiveCell);
+        im.onQab3.Insert(0, SetActiveCell);
+        im.onQab4.Insert(0, SetActiveCell);
+        im.onQab5.Insert(0, SetActiveCell);
+        im.onQab6.Insert(0, SetActiveCell);
+    }
+
+    private void UnsubscribeFromInputManager()
+    {
+        var im = inputManager;
+
+        im.onQab1.Remove(SetActiveCell);
+        im.onQab2.Remove(SetActiveCell);
+        im.onQab3.Remove(SetActiveCell);
+        im.onQab4.Remove(SetActiveCell);
+        im.onQab5.Remove(SetActiveCell);
+        im.onQab6.Remove(SetActiveCell);
     }
 }

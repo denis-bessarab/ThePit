@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class CustomInventory : PGS_Inventory
 {
+    [SerializeField] private InputManager inputManager;
     [SerializeField] private ItemDynamicsController itemDynamicsController;
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(FindDynamicItemHolder());
+        StartCoroutine(FindInputManager(SubscribeToInputManager));
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeFromInputManager();
     }
 
     protected override void SendAddItemReport(AddResult result)
@@ -30,5 +37,31 @@ public class CustomInventory : PGS_Inventory
             itemDynamicsController = FindAnyObjectByType<ItemDynamicsController>();
             yield return null;
         }
+    }
+
+    private IEnumerator FindInputManager(Action callback)
+    {
+        while (inputManager == null)
+        {
+            inputManager = InputManager.Instance;
+            yield return null;
+        }
+
+        callback?.Invoke();
+    }
+
+    public void ToggleInventory()
+    {
+        IsInventoryOpen = !IsInventoryOpen;
+    }
+
+    private void SubscribeToInputManager()
+    {
+        inputManager.onInventory.Insert(0, ToggleInventory);
+    }
+
+    private void UnsubscribeFromInputManager()
+    {
+        inputManager.onInventory.Remove(ToggleInventory);
     }
 }

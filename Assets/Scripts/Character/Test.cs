@@ -10,12 +10,10 @@ public class Test : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.Instance.EnterState(InputManager.InputState.Character);
     }
 
     private void OnDisable()
     {
-        InputManager.Instance.ExitState();
     }
     private void SubscribeToInputManager()
     {

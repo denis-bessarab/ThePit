@@ -24,9 +24,6 @@ public class MenuInputManager : Singleton<MenuInputManager>
     {
         base.Awake();
 
-        _inputActions.FindActionMap("Menu").Enable();
-        SetActions();
-
         if (gameManager != null || findGameManagerCoroutine != null) return;
         StartCoroutine(FindGameManagerCoroutine());
     }
@@ -34,11 +31,6 @@ public class MenuInputManager : Singleton<MenuInputManager>
     private void Update()
     {
         _menuInputResolver.ResolveMenuInput(this, gameManager);
-    }
-
-    private void SetActions()
-    {
-        pause = _inputActions.FindActionMap("Menu").FindAction("Pause");
     }
 
     private InputActionAsset GetInputActionAsset()

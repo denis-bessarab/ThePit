@@ -48,7 +48,6 @@ public class Character : MonoBehaviour
         set
         {
             if (movementContext == value) return;
-            //Debug.Log($"Switching context from {movementContext} to {value}");
             movementContext = value;
         }
     }
@@ -79,7 +78,7 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        movementData = movementDataCollector.UpdateMovementData(inputController, _rigidbody);
+        movementData = movementDataCollector.UpdateMovementData(_rigidbody);
         groundData = movementDataCollector.UpdateGroundData(_collider, movementParameters);
 
         MovementContext = movementContextCreator.UpdateMovementContext(
@@ -125,7 +124,11 @@ public class Character : MonoBehaviour
 
     private void AssignReferences()
     {
+        inputController.movementDataCollector = movementDataCollector;
+        inputController.quickAccessBar = quickAccessBar;
+
         staminaManager.movementParameters = movementParameters;
+
         dataController.movementParameters = movementParameters;
         dataController.spriteRenderer = _spriteRenderer;
     }

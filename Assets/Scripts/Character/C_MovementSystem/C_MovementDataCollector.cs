@@ -2,18 +2,33 @@ using UnityEngine;
 
 public class C_MovementDataCollector : MonoBehaviour
 {
+    public bool left;
+    public bool right;
+    public bool jump;
+    public bool down;
+    public bool up;
+    public bool sprint;
+    public bool jumpHold;
 
-    public MovementData UpdateMovementData(C_InputController ic, Rigidbody2D rb)
+    public void LeftHold() { left = true; }
+    public void LeftRelease() { left = false; }
+    public void RightHold() { right = true; }
+    public void RightRelease() { right = false; }
+    public void Jump() { jump = true; }
+    public void JumpHold() { jumpHold = true; }
+    public void JumpRelease() { jump = false; jumpHold = false; }
+    public void DownHold() { down = true; }
+    public void DownRelease() { down = false; }
+    public void UpHold() { up = true; }
+    public void UpRelease() { up = false; }
+    public void SprintHold() { sprint = true; }
+    public void SprintRelease() { sprint = false; }
+
+
+    public MovementData UpdateMovementData(Rigidbody2D rb)
     {
-        var left = ic.m_left.IsPressed();
-        var right = ic.m_right.IsPressed();
-        var jump = ic.m_jump.WasPressedThisFrame();
-        var down = ic.m_down.IsPressed();
-        var up = ic.m_up.IsPressed();
-        var sprint = ic.m_sprint.IsPressed();
         var vx = rb.linearVelocityX;
         var vy = rb.linearVelocityY;
-        var jumpHold = ic.m_jump.IsPressed();
         var dir = new Vector2(vx, vy).normalized;
 
         return new MovementData(left, right, jump, down, up, sprint, vx, vy, jumpHold, dir);
