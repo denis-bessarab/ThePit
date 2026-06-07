@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuickAccessBar : C_UsableItemsController
+public class QuickAccessBar : C_UsableItemsController, IInputSubscription
 {
     [Header("Resources")]
     [SerializeField] private GameObject usableItemPrefabReference;
@@ -138,7 +138,7 @@ public class QuickAccessBar : C_UsableItemsController
         ActiveCell = ActiveCell;
     }
 
-    private void SubscribeToInputManager()
+    public void SubscribeToInputManager()
     {
         var im = inputManager;
 
@@ -150,7 +150,7 @@ public class QuickAccessBar : C_UsableItemsController
         im.onQab6.Insert(0, SetActiveCell);
     }
 
-    private void UnsubscribeFromInputManager()
+    public void UnsubscribeFromInputManager()
     {
         var im = inputManager;
 

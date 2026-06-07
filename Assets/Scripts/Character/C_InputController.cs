@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-public class C_InputController : MonoBehaviour
+public class C_InputController : MonoBehaviour, IInputSubscription
 {
     [SerializeField] public InputManager inputManager;
     [SerializeField] public QuickAccessBar quickAccessBar;
@@ -28,7 +28,7 @@ public class C_InputController : MonoBehaviour
 
         callback?.Invoke();
     }
-    private void SubscribeToInputManager()
+    public void SubscribeToInputManager()
     {
         var im = InputManager.Instance;
         var mdc = movementDataCollector;
@@ -61,7 +61,7 @@ public class C_InputController : MonoBehaviour
         im.onRMBRelease.Insert(0, quickAccessBar.RMBReleaseAction);
     }
 
-    private void UnsubscribeFromInputManager()
+    public void UnsubscribeFromInputManager()
     {
         var im = InputManager.Instance;
         var mdc = movementDataCollector;

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class CustomInventory : PGS_Inventory
+public class CustomInventory : PGS_Inventory, IInputSubscription
 {
     [SerializeField] private InputManager inputManager;
     [SerializeField] private ItemDynamicsController itemDynamicsController;
@@ -55,13 +55,15 @@ public class CustomInventory : PGS_Inventory
         IsInventoryOpen = !IsInventoryOpen;
     }
 
-    private void SubscribeToInputManager()
+    public void SubscribeToInputManager()
     {
+        if (inputManager == null) return;
         inputManager.onInventory.Insert(0, ToggleInventory);
     }
 
-    private void UnsubscribeFromInputManager()
+    public void UnsubscribeFromInputManager()
     {
+        if (inputManager == null) return;
         inputManager.onInventory.Remove(ToggleInventory);
     }
 }

@@ -160,4 +160,18 @@ public class InputManager : Singleton<InputManager>
         lmbAction.Enable();
         rmbAction.Enable();
     }
+
+    public void TurnOnInputMap(string mapName)
+    {
+        var inputMap = inputActionAsset.FindActionMap(mapName);
+        if (inputMap == null) return;
+        inputMap.Enable();
+    }
+
+    public void TurnOffInputMap(string mapName)
+    {
+        var inputMap = inputActionAsset.FindActionMap(mapName);
+        if (inputMap == null) return;
+        inputMap.Disable();
+    }
 }
