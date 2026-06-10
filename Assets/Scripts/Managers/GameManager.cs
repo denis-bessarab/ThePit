@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] public static PGS_PrototypePauseMenu pauseMenu;
+    [SerializeField] public ShelterState shelterState;
     [SerializeField] public GameState gameState = GameState.Home;
     private Coroutine findPauseMenuCorotine;
 
@@ -17,14 +18,10 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.T))
-        //{
-        //    var ia = Resources.Load("InputSystem_Actions") as InputActionAsset;
-        //    for(int i = 0; i < ia.actionMaps.Count; i++)
-        //    {
-        //        Debug.Log($"{ia.actionMaps[i].name} {ia.actionMaps[i].enabled}");
-        //    }
-        //}
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ReturnToShelter();
+        }
     }
 
     public static IEnumerator FindPauseMenu()
@@ -49,5 +46,15 @@ public class GameManager : Singleton<GameManager>
     public static void FinishGame()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ReturnToShelter()
+    {
+
+    }
+
+    private ShelterState UpdateShelterState()
+    {
+        return shelterState;
     }
 }
