@@ -183,7 +183,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-  m_Distance: 5.87
+  m_Distance: 8
   m_MaxDistanceOnly: 0
 --- !u!114 &8903129906969012411
 MonoBehaviour:
@@ -243,6 +243,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  rope:
+    m_Name: Rope
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 33c29bfb-9466-45ca-8ef7-9343e1e03005
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &6225014976176851265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3145cab784cd68f46b22d68a9275f8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rope_Parameters
-  maxRopeLenght: 8
+  maxRopeLenght: 12
   minRopeLenght: 2
   swingPower: 2
   jumpPower: 2
@@ -324,6 +333,7 @@ MonoBehaviour:
     ropeLength: 0
     ropeCenterPosition: {x: 0, y: 0, z: 0}
     ropeCenterRotation: {x: 0, y: 0, z: 0, w: 0}
+  character: {fileID: 0}
 --- !u!1001 &3427622499399095298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -406,11 +416,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3945227442671088218, guid: bc0f01c3a12eb434d881c8446c19ab56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.0345601
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3945227442671088218, guid: bc0f01c3a12eb434d881c8446c19ab56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.43087
+      value: -8.78
       objectReference: {fileID: 0}
     - target: {fileID: 3945227442671088218, guid: bc0f01c3a12eb434d881c8446c19ab56, type: 3}
       propertyPath: m_LocalPosition.z

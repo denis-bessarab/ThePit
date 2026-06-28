@@ -48,6 +48,7 @@ public class Character : MonoBehaviour
         set
         {
             if (movementContext == value) return;
+            Debug.Log($"From {movementContext} to {value}");
             movementContext = value;
         }
     }
@@ -120,6 +121,8 @@ public class Character : MonoBehaviour
             movementParameters, 
             MovementContext
             );
+
+        movementDataCollector.ResetMovementDataFlags();
     }
 
     private void AssignReferences()

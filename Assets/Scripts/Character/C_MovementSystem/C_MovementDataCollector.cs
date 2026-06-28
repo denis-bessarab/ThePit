@@ -106,4 +106,9 @@ public class C_MovementDataCollector : MonoBehaviour
             groundBeneathRight3f
             );
     }
+
+    public void ResetMovementDataFlags()
+    {
+        jump = false;
+    }
 }

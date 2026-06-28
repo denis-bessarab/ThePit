@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.pillargamesstudio.perlinnoisegenerator":"https://github.com/denis-bessarab/PGS-PerlinNoiseGenerator.git",
     "com.pillargamesstudio.singleton":"https://github.com/denis-bessarab/PGS-Singleton.git",
     "com.pillargamesstudio.prototypemenu":"https://github.com/denis-bessarab/PGS-PrototypeMenu.git",
     "com.pillargamesstudio.defaultscenes":"https://github.com/denis-bessarab/PGS-DefaultScenes2D.git",

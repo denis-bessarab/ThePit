@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e16974d22bc8d4e43bc4278fdf9d2b0b, type: 3}
-  m_Name: Rope_Parameters
-  m_EditorClassIdentifier: Assembly-CSharp::Rope_ParametersHolder
-  maxRopeLenght: 12
-  minRopeLenght: 2
-  swingPower: 2
-  jumpPower: 2
-  lenghtChangeSpeed: 1
+  m_Script: {fileID: 11500000, guid: f601e7dae6303b7478d6ab81afce61db, type: 3}
+  m_Name: Start Location Parameters
+  m_EditorClassIdentifier: Assembly-CSharp::StartLocationParameters
+  startTilePosition: {x: 0, y: 0}
+  bounds: {x: 30, y: 30}

@@ -33,6 +33,8 @@ public class Rope : MonoBehaviour
 
         ropeCenterCollider = ropeCenter.GetComponent<BoxCollider2D>();
         ropeEndRigidbody = ropeEnd.GetComponent<Rigidbody2D>();
+
+        distanceJoint2D.distance = parameters.maxRopeLenght;
     }
 
     private void Update()

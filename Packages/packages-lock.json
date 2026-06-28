@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "765bc06f57f40a2b263a9c76b31bca2206c02b18"
     },
+    "com.pillargamesstudio.perlinnoisegenerator": {
+      "version": "https://github.com/denis-bessarab/PGS-PerlinNoiseGenerator.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ef619bad0ad8d5bfd507d689f54fba40e2c4866b"
+    },
     "com.pillargamesstudio.prototypeinventory": {
       "version": "https://github.com/denis-bessarab/PGS-PrototypeInventory.git",
       "depth": 0,
