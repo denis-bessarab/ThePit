@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6823801f8a5f8d847b6d672420753b88, type: 3}
+  m_Name: TunnelS_1
+  m_EditorClassIdentifier: Assembly-CSharp::LocationDescription
+  locationPrefab: {fileID: 1827610015443161399, guid: 1662b135b0e96b4418a7c7f0a91134ad, type: 3}
+  connections: []

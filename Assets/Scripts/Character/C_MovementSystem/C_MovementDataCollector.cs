@@ -37,28 +37,32 @@ public class C_MovementDataCollector : MonoBehaviour
     public GroundData UpdateGroundData(CapsuleCollider2D col, C_MovementParameters p)
     {
         var b = col.bounds;
+        var boxCastSize = 0.8f;
 
         var groundBelowLeft = Physics2D.Raycast(new Vector2(b.min.x + 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
         var groundBelowCenter = Physics2D.Raycast(b.center, Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
         var groundBelowRight = Physics2D.Raycast(new Vector2(b.max.x - 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance, p.groundLayerMask);
         
+        var groundBelowLeft0_3f = Physics2D.Raycast(new Vector2(b.min.x + 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance + .2f, p.groundLayerMask);
+        var groundBelowRight0_3f = Physics2D.Raycast(new Vector2(b.max.x - 0.05f, b.center.y), Vector2.down, p.verticalRaycastDistance + .2f, p.groundLayerMask);
+
         var groundBelow = groundBelowLeft || groundBelowCenter || groundBelowRight;
 
         var left1 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y + .6f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
-        var left2 = Physics2D.Raycast(b.center, Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundMiddleLeft = Physics2D.Raycast(new Vector2(b.center.x , b.center.y - 0.1f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         var left3 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y - .6f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         var groundBottomLeft = Physics2D.Raycast(new Vector2(b.center.x, b.min.y + 0.05f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         var groundTopLeft = Physics2D.Raycast(new Vector2(b.center.x, b.max.y - 0.05f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         
-        var groundOnLeft = left1 || left2 || left3 || groundBottomLeft || groundTopLeft;
+        var groundOnLeft = left1 || groundMiddleLeft || left3 || groundBottomLeft || groundTopLeft;
 
         var right1 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y + .6f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
-        var right2 = Physics2D.Raycast(b.center, Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
+        var groundMiddleRight = Physics2D.Raycast(new Vector2(b.center.x, b.center.y - 0.1f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
         var right3 = Physics2D.Raycast(new Vector2(b.center.x, b.center.y - .6f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
         var groundBottomRight = Physics2D.Raycast(new Vector2(b.center.x, b.min.y + 0.05f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
         var groundTopRight = Physics2D.Raycast(new Vector2(b.center.x, b.max.y - 0.05f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
 
-        var groundOnRight = right1 || right2 || right3 || groundBottomRight || groundTopRight;
+        var groundOnRight = right1 || groundMiddleRight || right3 || groundBottomRight || groundTopRight;
         
         var groundNormal = groundBelowCenter.normal;
 
@@ -70,7 +74,6 @@ public class C_MovementDataCollector : MonoBehaviour
         var groundAboveLeft0_2f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .2f), Vector2.left, p.horizontalRaycastDistance, p.groundLayerMask);
         var groundAboveRight0_2f = Physics2D.Raycast(new Vector2(b.center.x, b.max.y + .2f), Vector2.right, p.horizontalRaycastDistance, p.groundLayerMask);
 
-        var boxCastSize = 0.8f;
 
         var groundBeneathLeft1f = Physics2D.OverlapBox(new Vector2(b.center.x - 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
         var groundBeneathRight1f = Physics2D.OverlapBox(new Vector2(b.center.x + 1f, b.min.y - .5f), new Vector2(boxCastSize, boxCastSize), 0f, p.groundLayerMask);
@@ -103,7 +106,11 @@ public class C_MovementDataCollector : MonoBehaviour
             groundBeneathLeft2f,
             groundBeneathRight2f,
             groundBeneathLeft3f,
-            groundBeneathRight3f
+            groundBeneathRight3f,
+            groundMiddleLeft,
+            groundMiddleRight,
+            groundBelowLeft0_3f,
+            groundBelowRight0_3f
             );
     }
 

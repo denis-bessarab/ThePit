@@ -162,7 +162,7 @@ public class C_MovementActions : MonoBehaviour
                 yield return null;
             };
 
-            while (!c.groundData.groundBelowRight)
+            while (!c.groundData.groundBelowRight0_3f)
             {
                 rb.linearVelocityX = -p.climbingUpSpeed;
                 rb.linearVelocityY = 0;
@@ -180,7 +180,7 @@ public class C_MovementActions : MonoBehaviour
                 yield return null;
             };
 
-            while (!c.groundData.groundBelowLeft)
+            while (!c.groundData.groundBelowLeft0_3f)
             {
                 rb.linearVelocityX = p.climbingUpSpeed;
                 rb.linearVelocityY = 0;

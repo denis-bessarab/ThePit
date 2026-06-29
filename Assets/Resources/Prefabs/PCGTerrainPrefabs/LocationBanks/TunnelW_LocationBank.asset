@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd175bc4aee65b40afbaeb1a186933f, type: 3}
+  m_Name: TunnelW_LocationBank
+  m_EditorClassIdentifier: Assembly-CSharp::LocationBank
+  locations:
+  - {fileID: 11400000, guid: a98a1996d464ff14b8803d33be7fc85e, type: 2}
+  - {fileID: 11400000, guid: 43cd4b67b311333428f44314fc966f7b, type: 2}
+  - {fileID: 11400000, guid: 94dbcd1bc834f994e99c1fcb12de972c, type: 2}
+  - {fileID: 11400000, guid: b90c9bb5830df9b4f86e35151593bcee, type: 2}
